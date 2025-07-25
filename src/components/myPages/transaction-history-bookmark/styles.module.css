@@ -1,0 +1,19 @@
+.button_wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.button_wrapper button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.button_wrapper button:hover {
+    background-color: black;
+    color: white;
+}
+
+.button_selected {
+    color: white;
+    background-color: black;
+}

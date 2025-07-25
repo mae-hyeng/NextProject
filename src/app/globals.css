@@ -27,8 +27,8 @@
 }
 
 @font-face {
-  font-family: globalFont;
-  src: url(../commons/Pretendard-Regular.woff2);
+    font-family: globalFont;
+    src: url(../commons/Pretendard-Regular.woff2);
 }
 
 body {
@@ -45,6 +45,10 @@ h2 {
     @apply text-xl;
 }
 h3 {
+    @apply text-lg;
+}
+
+h4 {
     @apply text-lg;
 }
 

@@ -1,0 +1,36 @@
+.password_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.password_wrapper input {
+    border: 1px solid #d4d3d3;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.button_wrapper {
+    display: flex;
+    gap: 1rem;
+    justify-content: right;
+}
+
+.button_wrapper button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #c7c7c7;
+    color: #e4e4e4;
+}
+
+.button_wrapper button:hover {
+    background-color: #2974e5;
+    color: white;
+}
+
+.require_input {
+    padding: 0.3rem;
+    align-items: center;
+    color: red;
+}

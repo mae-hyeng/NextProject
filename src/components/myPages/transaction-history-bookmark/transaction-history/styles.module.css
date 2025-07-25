@@ -1,92 +1,38 @@
-.Page {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    padding: 2rem 20rem;
+.search_wrapper {
+    text-align: right;
 }
 
-/* img start */
-
-.detail_images {
-    border-radius: 1rem;
-}
-/* img end */
-
-.detail_wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.detail_wrapper_inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.detail_title {
-    font-weight: 700;
-}
-
-.detail_profiles {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.tripTalk_wrapper {
-    display: flex;
-    gap: 1rem;
-}
-
-.tripTalk_details {
-    display: flex;
-    gap: 1rem;
-    width: 25%;
-}
-
-.profile_wrapper {
-    display: flex;
-}
-
-.detail_likes {
-    display: flex;
-    justify-content: space-between;
-}
-
-.like_wrapper {
-    display: flex;
-    gap: 0.5rem;
-    color: red;
-}
-
-/* 게시판 아래 메뉴바 시작 */
-
-.submit_btn {
-    background-color: #2974e5;
-    color: white;
+.text_input {
+    width: 50%;
+    background-color: #f2f2f2;
     border-radius: 0.5rem;
     padding: 1rem;
     outline: none;
-    background-image: url("/images/write_white.png");
+    background-image: url("/images/search.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: 1rem center;
     padding-left: 3rem;
 }
-/* 게시판 아래 메뉴바 끝 */
 
-.tripTalk_boards {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.search_wrapper {
+    text-align: right;
 }
 
-.boards_func_wrapper {
-    display: flex;
-    justify-content: space-between;
+.text_input {
+    width: 50%;
+    background-color: #f2f2f2;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+    background-image: url("/images/search.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    padding-left: 3rem;
 }
 
-/* board start */
+/* boards start */
 .boards_wrapper {
     border: 1px solid #efefef;
     border-radius: 1rem;
@@ -121,7 +67,7 @@
     text-align: center;
 }
 
-.board_redDate,
+.board_regDate,
 .board_header_regDate {
     width: 10%;
     text-align: center;
@@ -134,7 +80,7 @@
 }
 
 .board_num,
-.board_redDate {
+.board_regDate {
     color: gray;
 }
 
@@ -174,4 +120,4 @@
 .board_row:hover .board_delete {
     display: block;
 }
-/* board_table end */
+/* boards end */

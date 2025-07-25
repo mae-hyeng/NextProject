@@ -1,0 +1,47 @@
+{
+    "name": "next-homework",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "codegen": "graphql-codegen -config codegen.ts"
+    },
+    "dependencies": {
+        "@apollo/client": "^3.13.8",
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.1",
+        "@mui/icons-material": "^7.2.0",
+        "@mui/material": "^7.2.0",
+        "@mui/styled-engine-sc": "^7.2.0",
+        "antd": "^5.26.5",
+        "apollo-upload-client": "^18.0.1",
+        "classnames": "^2.5.1",
+        "graphql": "^16.11.0",
+        "lodash": "^4.17.21",
+        "next": "15.3.4",
+        "react": "^19.0.0",
+        "react-daum-postcode": "^3.2.0",
+        "react-dom": "^19.0.0",
+        "react-infinite-scroll-component": "^6.1.0",
+        "react-player": "^3.2.1",
+        "styled-components": "^6.1.19",
+        "swiper": "^11.2.10"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@graphql-codegen/cli": "^5.0.7",
+        "@tailwindcss/postcss": "^4",
+        "@types/apollo-upload-client": "^18.0.0",
+        "@types/lodash": "^4.17.20",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "eslint": "^9",
+        "eslint-config-next": "15.3.4",
+        "tailwindcss": "^4",
+        "typescript": "^5"
+    }
+}

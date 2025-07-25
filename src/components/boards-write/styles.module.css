@@ -1,0 +1,140 @@
+.BoardsNew {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 20rem;
+}
+
+.BoardsNew input {
+    border: 1px solid #d4d3d3;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.BoardsNew textarea {
+    resize: none;
+    height: 20rem;
+    border: 1px solid #d4d3d3;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.BoardsNew input::placeholder,
+.BoardsNew textarea::placeholder {
+    color: #d4d3d3;
+}
+
+.divideLine {
+    width: 100%;
+    border-bottom: 1px solid #d4d3d3;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.require_input {
+    padding: 0.3rem;
+    align-items: center;
+    color: red;
+}
+
+.main_section_1 {
+    display: flex;
+    gap: 1rem;
+}
+
+.section_1_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 0.5rem;
+}
+
+.main_section_2,
+.main_section_3,
+.main_section_4,
+.main_section_5,
+.main_section_6 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.main-section_4 input {
+    width: 100%;
+}
+
+.main_section_4 .address_area_1 {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.main_section_4 .address_area_1 > input {
+    width: 5rem;
+}
+
+.main_section_4 .address_area_1 button,
+.footer .cancel {
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.main_section_4 .address_area_1 button,
+.footer button {
+    padding: 0.5rem 1rem;
+}
+
+.main_section_6 img {
+    width: 10rem;
+}
+
+.img_position {
+    position: relative;
+}
+
+.img_position:hover .image_delete {
+    display: block;
+}
+
+.img_wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.img_wrapper .image_input {
+    display: none;
+}
+
+.img_wrapper .image_delete {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: white;
+    background-color: black;
+    width: 1.5rem;
+    border-radius: 1rem;
+}
+
+.footer .submit {
+    background-color: #c7c7c7;
+    border: 1px solid #c7c7c7;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.error {
+    color: red;
+}

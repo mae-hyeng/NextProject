@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 2rem 20rem;
+}
+
+.header_category {
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.header_category.selected {
+    font-weight: 700;
+    border-bottom: 2px solid black;
+}
+
+.left_header,
+.right_header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

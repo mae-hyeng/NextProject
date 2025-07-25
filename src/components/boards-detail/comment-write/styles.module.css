@@ -1,0 +1,62 @@
+/* detail-reg-comment start */
+.detail_reg_comment {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 20rem;
+}
+
+.detail_reg_comment_edit {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail_reg_comment_edit input:disabled {
+    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
+}
+
+.detail_reg_comment textarea,
+.detail_reg_comment_edit textarea {
+    resize: none;
+    height: 10rem;
+    border: 1px solid #d4d3d3;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.detail_reg_comment_btn_wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.detail_reg_comment button,
+.detail_reg_comment_edit button {
+    color: white;
+    background-color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.writer_password_wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.writer_password_wrapper input {
+    border: 1px solid #d4d3d3;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.writer_wrapper,
+.password_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 0.5rem;
+}
+/* detail-reg-comment end */

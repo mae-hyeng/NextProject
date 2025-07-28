@@ -1,0 +1,54 @@
+.signIn {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.t_a_c {
+    text-align: center;
+}
+
+.signIn_left_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 1rem;
+    padding: 0rem 3rem;
+    justify-content: center;
+}
+
+.signIn_left_wrapper input {
+    border: 1px solid #d4d3d3;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+    width: 100%;
+}
+
+.signIn_right_wrapper {
+    width: 70%;
+}
+
+.signIn_button {
+    background-color: #2974e5;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+    width: 100%;
+}
+
+.signIn_image {
+    width: 100%;
+    height: 100%;
+}
+
+.require_input {
+    padding: 0.3rem;
+    align-items: center;
+    color: red;
+}
+
+.error {
+    color: red;
+}

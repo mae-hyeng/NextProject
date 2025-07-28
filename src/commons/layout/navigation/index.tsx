@@ -4,9 +4,19 @@ import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useNavigation } from "./hook";
+import { usePathname } from "next/navigation";
+import { useQuery } from "@apollo/client";
+import { FETCH_USER_LOGGED_IN } from "@/components/login/queries";
 
 export const Navigation = () => {
-    const { navigation, onClickNavigation } = useNavigation();
+    const pathName = usePathname();
+    const hideRoutes = ["/login", "/signIn"];
+
+    const { data } = useQuery(FETCH_USER_LOGGED_IN);
+    const { isLogin, navigation, onClickNavigation, onclickLogin } = useNavigation({ data });
+
+    if (hideRoutes.includes(pathName)) return;
+
     return (
         <div className={styles.header}>
             <div className={styles.left_header}>
@@ -36,14 +46,20 @@ export const Navigation = () => {
                     마이 페이지
                 </div>
             </div>
-            <div className={styles.right_header}>
-                <Image src="/images/profile.png" alt="프로필" width={25} height={0} />
-                <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-            </div>
+            {isLogin ? (
+                <div className={styles.right_header}>
+                    <Image src="/images/profile.png" alt="프로필" width={25} height={0} />
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+            ) : (
+                <button onClick={onclickLogin} className={styles.login_button}>
+                    로그인 {">"}
+                </button>
+            )}
         </div>
     );
 };

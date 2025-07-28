@@ -1,9 +1,10 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const useNavigation = () => {
+export const useNavigation = ({ data }) => {
     const pathName = usePathname();
     const router = useRouter();
+    const [isLogin, setIsLogin] = useState(false);
 
     const [navigation, setNavigation] = useState(pathName);
 
@@ -11,12 +12,23 @@ export const useNavigation = () => {
         setNavigation(pathName);
     }, [pathName]);
 
+    useEffect(() => {
+        if (localStorage.getItem("accessToken") === null) setIsLogin(false);
+        else setIsLogin(true);
+    }, [data]);
+
     const onClickNavigation = (page) => {
         router.push(page);
     };
 
+    const onclickLogin = () => {
+        router.push("/login");
+    };
+
     return {
+        isLogin,
         navigation,
         onClickNavigation,
+        onclickLogin,
     };
 };

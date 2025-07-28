@@ -21,3 +21,10 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+.login_button {
+    color: white;
+    background-color: black;
+    padding: 0 1rem;
+    border-radius: 3rem;
+}

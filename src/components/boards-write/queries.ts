@@ -39,9 +39,10 @@ export const CREATE_BOARD = gql`
                 deletedAt
             }
             # user
-            # createdAt
-            # updatedAt
-            # deletedAt
+            createdAt
+            updatedAt
+            deletedAt
+            __typename
         }
     }
 `;
@@ -54,6 +55,7 @@ export const UPDATE_BOARD = gql`
             title
             contents
             youtubeUrl
+            __typename
         }
     }
 `;

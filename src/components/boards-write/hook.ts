@@ -121,15 +121,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
             if (contents) myVariables.updateBoardInput.contents = contents;
             if (imageUrls) myVariables.updateBoardInput.images = imageUrls;
 
-            const result = await updateBoard({
-                variables: myVariables,
-                refetchQueries: [
-                    {
-                        query: FETCH_BOARD,
-                        variables: { boardId: params.boardId },
-                    },
-                ],
-            });
+            const result = await updateBoard({ variables: myVariables });
             router.push(`/boards/detail/${result.data.updateBoard._id}`);
         } catch (error) {
             console.log(error);

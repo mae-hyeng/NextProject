@@ -11,6 +11,7 @@ export const CREATE_BOARD_COMMENT = gql`
             createdAt
             updatedAt
             deletedAt
+            __typename
         }
     }
 `;
@@ -32,6 +33,7 @@ export const FETCH_BOARD_COMMENTS = gql`
             createdAt
             updatedAt
             deletedAt
+            __typename
         }
     }
 `;
@@ -55,6 +57,7 @@ export const UPDATE_BOARD_COMMENT = gql`
             createdAt
             updatedAt
             deletedAt
+            __typename
         }
     }
 `;

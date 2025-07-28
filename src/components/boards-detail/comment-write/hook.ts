@@ -57,12 +57,6 @@ export const useBoardComment = ({ comment, setIsEdit }) => {
         try {
             const result = await updateBoardComment({
                 variables: commentVariables,
-                refetchQueries: [
-                    {
-                        query: FETCH_BOARD_COMMENTS,
-                        variables: { boardId: params.boardId },
-                    },
-                ],
             });
 
             if (result?.data) {

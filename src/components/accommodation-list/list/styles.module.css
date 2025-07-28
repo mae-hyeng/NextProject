@@ -1,0 +1,49 @@
+.accommodation_page {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 20rem;
+}
+
+/* img start */
+
+.detail_images {
+    border-radius: 1rem;
+}
+/* img end */
+
+/* 게시판 아래 메뉴바 시작 */
+
+.submit_btn {
+    background-color: #2974e5;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+    background-image: url("/images/write_white.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    padding-left: 3rem;
+}
+/* 게시판 아래 메뉴바 끝 */
+
+.accommodation_boards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.accommodation_func_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.accommodation_wrapper {
+    border: 1px solid #efefef;
+    border-radius: 1rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}

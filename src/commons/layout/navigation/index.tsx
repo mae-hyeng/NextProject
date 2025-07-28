@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import styles from "./Header.module.css";
+import styles from "./styles.module.css";
 import { useNavigation } from "./hook";
 
 export const Navigation = () => {
@@ -14,15 +14,15 @@ export const Navigation = () => {
                 <div
                     onClick={() => onClickNavigation("/boards")}
                     className={`${styles.header_category} ${
-                        navigation === "/boards" ? styles.selected : ""
+                        navigation.includes("/boards") ? styles.selected : ""
                     }`}
                 >
                     트립토크
                 </div>
                 <div
-                    onClick={() => onClickNavigation("/")}
+                    onClick={() => onClickNavigation("/accommodation")}
                     className={`${styles.header_category} ${
-                        navigation === "/" ? styles.selected : ""
+                        navigation.includes("/accommodation") ? styles.selected : ""
                     }`}
                 >
                     숙박권 구매
@@ -30,7 +30,7 @@ export const Navigation = () => {
                 <div
                     onClick={() => onClickNavigation("/mypage")}
                     className={`${styles.header_category} ${
-                        navigation === "/mypage" ? styles.selected : ""
+                        navigation.includes("/mypage") ? styles.selected : ""
                     }`}
                 >
                     마이 페이지

@@ -43,6 +43,7 @@ h1 {
 }
 h2 {
     @apply text-xl;
+    font-weight: 700;
 }
 h3 {
     @apply text-lg;
@@ -50,6 +51,11 @@ h3 {
 
 h4 {
     @apply text-lg;
+}
+
+h5 {
+    @apply text-lg;
+    font-weight: 700;
 }
 
 button {

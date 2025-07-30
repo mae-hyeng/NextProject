@@ -5,22 +5,25 @@ import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { checkValidationFile } from "@/commons/libraries/validationFile";
 import { UploadFileDocument } from "@/commons/graphql/graphql";
-import { CREATE_TRAVEL_PRODUCT } from "./queries";
+import { CREATE_TRAVEL_PRODUCT, UPDATE_TRAVEL_PRODUCT } from "./queries";
 
-export const useAccommodationWrite = () => {
-    // useEffect(() => {
-    //     if (data?.fetchBoard?.boardAddress) {
-    //         setZipcode(data.fetchBoard.boardAddress.zipcode ?? "");
-    //         setAddress(data.fetchBoard.boardAddress.address ?? "");
-    //         setAddressDetail(data.fetchBoard.boardAddress.addressDetail ?? "");
-    //     }
+export const useAccommodationWrite = (data, reset, setValue) => {
+    useEffect(() => {
+        if (data?.fetchTravelproduct?.travelproductAddress) {
+            reset({
+                zipcode: data.fetchTravelproduct.travelproductAddress.zipcode ?? "",
+                address: data.fetchTravelproduct.travelproductAddress.address ?? "",
+                addressDetail: data.fetchTravelproduct.travelproductAddress.addressDetail ?? "",
+            });
+        }
 
-    //     if (data?.fetchBoard?.images) {
-    //         setImageUrls(data.fetchBoard.images);
-    //     }
-    // }, [data]);
+        if (data?.fetchTravelproduct?.images) {
+            setImageUrls(data.fetchTravelproduct.images);
+        }
+    }, [data]);
 
     const [createTravelProduct] = useMutation(CREATE_TRAVEL_PRODUCT);
+    const [updateTravelProduct] = useMutation(UPDATE_TRAVEL_PRODUCT);
 
     const [name, setName] = useState("");
     const [remarks, setRemarks] = useState("");
@@ -43,74 +46,55 @@ export const useAccommodationWrite = () => {
 
     const [uploadFile] = useMutation(UploadFileDocument);
 
-    const onChangeInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        if (name === "name") setName(value);
-        else if (name === "remarks") setRemarks(value);
-        else if (name === "contents") setContents(value);
-        else if (name === "price") setPrice(Number(value));
-        else if (name === "tags") setTags(value.split(/[\s,]+/).filter((tag) => tag.length > 0));
-    };
-
-    const onClickSubmit = async () => {
-        // if (!writer) document.getElementById("writer-error").innerText = "작성자를 입력해주세요";
-
-        // if (!password)
-        //     document.getElementById("password-error").innerText = "비밀번호를 입력해주세요";
-
-        // if (!title) document.getElementById("title-error").innerText = "제목을 입력해주세요";
-
-        // if (!contents) document.getElementById("content-error").innerText = "내용을 입력해주세요";
-
+    const onClickSubmit = async (data) => {
         try {
             const result = await createTravelProduct({
                 variables: {
-                    name,
-                    remarks,
-                    contents,
-                    price,
-                    tags,
+                    name: data.name,
+                    remarks: data.remarks,
+                    contents: data.contents,
+                    price: Number(data.price),
+                    tags: data.tags.split(/[\s,]+/),
                     travelproductAddress: {
-                        zipcode,
-                        address,
-                        addressDetail,
+                        zipcode: data.zipcode,
+                        address: data.address,
+                        addressDetail: data.addressDetail,
                     },
                     images: imageUrls,
                 },
             });
 
-            router.push(`/boards/detail/${result.data.createBoard._id}`);
+            router.push(`/accommodation/detail/${result.data.createTravelproduct._id}`);
         } catch (error) {
             console.log(error);
             alert("에러가 발생하였습니다. 다시 시도해 주세요.");
         }
     };
 
-    const onClickUpdate = async () => {
-        // const pw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요");
-        // try {
-        //     const myVariables = {
-        //         updateBoardInput: {
-        //             youtubeUrl: youtubeUrl,
-        //             boardAddress: {
-        //                 zipcode,
-        //                 address,
-        //                 addressDetail,
-        //             },
-        //         },
-        //         password: pw,
-        //         boardId: params.boardId,
-        //     };
-        //     if (title) myVariables.updateBoardInput.title = title;
-        //     if (contents) myVariables.updateBoardInput.contents = contents;
-        //     if (imageUrls) myVariables.updateBoardInput.images = imageUrls;
-        //     const result = await updateBoard({ variables: myVariables });
-        //     router.push(`/boards/detail/${result.data.updateBoard._id}`);
-        // } catch (error) {
-        //     console.log(error);
-        //     alert("비밀번호가 일치하지 않습니다!");
-        // }
+    const onClickUpdate = async (data) => {
+        try {
+            const variables = {
+                updateTravelproductInput: {
+                    name: data.name,
+                    remarks: data.remarks,
+                    contents: data.contents,
+                    price: Number(data.price),
+                    tags: data.tags.split(/[\s,]+/),
+                    travelproductAddress: {
+                        zipcode: data.zipcode,
+                        address: data.address,
+                        addressDetail: data.addressDetail,
+                    },
+                    images: imageUrls,
+                },
+                travelproductId: params.travelproductId,
+            };
+            const result = await updateTravelProduct({ variables });
+            router.push(`/accommodation/detail/${result.data.updateTravelproduct._id}`);
+        } catch (error) {
+            console.log(error);
+            // alert("비밀번호가 일치하지 않습니다!");
+        }
     };
 
     const showModal = () => {
@@ -130,10 +114,9 @@ export const useAccommodationWrite = () => {
         address: SetStateAction<string>;
     }) => {
         setIsOpen(false);
-        console.log(data);
-        setZipcode(data.zonecode);
-        setAddress(data.address);
-        setAddressDetail("");
+        setValue("zipcode", data.zonecode);
+        setValue("address", data.address);
+        setValue("addressDetail", "");
     };
 
     const onClickImage = (idx: string | number) => {
@@ -166,12 +149,8 @@ export const useAccommodationWrite = () => {
 
     return {
         isOpen,
-        zipcode,
-        address,
-        addressDetail,
         imageRefs,
         imageUrls,
-        onChangeInput,
         onClickUpdate,
         onClickSubmit,
         showModal,

@@ -16,9 +16,9 @@ export const CREATE_TRAVEL_PRODUCT = gql`
                 remarks: $remarks
                 contents: $contents
                 price: $price
-                # tags: $tag,
-                # travelproductAddress: $travelproductAddress
-                # images: $images
+                tags: $tags
+                travelproductAddress: $travelproductAddress
+                images: $images
             }
         ) {
             _id
@@ -37,6 +37,62 @@ export const CREATE_TRAVEL_PRODUCT = gql`
             updatedAt
             deletedAt
             __typename
+        }
+    }
+`;
+
+export const UPDATE_TRAVEL_PRODUCT = gql`
+    mutation updateTravelproduct(
+        $updateTravelproductInput: UpdateTravelproductInput!
+        $travelproductId: ID!
+    ) {
+        updateTravelproduct(
+            updateTravelproductInput: $updateTravelproductInput
+            travelproductId: $travelproductId
+        ) {
+            _id
+            name
+            remarks
+            contents
+            price
+            tags
+            images
+            pickedCount
+            travelproductAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                lat
+                lng
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            buyer {
+                _id
+                email
+                name
+                picture
+                # userPoint
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            seller {
+                _id
+                email
+                name
+                picture
+                # userPoint
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            soldAt
+            createdAt
+            updatedAt
+            deletedAt
         }
     }
 `;

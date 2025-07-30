@@ -5,6 +5,12 @@
     padding: 2rem 20rem;
 }
 
+.accommodation_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .accommodation_new input {
     border: 1px solid #d4d3d3;
     border-radius: 0.5rem;
@@ -152,11 +158,18 @@
     border-radius: 1rem;
 }
 
-.footer .submit {
+.footer .submit:disabled {
     background-color: #c7c7c7;
     border: 1px solid #c7c7c7;
     color: white;
     border-radius: 0.5rem;
+}
+
+.submit {
+    background-color: #2974e5;
+    color: white;
+    border-radius: 0.5rem;
+    border: 1px solid #2974e5;
 }
 
 .error {

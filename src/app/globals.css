@@ -58,7 +58,7 @@ h5 {
     font-weight: 700;
 }
 
-button {
+button:not(:disabled) {
     cursor: pointer;
 }
 

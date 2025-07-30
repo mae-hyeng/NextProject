@@ -2,7 +2,6 @@
 
 import { AccommodationListPage } from "@/components/accommodation-list/list";
 import { BannerPage } from "@/components/boards-list/banner";
-import { BoardsListPage } from "@/components/boards-list/list";
 import { FETCH_BOARDS } from "@/components/boards-list/list/queries";
 import { FETCH_BOARDS_COUNT } from "@/components/boards-list/pagination/queries";
 import { useQuery } from "@apollo/client";

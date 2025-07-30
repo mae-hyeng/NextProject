@@ -4,7 +4,6 @@ import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { IMyVariables } from "./types";
-import { FETCH_BOARD } from "@/commons/hooks/queries";
 import { checkValidationFile } from "@/commons/libraries/validationFile";
 import {
     CreateBoardDocument,

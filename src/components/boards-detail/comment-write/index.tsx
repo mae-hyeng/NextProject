@@ -4,8 +4,9 @@ import styles from "./styles.module.css";
 import { useBoardComment } from "./hook";
 
 import { Rate } from "antd";
+import { ICommentWriteProps } from "./types";
 
-export const CommentWrite = ({ isEdit, setIsEdit, comment }) => {
+export const CommentWrite = ({ isEdit, setIsEdit, comment }: ICommentWriteProps) => {
     const {
         writer,
         password,

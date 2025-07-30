@@ -49,8 +49,8 @@ export const useAccommodationWrite = () => {
         if (name === "name") setName(value);
         else if (name === "remarks") setRemarks(value);
         else if (name === "contents") setContents(value);
-        else if (name === "price") setPrice(value);
-        else if (name === "tags") setTags(value);
+        else if (name === "price") setPrice(Number(value));
+        else if (name === "tags") setTags(value.split(/[\s,]+/).filter((tag) => tag.length > 0));
     };
 
     const onClickSubmit = async () => {

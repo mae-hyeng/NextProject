@@ -38,9 +38,9 @@ export const AccommodationList = () => {
     };
 
     const getDebounce = _.debounce((value, start, end) => {
-        refetch({ endDate: end, startDate: start, search: value, page: 1 });
-        boardsCountRefetch({ endDate: end, startDate: start, search: value });
-        setKeyword(value);
+        // refetch({ endDate: end, startDate: start, search: value, page: 1 });
+        // boardsCountRefetch({ endDate: end, startDate: start, search: value });
+        // setKeyword(value);
     }, 500);
 
     const onChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,8 +52,8 @@ export const AccommodationList = () => {
         console.log(start, end);
         setStartDate(start);
         setEndDate(end);
-        refetch({ endDate: end, startDate: start, search: keyword, page: 1 });
-        boardsCountRefetch({ endDate: end, startDate: start, search: keyword });
+        // refetch({ endDate: end, startDate: start, search: keyword, page: 1 });
+        // boardsCountRefetch({ endDate: end, startDate: start, search: keyword });
     };
 
     return {

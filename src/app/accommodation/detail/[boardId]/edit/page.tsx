@@ -1,5 +1,6 @@
 "use client";
 
+import { LoginCheck } from "@/commons/hocs/loginCheck";
 import { FETCH_BOARD } from "@/commons/hooks/queries";
 import { BoardsWrite } from "@/components/boards-write";
 import { useQuery } from "@apollo/client";
@@ -14,4 +15,4 @@ const BoardEdit = () => {
     return <BoardsWrite isEdit={true} data={data} />;
 };
 
-export default BoardEdit;
+export default LoginCheck(BoardEdit);

@@ -22,7 +22,7 @@ const BoardsDetailPage = () => {
     });
     return (
         <>
-            <BoardsDetail data={data} commentsData={commentsData} />
+            <BoardsDetail data={data} />
             <CommentWrite isEdit={false} />
             <CommentList commentsData={commentsData} />
         </>

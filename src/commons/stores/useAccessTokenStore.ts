@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { AccessTokenState } from "./types";
 
-export const useAccessTokenStore = create((set) => {
+export const useAccessTokenStore = create<AccessTokenState>((set) => {
     return {
         accessToken: "",
         setAccessToken: (newAccessToken) =>

@@ -1,5 +1,6 @@
 "use client";
 
+import { LoginCheck } from "@/commons/hocs/loginCheck";
 import AccommodationDetail from "@/components/accommodation-detail";
 
 const AccommodationDetailPage = () => {
@@ -10,4 +11,4 @@ const AccommodationDetailPage = () => {
     );
 };
 
-export default AccommodationDetailPage;
+export default LoginCheck(AccommodationDetailPage);

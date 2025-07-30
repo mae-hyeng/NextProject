@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./styles.module.css";
 import { AccommodationList } from "./hook";
-import { IBoardListProps } from "./types";
 import { AccommodationSearchPage } from "../search";
 // import { Pagination } from "../pagination";
 // import { BoardSearchPage } from "../search";

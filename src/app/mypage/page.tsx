@@ -1,3 +1,4 @@
+import { LoginCheck } from "@/commons/hocs/loginCheck";
 import { MyPage } from "@/components/myPages";
 
 const myPage = () => {
@@ -8,4 +9,4 @@ const myPage = () => {
     );
 };
 
-export default myPage;
+export default LoginCheck(myPage);

@@ -4,7 +4,6 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 const AccommodationDetail = ({ data }) => {
-    console.log(data);
     return (
         <div className={styles.accommodationDetail}>
             <div className={styles.detail_header_wrapper}>

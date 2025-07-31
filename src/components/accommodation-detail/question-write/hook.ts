@@ -3,13 +3,9 @@
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
-import {
-    CREATE_TRAVEL_PRODUCT_QUESTION,
-    FETCH_TRAVEL_PRODUCT_QUESTIONS,
-    UPDATE_TRAVEL_PRODUCT_QUESTION,
-} from "./queries";
+import { CREATE_TRAVEL_PRODUCT_QUESTION, UPDATE_TRAVEL_PRODUCT_QUESTION } from "./queries";
 
-export const useQuestionWrite = ({ question, setIsEdit }) => {
+export const useQuestionWrite = ({ question, setIsEdit, refetchQuestionData }) => {
     useEffect(() => {
         if (question) setContents(question?.contents ?? "");
     }, [question]);
@@ -28,17 +24,9 @@ export const useQuestionWrite = ({ question, setIsEdit }) => {
             travelproductId: params.travelproductId,
         };
 
-        const result = await createTravelProductQuestion({
-            variables,
-            refetchQueries: [
-                {
-                    query: FETCH_TRAVEL_PRODUCT_QUESTIONS,
-                    variables: { travelproductId: params.travelproductId },
-                },
-            ],
-        });
+        const result = await createTravelProductQuestion({ variables });
+        await refetchQuestionData({ travelproductId: params.travelproductId });
 
-        console.log(result);
         resetQuestionArea();
     };
 

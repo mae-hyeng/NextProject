@@ -2,23 +2,28 @@
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { Rate } from "antd";
-import { useState } from "react";
-import { QuestionWrite } from "../question-write";
-import { useQuestionListItem } from "./hook";
+import { ReplyWrite } from "../reply-write";
+import { useReplyListItem } from "./hook";
 
-export const QuestionListItem = ({ question }) => {
-    const { isEdit, setIsEdit, onClickQuestionEdit, onClickQuestionDelete } = useQuestionListItem();
+export const ReplyListItem = ({ reply, data, question, refetchQuestionData, refetchReplyData }) => {
+    const { isEdit, setIsEdit, onClickReplyEdit, onClickReplyDelete } = useReplyListItem({
+        data,
+        question,
+        refetchQuestionData,
+        refetchReplyData,
+    });
 
     return (
         <>
-            <div className={styles.question_wrapper}>
+            <div className={styles.reply_wrapper}>
                 {isEdit ? (
-                    <QuestionWrite
-                        key={question._id}
+                    <ReplyWrite
+                        key={reply._id}
                         isEdit={isEdit}
                         setIsEdit={setIsEdit}
                         question={question}
+                        refetchQuestionData={refetchQuestionData}
+                        reply={reply}
                     />
                 ) : (
                     <>
@@ -31,14 +36,14 @@ export const QuestionListItem = ({ question }) => {
                                         width={25}
                                         height={0}
                                     />
-                                    {question.user.name}
+                                    {reply?.user?.name}
                                 </div>
                             </div>
                             <div className={styles.detail_image_wrapper}>
                                 <Image
                                     src={"/images/edit.png"}
                                     className={styles.detail_edit_image}
-                                    onClick={onClickQuestionEdit}
+                                    onClick={onClickReplyEdit}
                                     alt="수정버튼"
                                     width={25}
                                     height={0}
@@ -46,16 +51,16 @@ export const QuestionListItem = ({ question }) => {
                                 <Image
                                     src={"/images/close.png"}
                                     className={styles.detail_delete_image}
-                                    onClick={() => onClickQuestionDelete(question._id)}
+                                    onClick={() => onClickReplyDelete(reply._id)}
                                     alt="삭제버튼"
                                     width={25}
                                     height={0}
                                 />
                             </div>
                         </div>
-                        <div>{question.contents}</div>
-                        <div className={styles.detail_question_contents}>
-                            {new Date(question.createdAt)
+                        <div>{reply.contents}</div>
+                        <div className={styles.detail_reply_contents}>
+                            {new Date(reply.createdAt)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replaceAll("-", ".")}
@@ -63,7 +68,6 @@ export const QuestionListItem = ({ question }) => {
                     </>
                 )}
             </div>
-            <div className={styles.divideLine}></div>
         </>
     );
 };

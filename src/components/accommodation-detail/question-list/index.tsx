@@ -1,9 +1,9 @@
 "use client";
 
-import { QuestionListItem } from "../question-list-item";
+import { QuestionListItem } from "../question-list-item/item";
 import styles from "./styles.module.css";
 
-export const QuestionList = ({ questionData }) => {
+export const QuestionList = ({ data, questionData, refetchQuestionData }) => {
     const questions = questionData;
 
     return (
@@ -15,8 +15,14 @@ export const QuestionList = ({ questionData }) => {
                 등록된 댓글이 없습니다.
             </div>
             {/* <InfiniteScroll next={} hasMore={} loader={} dataLength={}> */}
-            {questions?.fetchTravelproductQuestions.map((question) => (
-                <QuestionListItem key={question._id} question={question} />
+            {questions?.fetchTravelproductQuestions.map((question, replyIdx) => (
+                <QuestionListItem
+                    key={question._id}
+                    data={data}
+                    question={question}
+                    refetchQuestionData={refetchQuestionData}
+                    replyIdx={replyIdx}
+                />
             ))}
             {/* </InfiniteScroll> */}
         </div>

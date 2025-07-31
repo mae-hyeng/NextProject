@@ -43,3 +43,13 @@ export const FETCH_BOARD = gql`
         }
     }
 `;
+
+export const FETCH_USER = gql`
+    query ($email: String!) {
+        fetchUser(email: $email) {
+            _id
+            name
+            email
+        }
+    }
+`;

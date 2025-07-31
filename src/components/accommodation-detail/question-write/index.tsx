@@ -5,9 +5,14 @@ import styles from "./styles.module.css";
 
 import { ICommentWriteProps } from "./types";
 
-export const QuestionWrite = ({ isEdit, setIsEdit, question }: ICommentWriteProps) => {
+export const QuestionWrite = ({
+    isEdit,
+    setIsEdit,
+    question,
+    refetchQuestionData,
+}: ICommentWriteProps) => {
     const { contents, onClickSubmitQuestion, onClickUpdateQuestion, onChangeInput } =
-        useQuestionWrite({ question, setIsEdit });
+        useQuestionWrite({ question, setIsEdit, refetchQuestionData });
 
     return (
         <div className={isEdit ? styles.detail_reg_question_edit : styles.detail_reg_question}>

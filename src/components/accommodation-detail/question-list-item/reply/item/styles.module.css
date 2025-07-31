@@ -1,0 +1,40 @@
+.reply_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0rem 2rem;
+}
+
+.divideLine {
+    width: 100%;
+    border-top: 1px solid #d4d3d3;
+}
+
+.user_wrapper,
+.detail_user_info {
+    display: flex;
+    gap: 1rem;
+}
+
+.detail_reply_contents {
+    color: gray;
+}
+
+.detail_image_wrapper {
+    display: none;
+    gap: 0.5rem;
+}
+
+.reply_wrapper:hover .detail_image_wrapper {
+    display: flex;
+}
+
+.detail_edit_image,
+.detail_delete_image {
+    cursor: pointer;
+}
+
+.user_header_wrapper {
+    display: flex;
+    justify-content: space-between;
+}

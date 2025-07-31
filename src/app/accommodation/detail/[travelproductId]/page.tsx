@@ -7,6 +7,7 @@ import { FETCH_TRAVEL_PRODUCT } from "@/components/accommodation-detail/detail/q
 import { QuestionList } from "@/components/accommodation-detail/question-list";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
+import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "@/components/accommodation-detail/question-list-item/reply/reply-write/queries";
 
 const AccommodationDetailPage = () => {
     const params = useParams();
@@ -15,14 +16,22 @@ const AccommodationDetailPage = () => {
         variables: { travelproductId: params.travelproductId },
     });
 
-    const { data: questionData } = useQuery(FETCH_TRAVEL_PRODUCT_QUESTIONS, {
-        variables: { page: 1, travelproductId: params.travelproductId },
-    });
+    const { data: questionData, refetch: refetchQuestionData } = useQuery(
+        FETCH_TRAVEL_PRODUCT_QUESTIONS,
+        {
+            variables: { page: 1, travelproductId: params.travelproductId },
+        }
+    );
+
     return (
         <>
             <AccommodationDetail data={data} />
-            <QuestionWrite isEdit={false} />
-            <QuestionList questionData={questionData} />
+            <QuestionWrite isEdit={false} refetchQuestionData={refetchQuestionData} />
+            <QuestionList
+                data={data}
+                questionData={questionData}
+                refetchQuestionData={refetchQuestionData}
+            />
         </>
     );
 };

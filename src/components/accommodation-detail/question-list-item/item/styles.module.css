@@ -38,3 +38,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.reply_button_wrapper {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+}

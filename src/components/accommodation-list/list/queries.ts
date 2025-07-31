@@ -1,26 +1,39 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_BOARDS = gql`
-    query fetchBoards($page: Int, $search: String, $endDate: DateTime, $startDate: DateTime) {
-        fetchBoards(page: $page, search: $search, endDate: $endDate, startDate: $startDate) {
+export const FETCH_TRAVEL_PRODUCTS = gql`
+    query fetchTravelproducts($isSoldout: Boolean, $search: String, $page: Int) {
+        fetchTravelproducts(isSoldout: $isSoldout, search: $search, page: $page) {
             _id
-            writer
-            title
+            name
+            remarks
             contents
-            youtubeUrl
-            likeCount
-            dislikeCount
-            # images
-            boardAddress {
+            price
+            tags
+            images
+            pickedCount
+            travelproductAddress {
                 _id
                 zipcode
                 address
                 addressDetail
-                createdAt
-                updatedAt
-                deletedAt
+                lat
+                lng
             }
-            # user
+            buyer {
+                _id
+                email
+                name
+                picture
+                # userPoint
+            }
+            seller {
+                _id
+                email
+                name
+                picture
+                # userPoint
+            }
+            soldAt
             createdAt
             updatedAt
             deletedAt
@@ -29,8 +42,8 @@ export const FETCH_BOARDS = gql`
     }
 `;
 
-export const DELETE_BOARD = gql`
-    mutation deleteBoard($boardId: ID!) {
-        deleteBoard(boardId: $boardId)
+export const DELETE_TRAVEL_PRODUCT = gql`
+    mutation deleteTravelproduct($travelproductId: ID!) {
+        deleteTravelproduct(travelproductId: $travelproductId)
     }
 `;

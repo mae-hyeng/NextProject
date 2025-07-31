@@ -21,9 +21,6 @@ const AccommodationDetail = ({ data }) => {
                 {data?.fetchTravelproduct?.tags.map((tag, idx) => (
                     <div key={idx + 1}>#{tag}</div>
                 ))}
-                {/* <div>#6인 이하</div>
-                <div>#건식 사우나</div>
-                <div>#애견동반 가능</div> */}
             </div>
 
             <div className={styles.accommodation_info_wrapper}>
@@ -79,17 +76,6 @@ const AccommodationDetail = ({ data }) => {
                         sizes="100vw"
                     />
                     문의하기
-                </div>
-                <div>
-                    <textarea
-                        // onChange={onChangeInput}
-                        name=""
-                        placeholder="문의사항을 입력해 주세요."
-                        // value={contents}
-                    ></textarea>
-                </div>
-                <div className={styles.detail_question_btn_wrapper}>
-                    <button>문의하기</button>
                 </div>
             </div>
         </div>

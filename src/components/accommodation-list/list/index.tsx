@@ -3,22 +3,19 @@
 import styles from "./styles.module.css";
 import { AccommodationList } from "./hook";
 import { AccommodationSearchPage } from "../search";
+import Image from "next/image";
 // import { Pagination } from "../pagination";
 // import { BoardSearchPage } from "../search";
 
-export const AccommodationListPage = (
-    {
-        /* data, lastPage, refetch, boardsCountRefetch*/
-    }
-) => {
+export const AccommodationListPage = ({ data, refetch }) => {
     const {
         keyword,
-        // onClickBoard,
-        // onClickDeleteBoard,
+        onClickAccommodation,
+        onClickDeleteAccommodation,
         onClickRegister,
         onChangeKeyword,
         onChangeDatePicker,
-    } = AccommodationList();
+    } = AccommodationList(data, refetch);
     return (
         <>
             <div className={styles.accommodation_page}>
@@ -38,7 +35,34 @@ export const AccommodationListPage = (
                         </div>
                     </div>
                     <div className={styles.accommodation_wrapper}>
-                        <div className={styles.accommodation_table}></div>
+                        <div className={styles.accommodation_table}>
+                            {data?.fetchTravelproducts?.map((product, idx) => (
+                                <div
+                                    key={product._id}
+                                    onClick={() => onClickAccommodation(product._id)}
+                                    className={styles.product_wrapper}
+                                >
+                                    <Image
+                                        src="/images/inner1.png"
+                                        alt="이미지"
+                                        className={styles.product_image}
+                                        width={350}
+                                        height={350}
+                                    />
+                                    <div className={styles.product_name}>{product.name}</div>
+                                    <div className={styles.product_remarks}>{product?.remarks}</div>
+                                    <div className={styles.product_tags}>
+                                        {product?.tags
+                                            .filter((tag) => tag.replaceAll(" ", ""))
+                                            .map((tag) => `#${tag} `)}
+                                    </div>
+                                    <div className={styles.product_seller_price}>
+                                        <div>아이콘/{product?.seller?.name}</div>
+                                        <div className={styles.product_price}>{product?.price}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { LoginCheck } from "@/commons/hocs/loginCheck";
-import { FETCH_TRAVEL_PRODUCT } from "@/components/accommodation-detail/queries";
+import { FETCH_TRAVEL_PRODUCT } from "@/components/accommodation-detail/detail/queries";
 import { AccommodationWrite } from "@/components/accommodation-write";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";

@@ -47,3 +47,46 @@
     flex-direction: column;
     gap: 3rem;
 }
+
+.accommodation_table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+
+.product_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.product_image {
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.product_name {
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+}
+
+.product_remarks {
+    color: #5f5f5f;
+}
+
+.product_tags {
+    color: #2974e5;
+}
+
+.product_seller_price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product_price {
+    font-weight: 700;
+}

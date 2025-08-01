@@ -12,7 +12,7 @@ import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "@/components/accommodatio
 const AccommodationDetailPage = () => {
     const params = useParams();
 
-    const { data } = useQuery(FETCH_TRAVEL_PRODUCT, {
+    const { data, refetch } = useQuery(FETCH_TRAVEL_PRODUCT, {
         variables: { travelproductId: params.travelproductId },
     });
 
@@ -25,7 +25,7 @@ const AccommodationDetailPage = () => {
 
     return (
         <>
-            <AccommodationDetail data={data} />
+            <AccommodationDetail data={data} refetch={refetch} />
             <QuestionWrite isEdit={false} refetchQuestionData={refetchQuestionData} />
             <QuestionList
                 data={data}

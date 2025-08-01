@@ -5,6 +5,11 @@
     padding: 0rem 2rem;
 }
 
+.answer_wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .divideLine {
     width: 100%;
     border-top: 1px solid #d4d3d3;

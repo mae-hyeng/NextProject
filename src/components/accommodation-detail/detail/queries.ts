@@ -50,3 +50,27 @@ export const FETCH_TRAVEL_PRODUCT = gql`
         }
     }
 `;
+
+export const TOGGLE_TRAVEL_PRODUCT_PICK = gql`
+    mutation toggleTravelproductPick($travelproductId: ID!) {
+        toggleTravelproductPick(travelproductId: $travelproductId)
+    }
+`;
+
+export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
+    mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+        createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+            buyer {
+                _id
+                email
+                name
+            }
+            seller {
+                _id
+                email
+                name
+            }
+            soldAt
+        }
+    }
+`;

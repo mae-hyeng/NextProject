@@ -65,3 +65,46 @@ button:not(:disabled) {
 .grayColor {
     color: gray;
 }
+
+/* react-image-gallery start */
+.image-gallery-content {
+    display: flex;
+    gap: 1rem;
+}
+
+.image-gallery-slide-wrapper {
+    width: 80% !important;
+}
+
+.image-gallery-thumbnails-wrapper {
+    width: 20% !important;
+}
+
+.styles_image_gallery_container__jmjyA {
+    border-radius: 0.5rem;
+}
+
+.image-gallery-thumbnails-container button {
+    opacity: 0.5;
+    width: 100% !important;
+    aspect-ratio: 4/3;
+    background-color: lightgray;
+    border-radius: 0.5rem;
+}
+
+.image-gallery-thumbnails,
+.image-gallery-thumbnails .active,
+.image-gallery-thumbnails:hover {
+    border: none !important;
+}
+
+.image-gallery-thumbnails .active {
+    opacity: 1;
+}
+
+nav.image-gallery-thumbnails-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+/* react-image-gallery end */

@@ -25,46 +25,56 @@ export const ReplyListItem = ({ reply, question, refetchQuestionData, refetchRep
                         reply={reply}
                     />
                 ) : (
-                    <>
-                        <div className={styles.user_header_wrapper}>
-                            <div className={styles.user_wrapper}>
-                                <div className={styles.detail_user_info}>
+                    <div className={styles.answer_wrapper}>
+                        <div>
+                            <Image
+                                src="/images/return.png"
+                                alt="답글이미지"
+                                width={25}
+                                height={25}
+                            />
+                        </div>
+                        <div>
+                            <div className={styles.user_header_wrapper}>
+                                <div className={styles.user_wrapper}>
+                                    <div className={styles.detail_user_info}>
+                                        <Image
+                                            src="/images/profile1.png"
+                                            alt="프로필"
+                                            width={25}
+                                            height={0}
+                                        />
+                                        {reply?.user?.name}
+                                    </div>
+                                </div>
+                                <div className={styles.detail_image_wrapper}>
                                     <Image
-                                        src="/images/profile1.png"
-                                        alt="프로필"
+                                        src={"/images/edit.png"}
+                                        className={styles.detail_edit_image}
+                                        onClick={onClickReplyEdit}
+                                        alt="수정버튼"
                                         width={25}
                                         height={0}
                                     />
-                                    {reply?.user?.name}
+                                    <Image
+                                        src={"/images/close.png"}
+                                        className={styles.detail_delete_image}
+                                        onClick={() => onClickReplyDelete(reply._id)}
+                                        alt="삭제버튼"
+                                        width={25}
+                                        height={0}
+                                    />
                                 </div>
                             </div>
-                            <div className={styles.detail_image_wrapper}>
-                                <Image
-                                    src={"/images/edit.png"}
-                                    className={styles.detail_edit_image}
-                                    onClick={onClickReplyEdit}
-                                    alt="수정버튼"
-                                    width={25}
-                                    height={0}
-                                />
-                                <Image
-                                    src={"/images/close.png"}
-                                    className={styles.detail_delete_image}
-                                    onClick={() => onClickReplyDelete(reply._id)}
-                                    alt="삭제버튼"
-                                    width={25}
-                                    height={0}
-                                />
+                            <div>{reply.contents}</div>
+                            <div className={styles.detail_reply_contents}>
+                                {new Date(reply.createdAt)
+                                    .toISOString()
+                                    .slice(0, 10)
+                                    .replaceAll("-", ".")}
                             </div>
                         </div>
-                        <div>{reply.contents}</div>
-                        <div className={styles.detail_reply_contents}>
-                            {new Date(reply.createdAt)
-                                .toISOString()
-                                .slice(0, 10)
-                                .replaceAll("-", ".")}
-                        </div>
-                    </>
+                    </div>
                 )}
             </div>
         </>

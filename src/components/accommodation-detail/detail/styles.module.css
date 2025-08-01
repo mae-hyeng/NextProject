@@ -19,6 +19,14 @@
     cursor: pointer;
 }
 
+.accommodation_pickedCount {
+    color: white;
+    border-radius: 0.5rem;
+    background: url("/images/bookmark-white.png") 25px 25px no-repeat #00000066;
+    background-position: 0.5rem;
+    padding: 0rem 1rem 0rem 2rem;
+}
+
 .accommodation_remarks {
     color: #777777;
 }
@@ -110,4 +118,8 @@
     border-radius: 0.5rem;
     padding: 1rem;
     outline: none;
+}
+
+.info_wrapper_left {
+    width: 100%;
 }

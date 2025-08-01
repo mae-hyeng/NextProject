@@ -7,8 +7,14 @@ import {
     CREATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
     UPDATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
 } from "./queries";
+import { IReplyWriteProps } from "./types";
 
-export const useReplyWrite = ({ question, setIsEdit, setIsShow, refetchReplyData }) => {
+export const useReplyWrite = ({
+    question,
+    setIsEdit,
+    setIsShow,
+    refetchReplyData,
+}: IReplyWriteProps) => {
     useEffect(() => {
         if (question) setContents(question?.contents ?? "");
     }, [question]);

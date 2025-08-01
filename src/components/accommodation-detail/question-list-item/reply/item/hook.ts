@@ -1,8 +1,9 @@
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER } from "../reply-write/queries";
+import { IUseReplyListItem } from "./types";
 
-export const useReplyListItem = ({ data, question, refetchQuestionData, refetchReplyData }) => {
+export const useReplyListItem = ({ question, refetchReplyData }: IUseReplyListItem) => {
     const [isEdit, setIsEdit] = useState(false);
 
     const [deleteTravelProductQuestionAnswer] = useMutation(DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER);

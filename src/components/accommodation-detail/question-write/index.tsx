@@ -3,14 +3,14 @@
 import { useQuestionWrite } from "./hook";
 import styles from "./styles.module.css";
 
-import { ICommentWriteProps } from "./types";
+import { IQuestionWriteProps } from "./types";
 
 export const QuestionWrite = ({
     isEdit,
     setIsEdit,
     question,
     refetchQuestionData,
-}: ICommentWriteProps) => {
+}: IQuestionWriteProps) => {
     const { contents, onClickSubmitQuestion, onClickUpdateQuestion, onChangeInput } =
         useQuestionWrite({ question, setIsEdit, refetchQuestionData });
 

@@ -15,13 +15,12 @@ export const QuestionList = ({ data, questionData, refetchQuestionData }) => {
                 등록된 댓글이 없습니다.
             </div>
             {/* <InfiniteScroll next={} hasMore={} loader={} dataLength={}> */}
-            {questions?.fetchTravelproductQuestions.map((question, replyIdx) => (
+            {questions?.fetchTravelproductQuestions.map((question) => (
                 <QuestionListItem
                     key={question._id}
                     data={data}
                     question={question}
                     refetchQuestionData={refetchQuestionData}
-                    replyIdx={replyIdx}
                 />
             ))}
             {/* </InfiniteScroll> */}

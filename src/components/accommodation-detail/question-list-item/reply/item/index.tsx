@@ -5,9 +5,8 @@ import styles from "./styles.module.css";
 import { ReplyWrite } from "../reply-write";
 import { useReplyListItem } from "./hook";
 
-export const ReplyListItem = ({ reply, data, question, refetchQuestionData, refetchReplyData }) => {
+export const ReplyListItem = ({ reply, question, refetchQuestionData, refetchReplyData }) => {
     const { isEdit, setIsEdit, onClickReplyEdit, onClickReplyDelete } = useReplyListItem({
-        data,
         question,
         refetchQuestionData,
         refetchReplyData,

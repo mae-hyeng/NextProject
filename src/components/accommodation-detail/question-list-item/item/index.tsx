@@ -9,7 +9,7 @@ import { useQuery } from "@apollo/client";
 import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "../reply/reply-write/queries";
 import { ReplyListItem } from "../reply/item";
 
-export const QuestionListItem = ({ data, question, refetchQuestionData, replyIdx }) => {
+export const QuestionListItem = ({ data, question, refetchQuestionData }) => {
     const {
         isSame,
         isEdit,
@@ -107,6 +107,7 @@ export const QuestionListItem = ({ data, question, refetchQuestionData, replyIdx
                                 key={reply._id}
                                 reply={reply}
                                 question={question}
+                                refetchQuestionData={refetchQuestionData}
                                 refetchReplyData={refetchReplyData}
                             />
                         ))}

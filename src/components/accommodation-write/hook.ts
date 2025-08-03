@@ -25,16 +25,7 @@ export const useAccommodationWrite = (data, reset, setValue) => {
     const [createTravelProduct] = useMutation(CREATE_TRAVEL_PRODUCT);
     const [updateTravelProduct] = useMutation(UPDATE_TRAVEL_PRODUCT);
 
-    const [name, setName] = useState("");
-    const [remarks, setRemarks] = useState("");
-    const [contents, setContents] = useState("");
-    const [price, setPrice] = useState(0);
-    const [tags, setTags] = useState([]);
-
     const [isOpen, setIsOpen] = useState(false);
-    const [zipcode, setZipcode] = useState("");
-    const [address, setAddress] = useState("");
-    const [addressDetail, setAddressDetail] = useState("");
 
     const router = useRouter();
     const params = useParams();

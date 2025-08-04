@@ -1,3 +1,4 @@
+import { getAccessToken } from "@/commons/libraries/getAccessToken";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -13,7 +14,7 @@ export const useNavigation = ({ data }) => {
     }, [pathName]);
 
     useEffect(() => {
-        if (localStorage.getItem("accessToken") === null) setIsLogin(false);
+        if (getAccessToken() === null) setIsLogin(false);
         else setIsLogin(true);
     }, [data]);
 

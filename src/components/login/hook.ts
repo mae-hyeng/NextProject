@@ -2,8 +2,7 @@ import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { LOGIN_USER } from "./queries";
 import { useRouter } from "next/navigation";
-import { useAccessTokenStore } from "@/commons/stores/useAccessTokenStore";
-import { useAuthStore } from "@/commons/stores/authStore";
+import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { FETCH_USER } from "@/commons/hooks/queries";
 
 export const UseLogin = () => {
@@ -17,9 +16,7 @@ export const UseLogin = () => {
     const { setAccessToken } = useAccessTokenStore();
 
     const [loginUser] = useMutation(LOGIN_USER);
-    const [fetchUser, { data: userData }] = useLazyQuery(FETCH_USER);
-
-    const { setUser } = useAuthStore();
+    const [fetchUser] = useLazyQuery(FETCH_USER);
 
     const onChangeInput = (e) => {
         const { name, value } = e.target;
@@ -52,7 +49,6 @@ export const UseLogin = () => {
 
             const accessToken = result.data.loginUser.accessToken;
             setAccessToken(accessToken);
-            localStorage.setItem("accessToken", accessToken);
 
             const userInfo = await fetchUser({ variables: { email } });
             localStorage.setItem("userInfo", JSON.stringify(userInfo.data.fetchUser));

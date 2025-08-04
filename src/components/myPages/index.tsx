@@ -9,6 +9,9 @@ import { useMyPages } from "./hook";
 
 export const MyPage = () => {
     const { category, onClickCategory } = useMyPages();
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(userInfo);
+
     return (
         <div className={styles.myPage}>
             <h3>마이 페이지</h3>
@@ -22,7 +25,7 @@ export const MyPage = () => {
                         height={0}
                         sizes="100vw"
                     />
-                    <div>홍길동</div>
+                    <div>{userInfo.name}</div>
                 </div>
                 <div className={styles.divideLine}></div>
                 <div className={styles.point_wrapper}>

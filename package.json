@@ -22,6 +22,7 @@
         "apollo-upload-client": "^18.0.1",
         "classnames": "^2.5.1",
         "graphql": "^16.11.0",
+        "graphql-request": "^7.2.0",
         "lodash": "^4.17.21",
         "next": "15.3.4",
         "react": "^19.1.0",
@@ -33,6 +34,7 @@
         "react-player": "^3.2.1",
         "styled-components": "^6.1.19",
         "swiper": "^11.2.10",
+        "zen-observable": "^0.10.0",
         "zod": "^4.0.13",
         "zustand": "^5.0.6"
     },
@@ -45,6 +47,7 @@
         "@types/node": "^20",
         "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.6",
+        "@types/zen-observable": "^0.8.7",
         "eslint": "^9",
         "eslint-config-next": "15.3.4",
         "tailwindcss": "^4",

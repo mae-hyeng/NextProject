@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { DELETE_TRAVEL_PRODUCT_QUESTION } from "../../question-write/queries";
 import { useParams } from "next/navigation";
+import { useAuthStore } from "@/commons/stores/authStore";
 
 export const useQuestionListItem = ({ data, refetchQuestionData }) => {
     const params = useParams();

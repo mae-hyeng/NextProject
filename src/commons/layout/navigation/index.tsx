@@ -15,6 +15,8 @@ export const Navigation = () => {
     const { data } = useQuery(FETCH_USER_LOGGED_IN);
     const { isLogin, navigation, onClickNavigation, onclickLogin } = useNavigation({ data });
 
+    console.log("Header Login Info", data);
+
     if (hideRoutes.includes(pathName)) return;
 
     return (

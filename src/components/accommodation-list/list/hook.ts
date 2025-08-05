@@ -12,6 +12,8 @@ export const AccommodationList = (data, refetch) => {
 
     const [keyword, setKeyword] = useState("");
 
+    const [category, setCategory] = useState("reservationAvailable");
+
     const [endDate, setEndDate] = useState(
         new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString()
     );
@@ -53,8 +55,14 @@ export const AccommodationList = (data, refetch) => {
         refetch({ search: keyword, page: 1 });
     };
 
+    const onClickCategory = (type) => {
+        setCategory(type);
+    };
+
     return {
         keyword,
+        category,
+        onClickCategory,
         onClickAccommodation,
         onClickDeleteAccommodation,
         onClickRegister,

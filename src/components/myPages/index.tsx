@@ -25,7 +25,7 @@ export const MyPage = () => {
                         height={0}
                         sizes="100vw"
                     />
-                    <div>{userInfo.name}</div>
+                    <div>{userInfo?.name}</div>
                 </div>
                 <div className={styles.divideLine}></div>
                 <div className={styles.point_wrapper}>

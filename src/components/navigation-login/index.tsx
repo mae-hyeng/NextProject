@@ -22,8 +22,6 @@ export const NavigationLogin = ({ data }) => {
         handleCloseModal,
     } = useNavigationLogin();
 
-    console.log("NavigationLogin : ", data);
-
     return (
         <div>
             <Button

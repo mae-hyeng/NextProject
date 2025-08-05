@@ -7,6 +7,7 @@ import { useNavigation } from "./hook";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { FETCH_USER_LOGGED_IN } from "@/components/login/queries";
+import { NavigationLogin } from "@/components/navigation-login";
 
 export const Navigation = () => {
     const pathName = usePathname();
@@ -14,8 +15,6 @@ export const Navigation = () => {
 
     const { data } = useQuery(FETCH_USER_LOGGED_IN);
     const { isLogin, navigation, onClickNavigation, onclickLogin } = useNavigation({ data });
-
-    console.log("Header Login Info", data);
 
     if (hideRoutes.includes(pathName)) return;
 
@@ -50,12 +49,7 @@ export const Navigation = () => {
             </div>
             {isLogin ? (
                 <div className={styles.right_header}>
-                    <Image src="/images/profile.png" alt="프로필" width={25} height={0} />
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                    <NavigationLogin data={data} />
                 </div>
             ) : (
                 <button onClick={onclickLogin} className={styles.login_button}>

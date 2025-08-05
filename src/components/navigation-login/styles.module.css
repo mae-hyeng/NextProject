@@ -1,0 +1,77 @@
+.menu_wrapper {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    align-items: center;
+}
+
+.user_wrapper {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.menu_s_b {
+    width: 100%;
+    justify-content: space-between !important;
+    color: black !important;
+}
+
+.menu_image_30 {
+    width: 30px;
+    height: 30px;
+}
+
+.menu_image_20 {
+    width: 20px;
+    height: 20px;
+}
+
+.menu_image_15 {
+    width: 15px;
+    height: 15px;
+}
+
+/* modal start */
+.point_charge_image {
+    width: 100%;
+}
+
+.point_charge_title {
+    text-align: center;
+    font-weight: 700;
+}
+
+.point_charge_select {
+    width: 100%;
+    align-items: center;
+    outline: none;
+    border: 1px solid #d4d3d3;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.point_charge_button_wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.point_charge_cancel,
+.point_charge_submit {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 10rem;
+}
+
+.point_charge_cancel {
+    border: 1px solid black;
+}
+
+.point_charge_submit {
+    border: 1px solid #2974e5;
+    background-color: #2974e5;
+    color: white;
+}
+
+/* modal end */

@@ -108,3 +108,15 @@ nav.image-gallery-thumbnails-container {
     gap: 0.5rem;
 }
 /* react-image-gallery end */
+
+/* mui-material-Menu start */
+.MuiPaper-root {
+    width: 200px;
+}
+
+.MuiList-root {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+/* mui-material-Menu end */

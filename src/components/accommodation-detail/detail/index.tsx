@@ -73,7 +73,9 @@ const AccommodationDetail = ({ data, refetch }) => {
 
             <div className={styles.detail_location_wrapper}>
                 <h5>상세 위치</h5>
-                <div>지도 표시 영역</div>
+                <div id="geo" className={styles.geo}>
+                    지도 표시 영역
+                </div>
             </div>
 
             <div className={styles.detail_question_wrapper}>

@@ -4,8 +4,33 @@ import {
     TOGGLE_TRAVEL_PRODUCT_PICK,
 } from "./queries";
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
+
+declare const window: Window & {
+    kakao: any;
+};
 
 export const useAccommodationDetail = ({ data, refetch }) => {
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src =
+            "//dapi.kakao.com/v2/maps/sdk.js?appkey=ae65aedca7117fd8bfe6b82678329eca&libraries=services&autoload=false";
+        document.head.appendChild(script);
+
+        script.onload = () => {
+            window.kakao.maps.load(function () {
+                const container = document.getElementById("geo");
+                const options = {
+                    center: new window.kakao.maps.LatLng(
+                        data?.fetchTravelproduct.travelproductAddress.lat,
+                        data?.fetchTravelproduct.travelproductAddress.lng
+                    ),
+                    level: 3,
+                };
+                new window.kakao.maps.Map(container, options);
+            });
+        };
+    }, [data?.fetchTravelproduct?.travelproductAddress]);
     const params = useParams();
 
     const [toggleTravelProductPick] = useMutation(TOGGLE_TRAVEL_PRODUCT_PICK);

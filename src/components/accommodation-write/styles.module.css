@@ -96,6 +96,15 @@
     gap: 0.5rem;
 }
 
+.LatLng_area input:disabled {
+    background-color: #e4e4e4;
+    border-color: #e4e4e4;
+}
+
+.LatLng_area input::placeholder {
+    color: #919191;
+}
+
 .geo {
     width: 100%;
     height: 100%;

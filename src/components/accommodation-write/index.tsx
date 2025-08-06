@@ -120,23 +120,36 @@ export const AccommodationWrite = ({ isEdit, data }) => {
                                     />
                                 </div>
                                 <div>
-                                    <input {...register("addressDetail")} placeholder="상세주소" />
+                                    <input
+                                        {...register("addressDetail")}
+                                        placeholder="상세주소를 입력해 주세요."
+                                    />
                                 </div>
                                 <div className={styles.error}>
                                     {formState.errors.addressDetail?.message}
                                 </div>
                                 <div className={styles.LatLng_area}>
                                     <div>위도(LAT)</div>
-                                    <input placeholder="주소를 먼저 입력해 주세요." />
+                                    <input
+                                        {...register("lat")}
+                                        placeholder="주소를 먼저 입력해 주세요."
+                                        disabled
+                                    />
                                 </div>
                                 <div className={styles.LatLng_area}>
                                     <div>경도(LNG)</div>
-                                    <input placeholder="주소를 먼저 입력해 주세요." />
+                                    <input
+                                        {...register("lng")}
+                                        placeholder="주소를 먼저 입력해 주세요."
+                                        disabled
+                                    />
                                 </div>
                             </div>
                             <div className={styles.address_right}>
                                 <div>상세 위치</div>
-                                <div className={styles.geo}>주소를 먼저 입력해 주세요.</div>
+                                <div id="geo" className={styles.geo}>
+                                    주소를 먼저 입력해 주세요.
+                                </div>
                             </div>
                         </div>
                     </div>

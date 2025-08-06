@@ -9,4 +9,6 @@ export const schema = z.object({
     zipcode: z.string(),
     address: z.string().min(1, { message: "주소를 입력해 주세요." }),
     addressDetail: z.string().min(1, { message: "상세주소를 입력해 주세요." }),
+    lat: z.string(),
+    lng: z.string(),
 });

@@ -72,11 +72,6 @@ export const AccommodationListPage = ({ data, refetch }) => {
                                     <div className={styles.product_name}>{product.name}</div>
                                     <div className={styles.product_remarks}>{product?.remarks}</div>
                                     <div className={styles.product_tags}>
-                                        {/* {product?.tags
-                                            ? product?.tags
-                                                  .filter((tag) => tag.replaceAll(" ", ""))
-                                                  .map((tag) => `#${tag} `)
-                                            : "aaaaa"} */}
                                         {product.tags.filter((tag) => tag.replaceAll(" ", ""))
                                             .length ? (
                                             product?.tags

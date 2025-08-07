@@ -8,17 +8,22 @@ import { useAccommodationWrite } from "./hook";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "./schema";
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
 
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 export const AccommodationWrite = ({ isEdit, data }) => {
-    const { register, handleSubmit, formState, reset, setValue } = useForm({
+    const { register, handleSubmit, formState, reset, setValue, trigger } = useForm({
         resolver: zodResolver(schema),
         mode: "onChange",
     });
 
     const {
+        isLoadData,
         isOpen,
         imageRefs,
         imageUrls,
+        onChangeContents,
         onClickUpdate,
         onClickSubmit,
         showModal,
@@ -28,7 +33,10 @@ export const AccommodationWrite = ({ isEdit, data }) => {
         onClickImage,
         onChangeImage,
         onDeleteImage,
-    } = useAccommodationWrite(data, reset, setValue);
+    } = useAccommodationWrite(data, reset, setValue, trigger);
+
+    console.log("formState : ", formState);
+    console.log(formState.errors);
 
     return (
         <div className={styles.accommodation_new}>
@@ -69,10 +77,11 @@ export const AccommodationWrite = ({ isEdit, data }) => {
                         <div>
                             상품 설명<span className={styles.require_input}>*</span>
                         </div>
-                        <textarea
-                            {...register("contents")}
+                        <ReactQuill
                             defaultValue={data?.fetchTravelproduct.contents}
-                        ></textarea>
+                            onChange={onChangeContents}
+                            theme="snow"
+                        />
                         <div className={styles.error}>{formState.errors.contents?.message}</div>
                     </div>
                     <div className={styles.divideLine}></div>
@@ -148,7 +157,11 @@ export const AccommodationWrite = ({ isEdit, data }) => {
                             <div className={styles.address_right}>
                                 <div>상세 위치</div>
                                 <div id="geo" className={styles.geo}>
-                                    주소를 먼저 입력해 주세요.
+                                    {isLoadData && (
+                                        <div className={styles.geo_isLoadData}>
+                                            tlqjf주소를 먼저 입력해 주세요.
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -169,13 +182,6 @@ export const AccommodationWrite = ({ isEdit, data }) => {
                                     <div key={idx} className={styles.img_position}>
                                         <Image
                                             src={
-                                                // imageUrls[idx]
-                                                //     ? imageUrls[idx].startsWith("codecamp")
-                                                //         ? `https://storage.googleapis.com/${imageUrls[idx]}`
-                                                //         : `/images/addImage.png`
-                                                //     : data?.fetchBoard.images?.[idx]
-                                                //     ? `https://storage.googleapis.com/${data.fetchBoard.images[idx]}`
-                                                //     : `/images/addImage.png`
                                                 imageUrls[idx]
                                                     ? `https://storage.googleapis.com/${imageUrls[idx]}`
                                                     : `/images/addImage.png`

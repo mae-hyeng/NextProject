@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { useAccommodationDetail } from "./hook";
 import ImageGallery from "./image-gallery";
 import AccommodationDetailImageGallery from "./image-gallery";
+import Dompurify from "dompurify";
 
 const AccommodationDetail = ({ data, refetch }) => {
     const { onClickBookmark, onClickBuyingAndSelling } = useAccommodationDetail({ data, refetch });
@@ -66,7 +67,14 @@ const AccommodationDetail = ({ data, refetch }) => {
 
             <div className={styles.detail_contents_wrapper}>
                 <h5>상세 설명</h5>
-                <div>{data?.fetchTravelproduct?.contents}</div>
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: data?.fetchTravelproduct.contents,
+                    }}
+                    // dangerouslySetInnerHTML={{
+                    //     __html: Dompurify.sanitize(data?.fetchTravelproduct.contents),
+                    // }}
+                ></div>
             </div>
 
             <div className={styles.divideLine}></div>

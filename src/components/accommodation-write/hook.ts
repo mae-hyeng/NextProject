@@ -11,18 +11,21 @@ declare const window: Window & {
     kakao: any;
 };
 
-export const useAccommodationWrite = (data, reset, setValue) => {
+export const useAccommodationWrite = (data, reset, setValue, trigger) => {
     const kakaoMapRef = useRef();
+    const [isLoadData, setIsLoadData] = useState(true);
 
     useEffect(() => {
-        if (data?.fetchTravelproduct?.travelproductAddress) {
+        if (data?.fetchTravelproduct) {
             reset({
+                contents: data?.fetchTravelproduct.contents ?? "",
                 zipcode: data.fetchTravelproduct.travelproductAddress.zipcode ?? "",
                 address: data.fetchTravelproduct.travelproductAddress.address ?? "",
                 addressDetail: data.fetchTravelproduct.travelproductAddress.addressDetail ?? "",
-                lat: data.fetchTravelproduct.travelproductAddress.lat ?? "",
-                lng: data.fetchTravelproduct.travelproductAddress.lng ?? "",
+                lat: data.fetchTravelproduct.travelproductAddress.lat.toString() ?? "",
+                lng: data.fetchTravelproduct.travelproductAddress.lng.toString() ?? "",
             });
+            setIsLoadData(false);
         }
 
         if (data?.fetchTravelproduct?.images) {
@@ -41,8 +44,8 @@ export const useAccommodationWrite = (data, reset, setValue) => {
                 const container = document.getElementById("geo");
                 const options = {
                     center: new window.kakao.maps.LatLng(
-                        data?.fetchTravelproduct.travelproductAddress.lat,
-                        data?.fetchTravelproduct.travelproductAddress.lng
+                        data?.fetchTravelproduct.travelproductAddress.lat || 0,
+                        data?.fetchTravelproduct.travelproductAddress.lng || 0
                     ),
                     level: 3,
                 };
@@ -121,6 +124,10 @@ export const useAccommodationWrite = (data, reset, setValue) => {
         }
     };
 
+    const onChangeContents = (value) => {
+        setValue("contents", value, { shouldValidate: true });
+    };
+
     const showModal = () => {
         setIsOpen(true);
     };
@@ -151,6 +158,7 @@ export const useAccommodationWrite = (data, reset, setValue) => {
                         kakaoMapRef.current.setCenter(latLng);
                         setValue("lat", result[0].y);
                         setValue("lng", result[0].x);
+                        setIsLoadData(false);
                     }
                 }
             );
@@ -186,9 +194,11 @@ export const useAccommodationWrite = (data, reset, setValue) => {
     };
 
     return {
+        isLoadData,
         isOpen,
         imageRefs,
         imageUrls,
+        onChangeContents,
         onClickUpdate,
         onClickSubmit,
         showModal,

@@ -6,7 +6,10 @@ import { useBoardsWrite } from "./hook";
 import { IBoardWriteProps } from "./types";
 import { Modal } from "antd";
 import { DaumPostcodeEmbed } from "react-daum-postcode";
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
 
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
     const {
         isOpen,
@@ -16,6 +19,7 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
         youtubeUrl,
         imageRefs,
         imageUrls,
+        onChangeContents,
         onChangeInput,
         onClickUpdate,
         onClickSubmit,
@@ -78,13 +82,18 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
                     <div>
                         내용<span className={styles.require_input}>*</span>
                     </div>
-                    <textarea
+                    {/* <textarea
                         onChange={onChangeInput}
                         name="content"
                         placeholder="내용을 입력해 주세요."
                         defaultValue={data?.fetchBoard.contents}
-                    ></textarea>
-                    <div id="content-error" className={styles.error}></div>
+                    ></textarea> */}
+                    <ReactQuill
+                        defaultValue={data?.fetchBoard.contents}
+                        onChange={onChangeContents}
+                        theme="snow"
+                    />
+                    <div id="contents-error" className={styles.error}></div>
                 </div>
 
                 <div className={styles.main_section_4}>

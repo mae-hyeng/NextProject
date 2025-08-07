@@ -120,3 +120,9 @@ nav.image-gallery-thumbnails-container {
     gap: 0.5rem;
 }
 /* mui-material-Menu end */
+
+/* react-quill start */
+.ql-editor {
+    height: 20rem !important;
+}
+/* react-quill end */

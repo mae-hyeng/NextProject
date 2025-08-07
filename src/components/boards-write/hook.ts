@@ -57,7 +57,6 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         if (name === "writer") setWriter(value);
         else if (name === "password") setPassword(value);
         else if (name === "title") setTitle(value);
-        else if (name === "content") setContents(value);
         else if (name === "addressDetail") setAddressDetail(value);
         else if (name === "youtubeUrl") setYoutubeUrl(value);
 
@@ -67,14 +66,19 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
     };
 
     const onClickSubmit = async () => {
-        if (!writer) document.getElementById("writer-error").innerText = "작성자를 입력해주세요";
+        if (!writer) {
+            document.getElementById("writer-error").innerText = "작성자를 입력해주세요";
+        }
 
         if (!password)
             document.getElementById("password-error").innerText = "비밀번호를 입력해주세요";
 
         if (!title) document.getElementById("title-error").innerText = "제목을 입력해주세요";
 
-        if (!contents) document.getElementById("content-error").innerText = "내용을 입력해주세요";
+        if (contents === "<p><br></p>")
+            document.getElementById("contents-error").innerText = "내용을 입력해주세요";
+
+        if (!writer || !password || !title || contents === "<p><br></p>") return;
 
         try {
             const result = await createBoard({
@@ -126,6 +130,12 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
             console.log(error);
             alert("비밀번호가 일치하지 않습니다!");
         }
+    };
+
+    const onChangeContents = (value) => {
+        setContents(value);
+
+        if (value) document.getElementById("contents-error").innerText = "";
     };
 
     const showModal = () => {
@@ -187,6 +197,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         youtubeUrl,
         imageRefs,
         imageUrls,
+        onChangeContents,
         onChangeInput,
         onClickUpdate,
         onClickSubmit,

@@ -49,7 +49,7 @@ export const BoardsDetail = ({ data }: IBoardDetailProps) => {
                     <div className={styles.detail_main_wrapper}>
                         <div className={styles.img1}>
                             {data?.fetchBoard.images.map((url, idx) =>
-                                url !== "/images/addImage.png" ? (
+                                url !== "" ? (
                                     <Image
                                         key={idx}
                                         className={styles.detail1_img}
@@ -62,7 +62,11 @@ export const BoardsDetail = ({ data }: IBoardDetailProps) => {
                                 ) : null
                             )}
                         </div>
-                        <div>{data?.fetchBoard?.contents}</div>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: data?.fetchBoard.contents,
+                            }}
+                        ></div>
                         <div className={styles.youtube_wrapper}>
                             <ReactPlayer
                                 src={data?.fetchBoard.youtubeUrl}

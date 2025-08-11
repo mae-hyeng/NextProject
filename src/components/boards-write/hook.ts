@@ -11,6 +11,7 @@ import {
     UpdateBoardDocument,
     UploadFileDocument,
 } from "@/commons/graphql/graphql";
+import { UPDATE_BOARD } from "./queries";
 
 export const useBoardsWrite = (data: FetchBoardQuery) => {
     useEffect(() => {
@@ -39,7 +40,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
     const [youtubeUrl, setYoutubeUrl] = useState("");
 
     const [createBoard] = useMutation(CreateBoardDocument);
-    const [updateBoard] = useMutation(UpdateBoardDocument);
+    const [updateBoard] = useMutation(UPDATE_BOARD);
 
     const router = useRouter();
     const params = useParams();
@@ -48,6 +49,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
     const imageRefs = useRef<(HTMLInputElement | null)[]>([]);
 
     const [imageUrls, setImageUrls] = useState(["", "", ""]);
+    const [files, setFiles] = useState<File[]>([]);
 
     const [uploadFile] = useMutation(UploadFileDocument);
 
@@ -80,6 +82,9 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
 
         if (!writer || !password || !title || contents === "<p><br></p>") return;
 
+        const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
+        const resultUrls = results.map((file) => file.data.uploadFile.url);
+
         try {
             const result = await createBoard({
                 variables: {
@@ -93,7 +98,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
                         address,
                         addressDetail,
                     },
-                    images: imageUrls,
+                    images: resultUrls,
                 },
             });
 
@@ -106,6 +111,11 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
 
     const onClickUpdate = async () => {
         const pw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요");
+        const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
+        const resultUrls = results.map((file, idx) =>
+            !file ? imageUrls[idx] : file.data.uploadFile.url
+        );
+        const images = resultUrls.length ? resultUrls : imageUrls;
         try {
             const myVariables: IMyVariables = {
                 updateBoardInput: {
@@ -122,7 +132,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
 
             if (title) myVariables.updateBoardInput.title = title;
             if (contents) myVariables.updateBoardInput.contents = contents;
-            if (imageUrls) myVariables.updateBoardInput.images = imageUrls;
+            if (images) myVariables.updateBoardInput.images = images;
 
             const result = await updateBoard({ variables: myVariables });
             router.push(`/boards/detail/${result.data.updateBoard._id}`);
@@ -171,20 +181,25 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         const isValid = checkValidationFile(file);
         if (!isValid) return;
 
-        const result = await uploadFile({ variables: { file } });
-        const url = result.data.uploadFile.url;
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = (e) => {
+            if (typeof e.target.result === "string") {
+                const tempUrls = [...imageUrls];
+                tempUrls[idx] = e.target.result;
+                setImageUrls(tempUrls);
 
-        setImageUrls((prev) => {
-            const newUrls = [...prev];
-            newUrls[idx] = url;
-            return newUrls;
-        });
+                const tempFiles = [...files];
+                tempFiles[idx] = file;
+                setFiles(tempFiles);
+            }
+        };
     };
 
     const onDeleteImage = (idx: number) => {
         setImageUrls((prev) => {
             const newUrls = [...prev];
-            newUrls[idx] = "/images/addImage.png";
+            newUrls.splice(idx, 1);
             return newUrls;
         });
     };

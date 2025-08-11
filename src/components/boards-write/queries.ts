@@ -55,6 +55,8 @@ export const UPDATE_BOARD = gql`
             title
             contents
             youtubeUrl
+            likeCount
+            images
             __typename
         }
     }

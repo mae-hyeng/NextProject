@@ -35,7 +35,7 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
     return (
         <div className={styles.BoardsNew}>
             <div className={styles.main}>
-                <h5>게시물 등록</h5>
+                <h5>게시물 {isEdit ? "수정" : "등록"}</h5>
                 <div className={styles.main_section_1}>
                     <div className={styles.section_1_wrapper}>
                         <div>
@@ -142,10 +142,8 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
                                             imageUrls[idx]
                                                 ? imageUrls[idx].startsWith("codecamp")
                                                     ? `https://storage.googleapis.com/${imageUrls[idx]}`
-                                                    : `/images/addImage.png`
-                                                : data?.fetchBoard.images?.[idx]
-                                                ? `https://storage.googleapis.com/${data.fetchBoard.images[idx]}`
-                                                : `/images/addImage.png`
+                                                    : imageUrls[idx]
+                                                : "/images/addImage.png"
                                         }
                                         alt={`이미지추가버튼${idx + 1}`}
                                         width={300}

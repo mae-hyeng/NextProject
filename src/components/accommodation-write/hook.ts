@@ -66,10 +66,15 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
     const imageRefs = useRef<(HTMLInputElement | null)[]>([]);
 
     const [imageUrls, setImageUrls] = useState(["", "", ""]);
+    const [files, setFiles] = useState<File[]>([]);
+
+    console.log("files : ", files);
 
     const [uploadFile] = useMutation(UploadFileDocument);
 
     const onClickSubmit = async (data) => {
+        const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
+        const resultUrls = results.map((file) => file.data.uploadFile.url);
         try {
             const result = await createTravelProduct({
                 variables: {
@@ -85,7 +90,7 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
                         lat: parseFloat(data.lat),
                         lng: parseFloat(data.lng),
                     },
-                    images: imageUrls,
+                    images: resultUrls,
                 },
             });
 
@@ -97,6 +102,11 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
     };
 
     const onClickUpdate = async (data) => {
+        const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
+        const resultUrls = results.map((file, idx) =>
+            !file ? imageUrls[idx] : file.data.uploadFile.url
+        );
+        const images = resultUrls.length ? resultUrls : imageUrls;
         try {
             const variables = {
                 updateTravelproductInput: {
@@ -112,7 +122,7 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
                         lat: parseFloat(data.lat),
                         lng: parseFloat(data.lng),
                     },
-                    images: imageUrls,
+                    images: images,
                 },
                 travelproductId: params.travelproductId,
             };
@@ -175,20 +185,26 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
         const isValid = checkValidationFile(file);
         if (!isValid) return;
 
-        const result = await uploadFile({ variables: { file } });
-        const url = result.data.uploadFile.url;
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = (e) => {
+            if (typeof e.target.result === "string") {
+                const tempUrls = [...imageUrls];
+                tempUrls[idx] = e.target.result;
+                setImageUrls(tempUrls);
 
-        setImageUrls((prev) => {
-            const newUrls = [...prev];
-            newUrls[idx] = url;
-            return newUrls;
-        });
+                const tempFiles = [...files];
+                tempFiles[idx] = file;
+                setFiles(tempFiles);
+            }
+        };
+        console.log("onChangeImage : ", file);
     };
 
     const onDeleteImage = (idx: number) => {
         setImageUrls((prev) => {
             const newUrls = [...prev];
-            newUrls[idx] = "/images/addImage.png";
+            newUrls.splice(idx, 1);
             return newUrls;
         });
     };

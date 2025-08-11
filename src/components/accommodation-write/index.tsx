@@ -35,9 +35,6 @@ export const AccommodationWrite = ({ isEdit, data }) => {
         onDeleteImage,
     } = useAccommodationWrite(data, reset, setValue, trigger);
 
-    console.log("formState : ", formState);
-    console.log(formState.errors);
-
     return (
         <div className={styles.accommodation_new}>
             <div className={styles.main}>
@@ -183,8 +180,10 @@ export const AccommodationWrite = ({ isEdit, data }) => {
                                         <Image
                                             src={
                                                 imageUrls[idx]
-                                                    ? `https://storage.googleapis.com/${imageUrls[idx]}`
-                                                    : `/images/addImage.png`
+                                                    ? imageUrls[idx].startsWith("codecamp")
+                                                        ? `https://storage.googleapis.com/${imageUrls[idx]}`
+                                                        : imageUrls[idx]
+                                                    : "/images/addImage.png"
                                             }
                                             alt={`이미지추가버튼${idx + 1}`}
                                             width={300}
@@ -200,6 +199,7 @@ export const AccommodationWrite = ({ isEdit, data }) => {
                                             }}
                                         />
                                         <button
+                                            type="button"
                                             onClick={() => onDeleteImage(idx)}
                                             className={styles.image_delete}
                                         >

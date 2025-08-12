@@ -10,7 +10,6 @@ import { useMyPages } from "./hook";
 export const MyPage = () => {
     const { category, onClickCategory } = useMyPages();
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(userInfo);
 
     return (
         <div className={styles.myPage}>

@@ -2,7 +2,7 @@
 
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS, UPDATE_BOARD_COMMENT } from "./queries";
+import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "./queries";
 import { ChangeEvent, useEffect, useState } from "react";
 
 export const useBoardComment = ({ comment, setIsEdit }) => {
@@ -21,26 +21,23 @@ export const useBoardComment = ({ comment, setIsEdit }) => {
 
     const onClickSubmitComment = async () => {
         const commentVariables = {
-            createBoardCommentInput: {
-                writer: writer,
-                password: password,
-                contents: contents,
-                rating: rating,
-            },
+            createBoardCommentInput: { writer, password, contents, rating },
             boardId: params.boardId,
         };
 
-        const result = await createBoardComment({
+        await createBoardComment({
             variables: commentVariables,
-            refetchQueries: [
-                {
-                    query: FETCH_BOARD_COMMENTS,
-                    variables: { boardId: params.boardId },
-                },
-            ],
+            update(cache, { data }) {
+                cache.modify({
+                    fields: {
+                        fetchBoardComments: (prev) => {
+                            return [data.createBoardComment, ...prev];
+                        },
+                    },
+                });
+            },
         });
 
-        console.log(result);
         resetCommentArea();
     };
 
@@ -73,12 +70,9 @@ export const useBoardComment = ({ comment, setIsEdit }) => {
         if (name === "writer") setWriter(value);
         else if (name === "password") setPassword(value);
         else if (name === "contents") setContents(value);
-
-        console.log(value);
     };
 
     const onChangeRating = (e) => {
-        console.log(e);
         setRating(e);
     };
 

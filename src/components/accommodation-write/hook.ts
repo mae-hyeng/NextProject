@@ -11,7 +11,7 @@ declare const window: Window & {
     kakao: any;
 };
 
-export const useAccommodationWrite = (data, reset, setValue, trigger) => {
+export const useAccommodationWrite = (data, reset, setValue) => {
     const kakaoMapRef = useRef();
     const [isLoadData, setIsLoadData] = useState(true);
 
@@ -68,8 +68,6 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
     const [imageUrls, setImageUrls] = useState(["", "", ""]);
     const [files, setFiles] = useState<File[]>([]);
 
-    console.log("files : ", files);
-
     const [uploadFile] = useMutation(UploadFileDocument);
 
     const onClickSubmit = async (data) => {
@@ -92,11 +90,19 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
                     },
                     images: resultUrls,
                 },
+                update(cache, { data }) {
+                    cache.modify({
+                        fields: {
+                            fetchTravelproducts: (prev) => {
+                                return [data.createTravelproduct, ...prev];
+                            },
+                        },
+                    });
+                },
             });
 
             router.push(`/accommodation/detail/${result.data.createTravelproduct._id}`);
         } catch (error) {
-            console.log(error);
             alert("에러가 발생하였습니다. 다시 시도해 주세요.");
         }
     };
@@ -130,7 +136,6 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
             router.push(`/accommodation/detail/${result.data.updateTravelproduct._id}`);
         } catch (error) {
             console.log(error);
-            // alert("비밀번호가 일치하지 않습니다!");
         }
     };
 
@@ -198,7 +203,6 @@ export const useAccommodationWrite = (data, reset, setValue, trigger) => {
                 setFiles(tempFiles);
             }
         };
-        console.log("onChangeImage : ", file);
     };
 
     const onDeleteImage = (idx: number) => {

@@ -3,19 +3,24 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useAccommodationDetail } from "./hook";
-import ImageGallery from "./image-gallery";
 import AccommodationDetailImageGallery from "./image-gallery";
-import Dompurify from "dompurify";
 
 const AccommodationDetail = ({ data, refetch }) => {
-    const { onClickBookmark, onClickBuyingAndSelling } = useAccommodationDetail({ data, refetch });
+    const { isAddress, onClickDeleteAccommodation, onClickBookmark, onClickBuyingAndSelling } =
+        useAccommodationDetail({ data, refetch });
 
     return (
         <div className={styles.accommodationDetail}>
             <div className={styles.detail_header_wrapper}>
                 <h2>{data?.fetchTravelproduct?.name}</h2>
                 <div className={styles.icons_wrapper}>
-                    <Image src={"/images/delete-black.png"} alt="delete" width={25} height={25} />
+                    <Image
+                        onClick={onClickDeleteAccommodation}
+                        src={"/images/delete-black.png"}
+                        alt="delete"
+                        width={25}
+                        height={25}
+                    />
                     <Image src={"/images/link.png"} alt="link" width={25} height={25} />
                     <Image src={"/images/location.png"} alt="location" width={25} height={25} />
                     <button
@@ -35,12 +40,11 @@ const AccommodationDetail = ({ data, refetch }) => {
 
             <div className={styles.accommodation_info_wrapper}>
                 <div className={styles.info_wrapper_left}>
-                    {/* <Image src={"/images/inner1.png"} alt="실내이미지" width={640} height={300} /> */}
                     <AccommodationDetailImageGallery data={data} />
                 </div>
                 <div className={styles.info_wrapper_right}>
                     <div className={styles.info_wrapper}>
-                        <h5>{data?.fetchTravelproduct?.price}</h5>
+                        <h5>{data?.fetchTravelproduct?.price.toLocaleString("ko-KR")}</h5>
                         <ul>
                             <li>숙박권은 트립트립에서 포인트 충전 후 구매하실 수 있습니다.</li>
                             <li>상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.</li>
@@ -71,9 +75,6 @@ const AccommodationDetail = ({ data, refetch }) => {
                     dangerouslySetInnerHTML={{
                         __html: data?.fetchTravelproduct.contents,
                     }}
-                    // dangerouslySetInnerHTML={{
-                    //     __html: Dompurify.sanitize(data?.fetchTravelproduct.contents),
-                    // }}
                 ></div>
             </div>
 
@@ -82,7 +83,7 @@ const AccommodationDetail = ({ data, refetch }) => {
             <div className={styles.detail_location_wrapper}>
                 <h5>상세 위치</h5>
                 <div id="geo" className={styles.geo}>
-                    지도 표시 영역
+                    판매자가 주소를 입력하지 않았습니다 😅
                 </div>
             </div>
 

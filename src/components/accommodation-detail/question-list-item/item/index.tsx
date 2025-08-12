@@ -9,7 +9,7 @@ import { useQuery } from "@apollo/client";
 import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "../reply/reply-write/queries";
 import { ReplyListItem } from "../reply/item";
 
-export const QuestionListItem = ({ data, question, refetchQuestionData }) => {
+export const QuestionListItem = ({ data, question }) => {
     const {
         isSame,
         isEdit,
@@ -21,15 +21,11 @@ export const QuestionListItem = ({ data, question, refetchQuestionData }) => {
         onClickReply,
     } = useQuestionListItem({
         data,
-        refetchQuestionData,
     });
 
-    const { data: replyData, refetch: refetchReplyData } = useQuery(
-        FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER,
-        {
-            variables: { travelproductQuestionId: question._id },
-        }
-    );
+    const { data: replyData } = useQuery(FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER, {
+        variables: { travelproductQuestionId: question._id },
+    });
 
     return (
         <>
@@ -40,7 +36,6 @@ export const QuestionListItem = ({ data, question, refetchQuestionData }) => {
                         isEdit={isEdit}
                         setIsEdit={setIsEdit}
                         question={question}
-                        refetchQuestionData={refetchQuestionData}
                     />
                 ) : (
                     <>
@@ -98,18 +93,11 @@ export const QuestionListItem = ({ data, question, refetchQuestionData }) => {
                                 isEdit={false}
                                 setIsShow={setIsShow}
                                 question={question}
-                                refetchReplyData={refetchReplyData}
                                 replyData={replyData}
                             />
                         )}
                         {replyData?.fetchTravelproductQuestionAnswers.map((reply) => (
-                            <ReplyListItem
-                                key={reply._id}
-                                reply={reply}
-                                question={question}
-                                refetchQuestionData={refetchQuestionData}
-                                refetchReplyData={refetchReplyData}
-                            />
+                            <ReplyListItem key={reply._id} reply={reply} question={question} />
                         ))}
                     </>
                 )}

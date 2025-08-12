@@ -3,7 +3,7 @@ import { useState } from "react";
 import { DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER } from "../reply-write/queries";
 import { IUseReplyListItem } from "./types";
 
-export const useReplyListItem = ({ question, refetchReplyData }: IUseReplyListItem) => {
+export const useReplyListItem = () => {
     const [isEdit, setIsEdit] = useState(false);
 
     const [deleteTravelProductQuestionAnswer] = useMutation(DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER);
@@ -12,12 +12,22 @@ export const useReplyListItem = ({ question, refetchReplyData }: IUseReplyListIt
 
     const onClickReplyDelete = async (id) => {
         try {
-            const result = await deleteTravelProductQuestionAnswer({
+            await deleteTravelProductQuestionAnswer({
                 variables: { travelproductQuestionAnswerId: id },
+                update(cache, { data }) {
+                    cache.modify({
+                        fields: {
+                            fetchTravelproductQuestionAnswers: (prev, { readField }) => {
+                                const deletedId = data.deleteTravelproductQuestionAnswer;
+                                const filteredAnswers = prev.filter(
+                                    (answers) => readField("_id", answers) !== deletedId
+                                );
+                                return [...filteredAnswers];
+                            },
+                        },
+                    });
+                },
             });
-            await refetchReplyData({ travelproductQuestionId: question._id });
-
-            console.log(result);
         } catch (error) {
             console.log(error);
         }

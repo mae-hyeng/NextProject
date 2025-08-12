@@ -1,15 +1,11 @@
 "use client";
 
-import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import _ from "lodash";
-import { DELETE_TRAVEL_PRODUCT, FETCH_TRAVEL_PRODUCTS } from "./queries";
 
-export const AccommodationList = (data, refetch) => {
+export const AccommodationList = (refetch) => {
     const router = useRouter();
-    const [deleteBoard] = useMutation(DELETE_TRAVEL_PRODUCT);
-
     const [keyword, setKeyword] = useState("");
 
     const [category, setCategory] = useState("reservationAvailable");
@@ -21,17 +17,6 @@ export const AccommodationList = (data, refetch) => {
 
     const onClickAccommodation = (travelproductId) => {
         router.push(`/accommodation/detail/${travelproductId}`);
-    };
-
-    const onClickDeleteAccommodation = (travelproductId) => {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            deleteBoard({
-                variables: {
-                    travelproductId: travelproductId,
-                },
-                refetchQueries: [{ query: FETCH_TRAVEL_PRODUCTS }],
-            });
-        }
     };
 
     const onClickRegister = () => {
@@ -49,7 +34,6 @@ export const AccommodationList = (data, refetch) => {
 
     const onChangeDatePicker = (_, dateString) => {
         const [start, end] = dateString;
-        console.log(start, end);
         setStartDate(start);
         setEndDate(end);
         refetch({ search: keyword, page: 1 });
@@ -64,7 +48,6 @@ export const AccommodationList = (data, refetch) => {
         category,
         onClickCategory,
         onClickAccommodation,
-        onClickDeleteAccommodation,
         onClickRegister,
         onChangeKeyword,
         onChangeDatePicker,

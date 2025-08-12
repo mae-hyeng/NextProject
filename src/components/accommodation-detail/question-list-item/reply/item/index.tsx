@@ -5,12 +5,8 @@ import styles from "./styles.module.css";
 import { ReplyWrite } from "../reply-write";
 import { useReplyListItem } from "./hook";
 
-export const ReplyListItem = ({ reply, question, refetchQuestionData, refetchReplyData }) => {
-    const { isEdit, setIsEdit, onClickReplyEdit, onClickReplyDelete } = useReplyListItem({
-        question,
-        refetchQuestionData,
-        refetchReplyData,
-    });
+export const ReplyListItem = ({ reply, question }) => {
+    const { isEdit, setIsEdit, onClickReplyEdit, onClickReplyDelete } = useReplyListItem();
 
     return (
         <>
@@ -21,7 +17,6 @@ export const ReplyListItem = ({ reply, question, refetchQuestionData, refetchRep
                         isEdit={isEdit}
                         setIsEdit={setIsEdit}
                         question={question}
-                        refetchQuestionData={refetchQuestionData}
                         reply={reply}
                     />
                 ) : (

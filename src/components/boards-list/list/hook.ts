@@ -2,7 +2,6 @@
 
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { FETCH_BOARDS } from "./queries";
 import { DeleteBoardDocument } from "@/commons/graphql/graphql";
 import { ChangeEvent, useState } from "react";
 import _ from "lodash";
@@ -28,7 +27,19 @@ export const BoardsList = ({ refetch, boardsCountRefetch }) => {
                 variables: {
                     boardId: boardId,
                 },
-                refetchQueries: [{ query: FETCH_BOARDS }],
+                update(cache, { data }) {
+                    cache.modify({
+                        fields: {
+                            fetchBoards: (prev, { readField }) => {
+                                const deletedId = data.deleteBoard;
+                                const filteredBoard = prev.filter(
+                                    (board) => readField("_id", board) !== deletedId
+                                );
+                                return [...filteredBoard];
+                            },
+                        },
+                    });
+                },
             });
         }
     };
@@ -49,7 +60,6 @@ export const BoardsList = ({ refetch, boardsCountRefetch }) => {
 
     const onChangeDatePicker = (_, dateString) => {
         const [start, end] = dateString;
-        console.log(start, end);
         setStartDate(start);
         setEndDate(end);
         refetch({ endDate: end, startDate: start, search: keyword, page: 1 });

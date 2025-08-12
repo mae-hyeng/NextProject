@@ -3,7 +3,7 @@
 import { QuestionListItem } from "../question-list-item/item";
 import styles from "./styles.module.css";
 
-export const QuestionList = ({ data, questionData, refetchQuestionData }) => {
+export const QuestionList = ({ data, questionData }) => {
     const questions = questionData;
 
     return (
@@ -16,12 +16,7 @@ export const QuestionList = ({ data, questionData, refetchQuestionData }) => {
             </div>
             {/* <InfiniteScroll next={} hasMore={} loader={} dataLength={}> */}
             {questions?.fetchTravelproductQuestions.map((question) => (
-                <QuestionListItem
-                    key={question._id}
-                    data={data}
-                    question={question}
-                    refetchQuestionData={refetchQuestionData}
-                />
+                <QuestionListItem key={question._id} data={data} question={question} />
             ))}
             {/* </InfiniteScroll> */}
         </div>

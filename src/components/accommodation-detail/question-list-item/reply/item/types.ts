@@ -11,5 +11,4 @@ export interface IUseReplyListItem {
     refetchQuestionData: (
         variables?: Partial<OperationVariables>
     ) => Promise<ApolloQueryResult<any>>;
-    refetchReplyData?: (variables?: Partial<OperationVariables>) => Promise<ApolloQueryResult<any>>;
 }

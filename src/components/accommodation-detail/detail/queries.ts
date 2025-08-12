@@ -74,3 +74,9 @@ export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
         }
     }
 `;
+
+export const DELETE_TRAVEL_PRODUCT = gql`
+    mutation deleteTravelproduct($travelproductId: ID!) {
+        deleteTravelproduct(travelproductId: $travelproductId)
+    }
+`;

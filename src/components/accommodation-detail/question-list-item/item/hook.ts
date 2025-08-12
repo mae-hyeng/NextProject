@@ -2,9 +2,8 @@ import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { DELETE_TRAVEL_PRODUCT_QUESTION } from "../../question-write/queries";
 import { useParams } from "next/navigation";
-import { useAuthStore } from "@/commons/stores/authStore";
 
-export const useQuestionListItem = ({ data, refetchQuestionData }) => {
+export const useQuestionListItem = ({ data }) => {
     const params = useParams();
     const [isEdit, setIsEdit] = useState(false);
     const [isSame, setIsSame] = useState(false);
@@ -24,14 +23,24 @@ export const useQuestionListItem = ({ data, refetchQuestionData }) => {
         }
     }, [user, data]);
 
-    const onClickQuestionDelete = async (id) => {
+    const onClickQuestionDelete = async (travelproductQuestionId) => {
         try {
-            const result = await deleteTravelProductQuestion({
-                variables: { travelproductQuestionId: id },
+            await deleteTravelProductQuestion({
+                variables: { travelproductQuestionId },
+                update(cache, { data }) {
+                    cache.modify({
+                        fields: {
+                            fetchTravelproductQuestions: (prev, { readField }) => {
+                                const deletedId = data.deleteTravelproductQuestion;
+                                const filteredData = prev.filter(
+                                    (comment) => readField("_id", comment) !== deletedId
+                                );
+                                return [...filteredData];
+                            },
+                        },
+                    });
+                },
             });
-            await refetchQuestionData({ travelproductId: params.travelproductId });
-
-            console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +48,6 @@ export const useQuestionListItem = ({ data, refetchQuestionData }) => {
 
     const onClickReply = () => {
         setIsShow(!isShow);
-        console.log(isShow);
     };
 
     return {

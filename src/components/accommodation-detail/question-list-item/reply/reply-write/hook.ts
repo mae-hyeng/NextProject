@@ -9,12 +9,7 @@ import {
 } from "./queries";
 import { IReplyWriteProps } from "./types";
 
-export const useReplyWrite = ({
-    question,
-    setIsEdit,
-    setIsShow,
-    refetchReplyData,
-}: IReplyWriteProps) => {
+export const useReplyWrite = ({ question, setIsEdit, setIsShow }: IReplyWriteProps) => {
     useEffect(() => {
         if (question) setContents(question?.contents ?? "");
     }, [question]);
@@ -33,9 +28,18 @@ export const useReplyWrite = ({
             travelproductQuestionId: question._id,
         };
 
-        const result = await createTravelProductQuestionAnswer({ variables });
-        await refetchReplyData({ travelproductQuestionId: question._id });
-
+        await createTravelProductQuestionAnswer({
+            variables,
+            update(cache, { data }) {
+                cache.modify({
+                    fields: {
+                        fetchTravelproductQuestionAnswers: (prev) => {
+                            return [data.createTravelproductQuestionAnswer, ...prev];
+                        },
+                    },
+                });
+            },
+        });
         resetReplyArea();
     };
 

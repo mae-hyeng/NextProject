@@ -10,10 +10,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "./schema";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
+import { IAccommodationWriteProps } from "./types";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-export const AccommodationWrite = ({ isEdit, data }) => {
-    const { register, handleSubmit, formState, reset, setValue, trigger } = useForm({
+export const AccommodationWrite = ({ isEdit, data }: IAccommodationWriteProps) => {
+    const { register, handleSubmit, formState, reset, setValue } = useForm({
         resolver: zodResolver(schema),
         mode: "onChange",
     });
@@ -33,7 +34,7 @@ export const AccommodationWrite = ({ isEdit, data }) => {
         onClickImage,
         onChangeImage,
         onDeleteImage,
-    } = useAccommodationWrite(data, reset, setValue, trigger);
+    } = useAccommodationWrite(data, reset, setValue);
 
     return (
         <div className={styles.accommodation_new}>

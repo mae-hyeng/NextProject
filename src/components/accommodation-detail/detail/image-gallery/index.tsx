@@ -5,7 +5,6 @@ import styles from "./styles.module.css";
 
 const AccommodationDetailImageGallery = ({ data }) => {
     if (!data?.fetchTravelproduct?.images) return;
-    console.log(data);
 
     const images = data?.fetchTravelproduct?.images.filter(Boolean).map((img) => {
         return {

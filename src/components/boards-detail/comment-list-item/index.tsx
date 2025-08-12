@@ -5,13 +5,11 @@ import styles from "./styles.module.css";
 import { Rate } from "antd";
 import { CommentWrite } from "../comment-write";
 import { useState } from "react";
+import { UseBoardCommentListItem } from "./hook";
 
 export const CommentListItem = ({ comment }) => {
-    const [isEdit, setIsEdit] = useState(false);
-
-    const onClickCommentEdit = () => setIsEdit(true);
-
-    const onClickCommentDelete = () => {};
+    const { isEdit, setIsEdit, onClickCommentEdit, onClickCommentDelete } =
+        UseBoardCommentListItem();
 
     return (
         <>
@@ -52,7 +50,7 @@ export const CommentListItem = ({ comment }) => {
                                 <Image
                                     src={"/images/close.png"}
                                     className={styles.detail_delete_image}
-                                    onClick={onClickCommentDelete}
+                                    onClick={() => onClickCommentDelete(comment._id)}
                                     alt="삭제버튼"
                                     width={25}
                                     height={0}

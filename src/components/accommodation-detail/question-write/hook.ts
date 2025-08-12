@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { CREATE_TRAVEL_PRODUCT_QUESTION, UPDATE_TRAVEL_PRODUCT_QUESTION } from "./queries";
 
-export const useQuestionWrite = ({ question, setIsEdit, refetchQuestionData }) => {
+export const useQuestionWrite = ({ question, setIsEdit }) => {
     useEffect(() => {
         if (question) setContents(question?.contents ?? "");
     }, [question]);
@@ -24,8 +24,18 @@ export const useQuestionWrite = ({ question, setIsEdit, refetchQuestionData }) =
             travelproductId: params.travelproductId,
         };
 
-        const result = await createTravelProductQuestion({ variables });
-        await refetchQuestionData({ travelproductId: params.travelproductId });
+        await createTravelProductQuestion({
+            variables,
+            update(cache, { data }) {
+                cache.modify({
+                    fields: {
+                        fetchTravelproductQuestions: (prev) => {
+                            return [data.createTravelproductQuestion, ...prev];
+                        },
+                    },
+                });
+            },
+        });
 
         resetQuestionArea();
     };

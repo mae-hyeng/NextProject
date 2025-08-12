@@ -30,13 +30,10 @@ export const useNavigationLogin = () => {
             },
             redirectUrl: "http://localhost:3000/mypage",
         });
-        console.log("paymentResult : ", paymentResult);
 
         const result = await createPointTransactionOfLoading({
             variables: { paymentId: paymentResult.paymentId },
         });
-
-        console.log("result : ", result);
         handleCloseModal();
     };
 

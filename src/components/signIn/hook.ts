@@ -63,7 +63,6 @@ export const useSignIn = () => {
                     name,
                 },
             });
-            console.log(result);
             Modal.success({
                 content: "회원가입을 축하드립니다!",
             });

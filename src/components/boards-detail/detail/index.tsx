@@ -11,7 +11,9 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Banner } from "@/commons/layout/banner";
 
 export const BoardsDetail = ({ data }: IBoardDetailProps) => {
-    const { onClickToBoards, onClickToUpdate } = useBoardsDetail();
+    const { onClickLike, onClickDislike, onClickToBoards, onClickToUpdate } = useBoardsDetail({
+        data,
+    });
     return (
         <>
             <Banner />
@@ -80,13 +82,13 @@ export const BoardsDetail = ({ data }: IBoardDetailProps) => {
                         </div>
                     </div>
                     <div className={styles.detail_main_like}>
-                        <div className={styles.detail_main_like_btn}>
+                        <div onClick={onClickDislike} className={styles.detail_main_like_btn}>
                             <ThumbDownIcon />
-                            24
+                            {data?.fetchBoard.dislikeCount}
                         </div>
-                        <div className={styles.detail_main_like_btn}>
+                        <div onClick={onClickLike} className={styles.detail_main_like_btn}>
                             <ThumbUpIcon />
-                            12
+                            {data?.fetchBoard.likeCount}
                         </div>
                     </div>
                     <div className={styles.detail_main_btn}>

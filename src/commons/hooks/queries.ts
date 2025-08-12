@@ -8,8 +8,8 @@ export const FETCH_BOARD = gql`
             title
             contents
             youtubeUrl
-            # likeCount
-            # dislikeCount
+            likeCount
+            dislikeCount
             images
             boardAddress {
                 _id
@@ -20,22 +20,23 @@ export const FETCH_BOARD = gql`
                 updatedAt
                 deletedAt
             }
+            # user null 반환됨
             # user {
-            #     _id
-            #     email
-            #     name
-            #     picture
-            #     userPoint {
-            #         _id
-            #         amount
-            #         user
-            #         createdAt
-            #         updatedAt
-            #         deletedAt
-            #     }
-            #     createdAt
-            #     updatedAt
-            #     deletedAt
+            #     # _id
+            #     # email
+            #     # name
+            #     #     picture
+            #     # userPoint {
+            #         # _id
+            #         #         amount
+            #         #         user
+            #         #         createdAt
+            #         #         updatedAt
+            #         #         deletedAt
+            #     # }
+            #     #     createdAt
+            #     #     updatedAt
+            #     #     deletedAt
             # }
             createdAt
             updatedAt

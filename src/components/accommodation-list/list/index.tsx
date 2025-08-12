@@ -9,15 +9,13 @@ import Image from "next/image";
 
 export const AccommodationListPage = ({ data, refetch }) => {
     const {
-        keyword,
         category,
         onClickCategory,
         onClickAccommodation,
-        onClickDeleteAccommodation,
         onClickRegister,
         onChangeKeyword,
         onChangeDatePicker,
-    } = AccommodationList(data, refetch);
+    } = AccommodationList(refetch);
     return (
         <>
             <div className={styles.accommodation_page}>
@@ -83,7 +81,9 @@ export const AccommodationListPage = ({ data, refetch }) => {
                                     </div>
                                     <div className={styles.product_seller_price}>
                                         <div>아이콘/{product?.seller?.name}</div>
-                                        <div className={styles.product_price}>{product?.price}</div>
+                                        <div className={styles.product_price}>
+                                            {product?.price.toLocaleString("ko-KR")}
+                                        </div>
                                     </div>
                                     <div className={styles.accommodation_pickedCount}>
                                         {product?.pickedCount}

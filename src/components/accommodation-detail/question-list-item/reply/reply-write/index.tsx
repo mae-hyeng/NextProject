@@ -4,18 +4,10 @@ import { useReplyWrite } from "./hook";
 import styles from "./styles.module.css";
 import { IReplyWriteProps } from "./types";
 
-export const ReplyWrite = ({
-    isEdit,
-    setIsShow,
-    question,
-    setIsEdit,
-    refetchReplyData,
-    reply,
-}: IReplyWriteProps) => {
+export const ReplyWrite = ({ isEdit, setIsShow, question, setIsEdit, reply }: IReplyWriteProps) => {
     const { contents, onClickSubmitReply, onClickUpdateReply, onChangeInput } = useReplyWrite({
         setIsEdit,
         setIsShow,
-        refetchReplyData,
     });
 
     return (

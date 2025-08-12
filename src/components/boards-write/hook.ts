@@ -100,6 +100,15 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
                     },
                     images: resultUrls,
                 },
+                update(cache, { data }) {
+                    cache.modify({
+                        fields: {
+                            fetchBoards: (prev) => {
+                                return [data.createBoard, ...prev];
+                            },
+                        },
+                    });
+                },
             });
 
             router.push(`/boards/detail/${result.data.createBoard._id}`);
@@ -110,7 +119,7 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
     };
 
     const onClickUpdate = async () => {
-        const pw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요");
+        const pw = prompt("글을 작성할 때 입력하셨던 비밀번호를 입력해주세요");
         const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
         const resultUrls = results.map((file, idx) =>
             !file ? imageUrls[idx] : file.data.uploadFile.url
@@ -165,7 +174,6 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         address: SetStateAction<string>;
     }) => {
         setIsOpen(false);
-        console.log(data);
         setZipcode(data.zonecode);
         setAddress(data.address);
         setAddressDetail("");

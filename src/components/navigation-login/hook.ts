@@ -3,6 +3,10 @@ import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 as uuidv4 } from "uuid";
 import { useMutation } from "@apollo/client";
 import { CREATE_POINT_TRANSACTION_OF_LOADING } from "./queries";
+import { LOG_OUT_USER } from "@/commons/hooks/queries";
+import { Modal } from "antd";
+import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
+import { useLoadStore } from "@/commons/stores/loadStore";
 
 export const useNavigationLogin = () => {
     const [point, setPoint] = useState();
@@ -11,6 +15,11 @@ export const useNavigationLogin = () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
     const [createPointTransactionOfLoading] = useMutation(CREATE_POINT_TRANSACTION_OF_LOADING);
+
+    const [logOutUser] = useMutation(LOG_OUT_USER);
+
+    const { setAccessToken } = useAccessTokenStore();
+    const { setIsLoaded } = useLoadStore();
 
     const onChangePointCharge = (e) => {
         setPoint(e.target.value);
@@ -31,10 +40,20 @@ export const useNavigationLogin = () => {
             redirectUrl: "http://localhost:3000/mypage",
         });
 
-        const result = await createPointTransactionOfLoading({
+        await createPointTransactionOfLoading({
             variables: { paymentId: paymentResult.paymentId },
         });
         handleCloseModal();
+    };
+
+    const onClickLogOut = async () => {
+        try {
+            await logOutUser();
+            setIsLoaded(false);
+            setAccessToken("");
+        } catch (error) {
+            Modal.error({ content: `${error}` });
+        }
     };
 
     const open = Boolean(anchorEl);
@@ -61,6 +80,7 @@ export const useNavigationLogin = () => {
         isModalOpen,
         onChangePointCharge,
         onClickPointCharge,
+        onClickLogOut,
         handleClick,
         handleClose,
         handleOpenModal,

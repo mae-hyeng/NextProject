@@ -1,3 +1,9 @@
+.changePassword_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .password_wrapper {
     display: flex;
     flex-direction: column;
@@ -24,13 +30,11 @@
     color: #e4e4e4;
 }
 
-.button_wrapper button:hover {
+.button_wrapper button:not(:disabled) {
     background-color: #2974e5;
     color: white;
 }
 
-.require_input {
-    padding: 0.3rem;
-    align-items: center;
+.error {
     color: red;
 }

@@ -14,9 +14,9 @@ export const ChargingHistory = ({ loading }) => {
             <div className={styles.charging_wrapper}>
                 <div className={styles.charging_table}>
                     <div className={styles.charging_header}>
-                        <div className={styles.charging_header_date}>거래일</div>
-                        <div className={styles.charging_header_impUid}>상품 명</div>
-                        <div className={styles.charging_header_transaction}>거래내역</div>
+                        <div className={styles.charging_header_date}>충전일</div>
+                        <div className={styles.charging_header_impUid}>결제 ID</div>
+                        <div className={styles.charging_header_transaction}>충전내역</div>
                         <div className={styles.charging_header_balance}>거래 후 잔액</div>
                     </div>
                     <div className={styles.charging_body}>

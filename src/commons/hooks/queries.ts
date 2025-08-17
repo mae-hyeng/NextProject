@@ -169,3 +169,77 @@ export const FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING = gql`
         fetchPointTransactionsCountOfSelling
     }
 `;
+
+// 비밀번호 변경
+export const RESET_USER_PASSWORD = gql`
+    mutation resetUserPassword($password: String!) {
+        resetUserPassword(password: $password)
+    }
+`;
+
+// 나의 상품 구매 상품 정보
+export const FETCH_TRAVEL_PRODUCTS_I_BOUGHT = gql`
+    query fetchTravelproductsIBought($search: String, $page: Int) {
+        fetchTravelproductsIBought(search: $search, page: $page) {
+            name
+            price
+            soldAt
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+// 나의 상품 구매 상품 페이지네이션
+export const FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT = gql`
+    query fetchTravelproductsCountIBought {
+        fetchTravelproductsCountIBought
+    }
+`;
+
+// 나의 북마크 정보
+export const FETCH_TRAVEL_PRODUCTS_I_PICKED = gql`
+    query fetchTravelproductsIPicked($search: String, $page: Int) {
+        fetchTravelproductsIPicked(search: $search, page: $page) {
+            name
+            price
+            soldAt
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+// 나의 북마크 페이지네이션
+export const FETCH_TRAVEL_PRODUCTS_COUNT_I_PICKED = gql`
+    query fetchTravelproductsCountIPicked {
+        fetchTravelproductsCountIPicked
+    }
+`;
+
+// 나의 구매 항목 정보
+export const FETCH_TRAVEL_PRODUCTS_I_SOLD = gql`
+    query fetchTravelproductsISold($search: String, $page: Int) {
+        fetchTravelproductsISold(search: $search, page: $page) {
+            name
+            price
+            soldAt
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+// 나의 구매 항목 페이지네이션
+export const FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD = gql`
+    query fetchTravelproductsCountISold {
+        fetchTravelproductsCountISold
+    }
+`;
+
+// 로그아웃
+export const LOG_OUT_USER = gql`
+    mutation logoutUser {
+        logoutUser
+    }
+`;

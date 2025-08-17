@@ -19,14 +19,10 @@ export const useNavigation = ({ data }) => {
     useEffect(() => {
         if (!accessToken) {
             setIsLogin(false);
-            // localStorage.removeItem("userInfo");
+            localStorage.removeItem("userInfo");
         } else {
             setIsLogin(true);
         }
-        // getAccessToken().then((token) => {
-        //     setIsLogin(!!token);
-        //     localStorage.removeItem("userInfo");
-        // });
     }, [data]);
 
     const onClickNavigation = (page) => {

@@ -42,36 +42,28 @@
     gap: 3rem;
 }
 
-.transaction_title {
-    cursor: pointer;
-}
-
 .search_keyword {
     color: red;
 }
 
 .transaction_num,
-.transaction_header_num {
-    width: 15%;
-    text-align: center;
-}
-
-.transaction_title,
-.transaction_header_title {
-    width: 70%;
-}
-
-.transaction_writer,
-.transaction_header_writer {
+.transaction_header_num,
+.transaction_selling_price,
+.transaction_header_selling_price,
+.transaction_date,
+.transaction_header_date {
     width: 10%;
     text-align: center;
 }
 
-.transaction_regDate,
-.transaction_header_regDate {
-    width: 10%;
-    text-align: center;
+.transaction_name,
+.transaction_header_name {
+    width: 65%;
+
+    display: flex;
+    gap: 1rem;
 }
+
 .delete_wrapper,
 .transaction_header_delete {
     width: 5%;
@@ -107,9 +99,6 @@
     border: 1px solid #efefef;
     border-radius: 1rem;
     padding: 1rem 0rem;
-    /* gap: 0.5rem; */
-
-    cursor: context-menu;
 }
 
 .transaction_delete {
@@ -119,5 +108,14 @@
 
 .transaction_row:hover .transaction_delete {
     display: block;
+}
+
+.isSold_name {
+    color: #ababab;
+}
+
+.isSold_text {
+    color: #2974e5;
+    font-weight: bold;
 }
 /* transaction end */

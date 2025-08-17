@@ -1,0 +1,69 @@
+/* purchased start */
+.purchased_wrapper {
+    border: 1px solid #efefef;
+    border-radius: 1rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.purchased_num,
+.purchased_header_num,
+.purchased_bought_price,
+.purchased_header_bought_price,
+.purchased_date,
+.purchased_header_date {
+    width: 10%;
+    text-align: center;
+}
+
+.purchased_name,
+.purchased_header_name {
+    width: 65%;
+
+    display: flex;
+    gap: 1rem;
+}
+
+.delete_wrapper,
+.purchased_header_delete {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.purchased_num,
+.purchased_regDate {
+    color: gray;
+}
+
+.purchased_table {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+}
+
+.purchased_header {
+    display: flex;
+    font-weight: bold;
+    padding: 1rem 0rem;
+}
+
+.purchased_body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.purchased_row {
+    display: flex;
+    border: 1px solid #efefef;
+    border-radius: 1rem;
+    padding: 1rem 0rem;
+}
+
+.purchased_bought_price {
+    color: #f66a6a;
+}
+/* purchased end */

@@ -16,6 +16,7 @@ export const NavigationLogin = ({ data }) => {
         isModalOpen,
         onChangePointCharge,
         onClickPointCharge,
+        onClickLogOut,
         handleClick,
         handleClose,
         handleOpenModal,
@@ -90,7 +91,7 @@ export const NavigationLogin = ({ data }) => {
                     </div>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                    <div className={styles.menu_wrapper}>
+                    <div className={styles.menu_wrapper} onClick={onClickLogOut}>
                         <Image
                             src={"/images/logout.png"}
                             alt="logout"

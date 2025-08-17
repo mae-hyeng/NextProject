@@ -1,40 +1,34 @@
 "use client";
 
+import { RESET_USER_PASSWORD } from "@/commons/hooks/queries";
 import "@ant-design/v5-patch-for-react-19";
+import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
-import { useState } from "react";
 
 export const useChangePassword = () => {
-    const [password, setPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [isSame, setIsSame] = useState(false);
+    const [resetUserPassword] = useMutation(RESET_USER_PASSWORD);
 
-    const onChangeInput = (e) => {
-        const { name, value } = e.target;
+    const onClickButton = async (data) => {
+        try {
+            if (data.password !== data.newPassword) {
+                return Modal.error({
+                    content: "비밀번호가 맞지 않습니다. 다시 확인해 주세요.",
+                });
+            }
 
-        if (name === "password") setPassword(value);
-        if (name === "newPassword") setNewPassword(value);
-
-        if (password === newPassword) setIsSame(true);
-    };
-
-    const onClickButton = () => {
-        if (password === newPassword) {
+            await resetUserPassword({ variables: { password: data.newPassword } });
             Modal.success({
                 content: "비밀번호가 변경 되었습니다.",
+                onOk: () => window.location.reload(),
             });
-        } else {
+        } catch (error) {
             Modal.error({
-                content: "비밀번호가 맞지 않습니다. 다시 확인해 주세요.",
+                content: `${error}`,
             });
         }
     };
 
     return {
-        password,
-        newPassword,
-        isSame,
-        onChangeInput,
         onClickButton,
     };
 };

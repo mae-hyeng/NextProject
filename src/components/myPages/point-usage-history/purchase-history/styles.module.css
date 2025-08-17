@@ -1,20 +1,5 @@
-.button_wrapper {
-    display: flex;
-    gap: 1rem;
-}
-
-.button_wrapper button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-}
-
-.button_wrapper button:hover {
-    background-color: black;
-    color: white;
-}
-
-/* boards start */
-.boards_wrapper {
+/* purchase start */
+.purchase_wrapper {
     border: 1px solid #efefef;
     border-radius: 1rem;
     padding: 3rem;
@@ -23,73 +8,61 @@
     gap: 3rem;
 }
 
-.board_title {
-    cursor: pointer;
+.purchase_title,
+.purchase_header_title {
+    width: 60%;
+    padding: 0rem 1rem;
 }
 
-.search_keyword {
-    color: red;
+.purchase_transaction {
+    color: #f66a6a;
 }
 
-.board_num,
-.board_header_num {
-    width: 15%;
-    text-align: center;
-}
-
-.board_title,
-.board_header_title {
-    width: 70%;
-}
-
-.board_writer,
-.board_header_writer {
+.purchase_date,
+.purchase_header_date,
+.purchase_transaction,
+.purchase_header_transaction,
+.purchase_balance,
+.purchase_seller,
+.purchase_header_balance,
+.purchase_header_seller {
     width: 10%;
     text-align: center;
 }
 
-.board_redDate,
-.board_header_regDate {
-    width: 10%;
-    text-align: center;
-}
-.delete_wrapper,
-.board_header_delete {
-    width: 5%;
-    display: flex;
-    justify-content: center;
+.purchase_seller {
+    color: #f66a6a;
 }
 
-.board_num,
-.board_redDate {
+.purchase_date,
+.purchase_seller {
     color: gray;
 }
 
-.board_table {
+.purchase_table {
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
 }
 
-.board_header {
+.purchase_header {
     display: flex;
     font-weight: bold;
-    padding: 1rem 0rem;
+    padding: 1rem 2rem;
 }
 
-.board_body {
+.purchase_body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.board_row {
+.purchase_row {
     display: flex;
     border: 1px solid #efefef;
     border-radius: 1rem;
-    padding: 1rem 0rem;
-    /* gap: 0.5rem; */
+    padding: 1rem 2rem;
 
     cursor: context-menu;
 }
-/* boards end */
+/* purchase end */

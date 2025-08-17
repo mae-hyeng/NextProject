@@ -13,21 +13,21 @@ export const TransactionHistory = () => {
                     type="text"
                 />
             </div>
-            <div className={styles.boards_wrapper}>
-                <div className={styles.board_table}>
-                    <div className={styles.board_header}>
-                        <div className={styles.board_header_num}>번호</div>
-                        <div className={styles.board_header_title}>상품 명</div>
-                        <div className={styles.board_header_writer}>판매가격</div>
-                        <div className={styles.board_header_regDate}>날짜</div>
-                        <div className={styles.board_header_delete}></div>
+            <div className={styles.transaction_wrapper}>
+                <div className={styles.transaction_table}>
+                    <div className={styles.transaction_header}>
+                        <div className={styles.transaction_header_num}>날짜</div>
+                        <div className={styles.transaction_header_title}>내용</div>
+                        <div className={styles.transaction_header_writer}>거래 및 충전 내역</div>
+                        <div className={styles.transaction_header_regDate}>잔액</div>
+                        <div className={styles.transaction_header_delete}></div>
                     </div>
-                    <div className={styles.board_body}>
-                        <div className={styles.board_row}>
-                            <div className={styles.board_num}>1</div>
-                            <div className={styles.board_title}>1</div>
-                            <div className={styles.board_writer}>1</div>
-                            <div className={styles.board_regDate}>1</div>
+                    <div className={styles.transaction_body}>
+                        <div className={styles.transaction_row}>
+                            <div className={styles.transaction_num}>1</div>
+                            <div className={styles.transaction_title}>1</div>
+                            <div className={styles.transaction_writer}>1</div>
+                            <div className={styles.transaction_regDate}>1</div>
                             <div className={styles.delete_wrapper}>
                                 <Image
                                     // id={String(idx + 1)}

@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     images: {
         domains: ["storage.googleapis.com"],
     },
+    reactStrictMode: false,
 };
 
 export default nextConfig;

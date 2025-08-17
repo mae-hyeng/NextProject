@@ -74,7 +74,7 @@ export const NavigationLogin = ({ data }) => {
                             width={20}
                             height={0}
                         />
-                        23,000
+                        {data?.fetchUserLoggedIn.userPoint.amount.toLocaleString("ko-KR")}
                     </div>
                 </MenuItem>
                 <MenuItem onClick={handleOpenModal}>
@@ -113,8 +113,12 @@ export const NavigationLogin = ({ data }) => {
                 />
                 <div className={styles.point_charge_title}>충전하실 금액을 선택해 주세요</div>
                 <div>
-                    <select className={styles.point_charge_select} onChange={onChangePointCharge}>
-                        <option selected={true} disabled hidden>
+                    <select
+                        className={styles.point_charge_select}
+                        onChange={onChangePointCharge}
+                        defaultValue={""}
+                    >
+                        <option value="" disabled hidden>
                             내용입력
                         </option>
                         <option value="100">100</option>

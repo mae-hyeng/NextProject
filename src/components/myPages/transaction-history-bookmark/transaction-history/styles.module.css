@@ -32,8 +32,8 @@
     padding-left: 3rem;
 }
 
-/* boards start */
-.boards_wrapper {
+/* transaction start */
+.transaction_wrapper {
     border: 1px solid #efefef;
     border-radius: 1rem;
     padding: 3rem;
@@ -42,7 +42,7 @@
     gap: 3rem;
 }
 
-.board_title {
+.transaction_title {
     cursor: pointer;
 }
 
@@ -50,59 +50,59 @@
     color: red;
 }
 
-.board_num,
-.board_header_num {
+.transaction_num,
+.transaction_header_num {
     width: 15%;
     text-align: center;
 }
 
-.board_title,
-.board_header_title {
+.transaction_title,
+.transaction_header_title {
     width: 70%;
 }
 
-.board_writer,
-.board_header_writer {
+.transaction_writer,
+.transaction_header_writer {
     width: 10%;
     text-align: center;
 }
 
-.board_regDate,
-.board_header_regDate {
+.transaction_regDate,
+.transaction_header_regDate {
     width: 10%;
     text-align: center;
 }
 .delete_wrapper,
-.board_header_delete {
+.transaction_header_delete {
     width: 5%;
     display: flex;
     justify-content: center;
 }
 
-.board_num,
-.board_regDate {
+.transaction_num,
+.transaction_regDate {
     color: gray;
 }
 
-.board_table {
+.transaction_table {
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
 }
 
-.board_header {
+.transaction_header {
     display: flex;
     font-weight: bold;
     padding: 1rem 0rem;
 }
 
-.board_body {
+.transaction_body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.board_row {
+.transaction_row {
     display: flex;
     border: 1px solid #efefef;
     border-radius: 1rem;
@@ -112,12 +112,12 @@
     cursor: context-menu;
 }
 
-.board_delete {
+.transaction_delete {
     display: none;
     cursor: pointer;
 }
 
-.board_row:hover .board_delete {
+.transaction_row:hover .transaction_delete {
     display: block;
 }
-/* boards end */
+/* transaction end */

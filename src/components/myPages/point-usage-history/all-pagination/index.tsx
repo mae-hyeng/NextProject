@@ -1,11 +1,11 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { usePointUsageHistoryPagination } from "./took";
+import { usePointUsageHistoryAllPagination } from "./took";
 
-export const PointUsageHistoryPagination = ({ lastPage }) => {
-    const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } =
-        usePointUsageHistoryPagination({ lastPage });
+export const PointUsageHistoryAllPagination = ({ lastPage, currentPage, setCurrentPage }) => {
+    const { startPage, onClickPrevPage, onClickNextPage, onClickPage } =
+        usePointUsageHistoryAllPagination({ lastPage, setCurrentPage });
     return (
         <div className={styles.pagination_wrapper}>
             <span onClick={onClickPrevPage}>이전페이지</span>

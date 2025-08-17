@@ -107,6 +107,7 @@ export const useAccommodationDetail = ({ data, refetch }) => {
             const result = await createPointTransactionOfBuyingAndSelling({
                 variables: { useritemId: data.fetchTravelproduct._id },
             });
+            console.log(result);
         } catch (error) {
             alert(error);
         }

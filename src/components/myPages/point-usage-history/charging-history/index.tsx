@@ -1,69 +1,45 @@
 "use client";
 
+import { useQuery } from "@apollo/client";
 import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
+import { FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING } from "@/commons/hooks/queries";
 
-export const ChargingHistory = () => {
+export const ChargingHistory = ({ loading }) => {
+    const { data: loadingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING);
+    const lastPage = Math.ceil((loadingCount?.fetchPointTransactionsCountOfLoading ?? 10) / 10);
+
     return (
         <>
-            <div className={styles.boards_wrapper}>
-                <div className={styles.board_table}>
-                    <div className={styles.board_header}>
-                        <div className={styles.board_header_num}>충전일</div>
-                        <div className={styles.board_header_title}>결제 ID</div>
-                        <div className={styles.board_header_writer}>충전내역</div>
-                        <div className={styles.board_header_regDate}>거래 후 잔액</div>
+            <div className={styles.charging_wrapper}>
+                <div className={styles.charging_table}>
+                    <div className={styles.charging_header}>
+                        <div className={styles.charging_header_date}>거래일</div>
+                        <div className={styles.charging_header_impUid}>상품 명</div>
+                        <div className={styles.charging_header_transaction}>거래내역</div>
+                        <div className={styles.charging_header_balance}>거래 후 잔액</div>
                     </div>
-                    <div className={styles.board_body}>
-                        {/* {data?.fetchBoards?.map((d, idx) => (
-                            <div key={idx + 1} className={styles.board_row}>
-                                <div className={styles.board_num}>{idx + 1}</div>
-                                <div
-                                    onClick={() => onClickBoard(d._id)}
-                                    className={styles.board_title}
-                                >
-                                    {d.title
-                                        .replaceAll(
-                                            keyword,
-                                            `[keywordTitle]${keyword}[keywordTitle]`
-                                        )
-                                        .split("[keywordTitle]")
-                                        .map((el, idx) => (
-                                            <span
-                                                key={`${el}_${idx}`}
-                                                className={
-                                                    el === keyword
-                                                        ? styles.search_keyword
-                                                        : ""
-                                                }
-                                            >
-                                                {el}
-                                            </span>
-                                        ))}
-                                </div>
-                                <div className={styles.board_writer}>{d.writer}</div>
-                                <div className={styles.board_redDate}>
-                                    {new Date(d.createdAt)
+                    <div className={styles.charging_body}>
+                        {loading?.fetchPointTransactionsOfLoading?.map((item, idx) => (
+                            <div key={idx + 1} className={styles.charging_row}>
+                                <div className={styles.charging_date}>
+                                    {new Date(item.createdAt)
                                         .toISOString()
                                         .slice(0, 10)
                                         .replaceAll("-", ".")}
                                 </div>
-                                <div className={styles.delete_wrapper}>
-                                    <Image
-                                        id={String(idx + 1)}
-                                        className={styles.board_delete}
-                                        onClick={() => onClickDeleteBoard(d._id)}
-                                        src="/images/delete.png"
-                                        width={22}
-                                        height={0}
-                                        alt="삭제하기"
-                                    />
+                                <div className={styles.charging_impUid}>{item.impUid}</div>
+                                <div className={styles.charging_transaction}>
+                                    +{item.amount.toLocaleString("ko-KR")}
+                                </div>
+                                <div className={styles.charging_balance}>
+                                    {item.balance.toLocaleString("ko-KR")}
                                 </div>
                             </div>
-                        ))} */}
+                        ))}
                     </div>
                 </div>
-                <PointUsageHistoryPagination />
+                <PointUsageHistoryPagination lastPage={lastPage} />
             </div>
         </>
     );

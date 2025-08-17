@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-export const usePointUsageHistoryPagination = ({ lastPage }) => {
+export const usePointUsageHistoryAllPagination = ({ lastPage, setCurrentPage }) => {
     const [startPage, setStartPage] = useState(1);
-    const [currentPage, setCurrentPage] = useState(1);
 
     const onClickPrevPage = () => {
         if (startPage === 1) return;
@@ -22,7 +21,6 @@ export const usePointUsageHistoryPagination = ({ lastPage }) => {
 
     return {
         startPage,
-        currentPage,
         onClickPrevPage,
         onClickNextPage,
         onClickPage,

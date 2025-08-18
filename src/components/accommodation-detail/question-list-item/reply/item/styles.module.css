@@ -2,12 +2,16 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 0rem 2rem;
+    padding: 0.5rem 0rem 0.5rem 2rem;
 }
 
 .answer_wrapper {
     display: flex;
     gap: 0.5rem;
+}
+
+.answer_wrapper_width_100per {
+    width: 100%;
 }
 
 .divideLine {
@@ -25,12 +29,12 @@
     color: gray;
 }
 
-.detail_image_wrapper {
+.reply_detail_image_wrapper {
     display: none;
     gap: 0.5rem;
 }
 
-.reply_wrapper:hover .detail_image_wrapper {
+.reply_wrapper:hover .reply_detail_image_wrapper {
     display: flex;
 }
 
@@ -42,4 +46,34 @@
 .user_header_wrapper {
     display: flex;
     justify-content: space-between;
+}
+
+/* modal */
+.modal_title {
+    color: #f66a6a;
+    text-align: center;
+    font-weight: 700;
+}
+
+.modal_button_wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal_button_cancel,
+.modal_button_submit {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 10rem;
+}
+
+.modal_button_cancel {
+    border: 1px solid black;
+}
+
+.modal_button_submit {
+    border: 1px solid #2974e5;
+    background-color: #2974e5;
+    color: white;
 }

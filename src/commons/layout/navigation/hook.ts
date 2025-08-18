@@ -1,5 +1,5 @@
-import { getAccessToken } from "@/commons/libraries/getAccessToken";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
+import { useAuthStore } from "@/commons/stores/authStore";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ export const useNavigation = ({ data }) => {
     const [navigation, setNavigation] = useState(pathName);
 
     const { accessToken } = useAccessTokenStore();
+    const { setUser, clearUser } = useAuthStore();
 
     useEffect(() => {
         setNavigation(pathName);
@@ -19,9 +20,12 @@ export const useNavigation = ({ data }) => {
     useEffect(() => {
         if (!accessToken) {
             setIsLogin(false);
+            clearUser();
             localStorage.removeItem("userInfo");
         } else {
             setIsLogin(true);
+            setUser(data.fetchUserLoggedIn);
+            localStorage.setItem("userInfo", JSON.stringify(data.fetchUserLoggedIn));
         }
     }, [data]);
 

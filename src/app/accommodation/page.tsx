@@ -7,7 +7,7 @@ import { BannerPage } from "@/components/boards-list/banner";
 import { useQuery } from "@apollo/client";
 
 const Page = () => {
-    const { data, refetch } = useQuery(FETCH_TRAVEL_PRODUCTS, {
+    const { data, refetch, fetchMore } = useQuery(FETCH_TRAVEL_PRODUCTS, {
         variables: {
             isSoldout: false,
         },
@@ -18,7 +18,12 @@ const Page = () => {
     return (
         <>
             <BannerPage />
-            <AccommodationListPage data={data} bestProducts={bestProducts} refetch={refetch} />
+            <AccommodationListPage
+                data={data}
+                bestProducts={bestProducts}
+                refetch={refetch}
+                fetchMore={fetchMore}
+            />
         </>
     );
 };

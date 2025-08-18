@@ -2,6 +2,8 @@
 
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 import { ChangeEvent, useEffect, useState } from "react";
 import { CREATE_TRAVEL_PRODUCT_QUESTION, UPDATE_TRAVEL_PRODUCT_QUESTION } from "./queries";
 
@@ -53,7 +55,13 @@ export const useQuestionWrite = ({ question, setIsEdit }) => {
                 setIsEdit(false);
             }
         } catch (error) {
-            alert(error);
+            console.log(error);
+            Modal.error({
+                content: "상품 문의 수정 권한이 존재하지 않습니다.",
+                onOk: () => {
+                    setIsEdit(false);
+                },
+            });
         }
     };
 

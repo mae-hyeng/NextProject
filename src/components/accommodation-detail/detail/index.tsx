@@ -34,7 +34,7 @@ const AccommodationDetail = ({ data, refetch }) => {
             <div className={styles.accommodation_remarks}>{data?.fetchTravelproduct?.remarks}</div>
             <div className={styles.accommodation_tags}>
                 {data?.fetchTravelproduct?.tags.map((tag, idx) => (
-                    <div key={idx + 1}>#{tag}</div>
+                    <div key={idx + 1}>#{tag.replace(/[#\s]/g, "")}</div>
                 ))}
             </div>
 

@@ -1,7 +1,7 @@
 .accommodation_page {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
     padding: 2rem 20rem;
 }
 
@@ -39,15 +39,6 @@
     justify-content: space-between;
 }
 
-.accommodation_wrapper {
-    border: 1px solid #efefef;
-    border-radius: 1rem;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-
 .accommodation_table {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -71,7 +62,8 @@
     border-radius: 1rem;
 }
 
-.product_name {
+.product_name,
+.product_remarks {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

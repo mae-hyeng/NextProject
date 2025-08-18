@@ -24,38 +24,28 @@ export const Banner = () => {
                         src="/images/banner.png"
                         alt="이미지"
                         className={styles.banner_img}
-                        width={0}
-                        height={0}
+                        width={1000}
+                        height={700}
                         sizes="100vw"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <Image
-                        src="/images/detail1.png"
+                        src="/images/banner2.png"
                         alt="이미지"
                         className={styles.banner_img}
-                        width={0}
-                        height={0}
+                        width={1000}
+                        height={700}
                         sizes="100vw"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <Image
-                        src="/images/detail2.png"
+                        src="/images/banner3.png"
                         alt="이미지"
                         className={styles.banner_img}
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image
-                        src="/images/calendar.png"
-                        alt="이미지"
-                        className={styles.banner_img}
-                        width={0}
-                        height={0}
+                        width={1000}
+                        height={700}
                         sizes="100vw"
                     />
                 </SwiperSlide>

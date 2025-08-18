@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import _ from "lodash";
 
 export const AccommodationList = (refetch) => {
@@ -9,11 +9,16 @@ export const AccommodationList = (refetch) => {
     const [keyword, setKeyword] = useState("");
 
     const [category, setCategory] = useState("reservationAvailable");
+    const [isSoldout, setIsSoldout] = useState(false);
 
     const [endDate, setEndDate] = useState(
         new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString()
     );
     const [startDate, setStartDate] = useState(new Date().toLocaleDateString());
+
+    useEffect(() => {
+        refetch({ isSoldout });
+    }, [isSoldout]);
 
     const onClickAccommodation = (travelproductId) => {
         router.push(`/accommodation/detail/${travelproductId}`);
@@ -41,6 +46,7 @@ export const AccommodationList = (refetch) => {
 
     const onClickCategory = (type) => {
         setCategory(type);
+        setIsSoldout(type === "reservationAvailable" ? false : true);
     };
 
     return {

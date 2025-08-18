@@ -4,10 +4,9 @@ import styles from "./styles.module.css";
 import { AccommodationList } from "./hook";
 import { AccommodationSearchPage } from "../search";
 import Image from "next/image";
-// import { Pagination } from "../pagination";
-// import { BoardSearchPage } from "../search";
+import { ImageSwiper } from "../swiper";
 
-export const AccommodationListPage = ({ data, refetch }) => {
+export const AccommodationListPage = ({ data, bestProducts, refetch }) => {
     const {
         category,
         onClickCategory,
@@ -20,7 +19,7 @@ export const AccommodationListPage = ({ data, refetch }) => {
         <>
             <div className={styles.accommodation_page}>
                 <h1>2024 끝여름 낭만있게 마무리 하고 싶다면?</h1>
-                <div className={styles.accommodation_wrapper}></div>
+                <ImageSwiper bestProducts={bestProducts} />
                 <h1>여기에서만 예약할 수 있는 숙소</h1>
                 <div className={styles.button_wrapper}>
                     <button
@@ -54,7 +53,7 @@ export const AccommodationListPage = ({ data, refetch }) => {
                     </div>
                     <div className={styles.accommodation_wrapper}>
                         <div className={styles.accommodation_table}>
-                            {data?.fetchTravelproducts?.map((product, idx) => (
+                            {data?.fetchTravelproducts?.map((product) => (
                                 <div
                                     key={product._id}
                                     onClick={() => onClickAccommodation(product._id)}

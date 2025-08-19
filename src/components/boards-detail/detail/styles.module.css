@@ -98,6 +98,13 @@
     overflow: hidden;
 }
 
+.youtube_src_none_wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #f2f2f2;
+    padding: 1rem;
+}
+
 .detail_main_like {
     display: flex;
     justify-content: center;

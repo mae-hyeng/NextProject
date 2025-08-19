@@ -12,10 +12,11 @@ export const BoardsList = ({ refetch, boardsCountRefetch }) => {
 
     const [keyword, setKeyword] = useState("");
 
-    const [endDate, setEndDate] = useState(
+    const [startDate, setStartDate] = useState(
         new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString()
     );
-    const [startDate, setStartDate] = useState(new Date().toLocaleDateString());
+
+    const [endDate, setEndDate] = useState(new Date().toLocaleDateString());
 
     const onClickBoard = (boardId) => {
         router.push(`/boards/detail/${boardId}`);
@@ -49,8 +50,8 @@ export const BoardsList = ({ refetch, boardsCountRefetch }) => {
     };
 
     const getDebounce = _.debounce((value, start, end) => {
-        refetch({ endDate: end, startDate: start, search: value, page: 1 });
-        boardsCountRefetch({ endDate: end, startDate: start, search: value });
+        refetch({ startDate: start, endDate: end, search: value, page: 1 });
+        boardsCountRefetch({ startDate: start, endDate: end, search: value });
         setKeyword(value);
     }, 500);
 
@@ -62,8 +63,8 @@ export const BoardsList = ({ refetch, boardsCountRefetch }) => {
         const [start, end] = dateString;
         setStartDate(start);
         setEndDate(end);
-        refetch({ endDate: end, startDate: start, search: keyword, page: 1 });
-        boardsCountRefetch({ endDate: end, startDate: start, search: keyword });
+        refetch({ startDate: start, endDate: end, search: keyword, page: 1 });
+        boardsCountRefetch({ startDate: start, endDate: end, search: keyword });
     };
 
     return {

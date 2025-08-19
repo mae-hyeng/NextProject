@@ -5,21 +5,20 @@ import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { IMyVariables } from "./types";
 import { checkValidationFile } from "@/commons/libraries/validationFile";
-import {
-    CreateBoardDocument,
-    FetchBoardQuery,
-    UpdateBoardDocument,
-    UploadFileDocument,
-} from "@/commons/graphql/graphql";
+import { CreateBoardDocument, UploadFileDocument } from "@/commons/graphql/graphql";
 import { UPDATE_BOARD } from "./queries";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
-export const useBoardsWrite = (data: FetchBoardQuery) => {
+export const useBoardsWrite = ({ data, reset, setValue }) => {
     useEffect(() => {
         if (data?.fetchBoard?.boardAddress) {
-            setZipcode(data.fetchBoard.boardAddress.zipcode ?? "");
-            setAddress(data.fetchBoard.boardAddress.address ?? "");
-            setAddressDetail(data.fetchBoard.boardAddress.addressDetail ?? "");
-            setYoutubeUrl(data.fetchBoard.youtubeUrl ?? "");
+            reset({
+                zipcode: data.fetchBoard.boardAddress.zipcode ?? "",
+                address: data.fetchBoard.boardAddress.address ?? "",
+                addressDetail: data.fetchBoard.boardAddress.addressDetail ?? "",
+                youtubeUrl: data.fetchBoard.youtubeUrl ?? "",
+            });
         }
 
         if (data?.fetchBoard?.images) {
@@ -27,17 +26,10 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         }
     }, [data]);
 
-    const [writer, setWriter] = useState("");
     const [password, setPassword] = useState("");
-    const [title, setTitle] = useState("");
-    const [contents, setContents] = useState("");
 
     const [isOpen, setIsOpen] = useState(false);
-    const [zipcode, setZipcode] = useState("");
-    const [address, setAddress] = useState("");
-    const [addressDetail, setAddressDetail] = useState("");
-
-    const [youtubeUrl, setYoutubeUrl] = useState("");
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const [createBoard] = useMutation(CreateBoardDocument);
     const [updateBoard] = useMutation(UPDATE_BOARD);
@@ -53,52 +45,24 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
 
     const [uploadFile] = useMutation(UploadFileDocument);
 
-    const onChangeInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        if (name === "writer") setWriter(value);
-        else if (name === "password") setPassword(value);
-        else if (name === "title") setTitle(value);
-        else if (name === "addressDetail") setAddressDetail(value);
-        else if (name === "youtubeUrl") setYoutubeUrl(value);
-
-        if (name === "addressDetail" || name === "youtubeUrl") return;
-
-        if (value) document.getElementById(`${name}-error`).innerText = "";
-    };
-
-    const onClickSubmit = async () => {
-        if (!writer) {
-            document.getElementById("writer-error").innerText = "작성자를 입력해주세요";
-        }
-
-        if (!password)
-            document.getElementById("password-error").innerText = "비밀번호를 입력해주세요";
-
-        if (!title) document.getElementById("title-error").innerText = "제목을 입력해주세요";
-
-        if (contents === "<p><br></p>")
-            document.getElementById("contents-error").innerText = "내용을 입력해주세요";
-
-        if (!writer || !password || !title || contents === "<p><br></p>") return;
-
+    const onClickSubmit = async (data) => {
         const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
-        const resultUrls = results.map((file) => file.data.uploadFile.url);
+        const images = results.map((file) => file.data.uploadFile.url);
 
         try {
             const result = await createBoard({
                 variables: {
-                    writer: writer,
-                    title: title,
-                    contents: contents,
-                    password: password,
-                    youtubeUrl: youtubeUrl,
+                    writer: data.writer,
+                    title: data.title,
+                    contents: data.contents,
+                    password: data.password,
+                    youtubeUrl: data.youtubeUrl,
                     boardAddress: {
-                        zipcode,
-                        address,
-                        addressDetail,
+                        zipcode: data.zipcode,
+                        address: data.address,
+                        addressDetail: data.addressDetail,
                     },
-                    images: resultUrls,
+                    images,
                 },
                 update(cache, { data }) {
                     cache.modify({
@@ -114,12 +78,16 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
             router.push(`/boards/detail/${result.data.createBoard._id}`);
         } catch (error) {
             console.log(error);
-            alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+            Modal.error({
+                content: `${error}`,
+                onOk: () => {
+                    setIsEditModalOpen(false);
+                },
+            });
         }
     };
 
-    const onClickUpdate = async () => {
-        const pw = prompt("글을 작성할 때 입력하셨던 비밀번호를 입력해주세요");
+    const onClickUpdate = async (data) => {
         const results = await Promise.all(files.map((file) => uploadFile({ variables: { file } })));
         const resultUrls = results.map((file, idx) =>
             !file ? imageUrls[idx] : file.data.uploadFile.url
@@ -128,33 +96,42 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         try {
             const myVariables: IMyVariables = {
                 updateBoardInput: {
-                    youtubeUrl: youtubeUrl,
+                    youtubeUrl: data.youtubeUrl,
                     boardAddress: {
-                        zipcode,
-                        address,
-                        addressDetail,
+                        zipcode: data.zipcode,
+                        address: data.address,
+                        addressDetail: data.addressDetail,
                     },
                 },
-                password: pw,
+                password,
                 boardId: params.boardId,
             };
 
-            if (title) myVariables.updateBoardInput.title = title;
-            if (contents) myVariables.updateBoardInput.contents = contents;
-            if (images) myVariables.updateBoardInput.images = images;
+            if (data.title) myVariables.updateBoardInput.title = data.title;
+            if (data.contents) myVariables.updateBoardInput.contents = data.contents;
+            if (images && images.length) myVariables.updateBoardInput.images = images;
 
             const result = await updateBoard({ variables: myVariables });
             router.push(`/boards/detail/${result.data.updateBoard._id}`);
         } catch (error) {
             console.log(error);
-            alert("비밀번호가 일치하지 않습니다!");
+            Modal.error({
+                content: "비밀번호가 일치하지 않습니다!",
+                onOk: () => {
+                    setIsEditModalOpen(false);
+                    setPassword("");
+                },
+            });
         }
     };
 
     const onChangeContents = (value) => {
-        setContents(value);
+        const defaultValue = value === "<p><br></p>" ? "" : value;
+        setValue("contents", defaultValue, { shouldValidate: true });
+    };
 
-        if (value) document.getElementById("contents-error").innerText = "";
+    const onChangePassword = (e) => {
+        setPassword(e.target.value);
     };
 
     const showModal = () => {
@@ -169,14 +146,23 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
         setIsOpen(false);
     };
 
+    const showEditModal = (e) => {
+        e.preventDefault();
+        setIsEditModalOpen(true);
+    };
+
+    const editModalClose = () => {
+        setIsEditModalOpen(false);
+    };
+
     const handleComplete = (data: {
         zonecode: SetStateAction<string>;
         address: SetStateAction<string>;
     }) => {
         setIsOpen(false);
-        setZipcode(data.zonecode);
-        setAddress(data.address);
-        setAddressDetail("");
+        setValue("zipcode", data.zonecode);
+        setValue("address", data.address);
+        setValue("addressDetail", "");
     };
 
     const onClickImage = (idx: string | number) => {
@@ -214,20 +200,20 @@ export const useBoardsWrite = (data: FetchBoardQuery) => {
 
     return {
         isOpen,
-        zipcode,
-        address,
-        addressDetail,
-        youtubeUrl,
+        isEditModalOpen,
         imageRefs,
         imageUrls,
+        password,
         onChangeContents,
-        onChangeInput,
+        onChangePassword,
         onClickUpdate,
         onClickSubmit,
         showModal,
         handleOk,
         handleCancel,
         handleComplete,
+        showEditModal,
+        editModalClose,
         onClickImage,
         onChangeImage,
         onDeleteImage,

@@ -157,7 +157,7 @@ export const AccommodationWrite = ({ isEdit, data }: IAccommodationWriteProps) =
                                 <div id="geo" className={styles.geo}>
                                     {isLoadData && (
                                         <div className={styles.geo_isLoadData}>
-                                            tlqjf주소를 먼저 입력해 주세요.
+                                            주소를 먼저 입력해 주세요.
                                         </div>
                                     )}
                                 </div>

@@ -12,7 +12,7 @@ declare const window: Window & {
 };
 
 export const useAccommodationWrite = (data, reset, setValue) => {
-    const kakaoMapRef = useRef();
+    const kakaoMapRef = useRef(null);
     const [isLoadData, setIsLoadData] = useState(true);
 
     useEffect(() => {

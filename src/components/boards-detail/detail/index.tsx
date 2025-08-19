@@ -46,7 +46,10 @@ export const BoardsDetail = ({ data }: IBoardDetailProps) => {
                 <div className={styles.divideLine}></div>
                 <div className={styles.detail_main}>
                     <div className={styles.detail_main_loc}>
-                        <button>{data?.fetchBoard?.boardAddress?.address}</button>
+                        <button>
+                            {data?.fetchBoard?.boardAddress?.address ||
+                                "작성자가 주소를 입력하지 않았습니다😅"}
+                        </button>
                     </div>
                     <div className={styles.detail_main_wrapper}>
                         <div className={styles.img1}>
@@ -69,17 +72,22 @@ export const BoardsDetail = ({ data }: IBoardDetailProps) => {
                                 __html: data?.fetchBoard.contents,
                             }}
                         ></div>
-                        <div className={styles.youtube_wrapper}>
-                            <ReactPlayer
-                                src={data?.fetchBoard.youtubeUrl}
-                                className={styles.youtube_player}
-                                width={"100%"}
-                                height={"100%"}
-                                muted
-                                controls
-                                // light
-                            />
-                        </div>
+                        {data?.fetchBoard.youtubeUrl ? (
+                            <div className={styles.youtube_wrapper}>
+                                <ReactPlayer
+                                    src={data?.fetchBoard.youtubeUrl}
+                                    className={styles.youtube_player}
+                                    width={"100%"}
+                                    height={"100%"}
+                                    muted
+                                    controls
+                                />
+                            </div>
+                        ) : (
+                            <div className={styles.youtube_src_none_wrapper}>
+                                작성자가 유튜브 링크를 등록하지 않았습니다😅
+                            </div>
+                        )}
                     </div>
                     <div className={styles.detail_main_like}>
                         <div onClick={onClickDislike} className={styles.detail_main_like_btn}>

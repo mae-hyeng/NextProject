@@ -3,7 +3,6 @@ import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useEffect, useState } from "react";
 import { DELETE_TRAVEL_PRODUCT_QUESTION } from "../../question-write/queries";
-import { useLoadStore } from "@/commons/stores/loadStore";
 import { useAuthStore } from "@/commons/stores/authStore";
 
 export const useQuestionListItem = ({ data }) => {
@@ -64,7 +63,6 @@ export const useQuestionListItem = ({ data }) => {
                 },
             });
         } catch (error) {
-            console.log(error);
             Modal.error({
                 content: "상품 문의 삭제 권한이 존재하지 않습니다.",
                 onOk: () => {

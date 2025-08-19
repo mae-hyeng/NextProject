@@ -6,6 +6,8 @@ import {
 } from "./queries";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 declare const window: Window & {
     kakao: any;
@@ -19,7 +21,7 @@ export const useAccommodationDetail = ({ data, refetch }) => {
         document.head.appendChild(script);
 
         script.onload = () => {
-            if (!data?.fetchTravelproduct.travelproductAddress) return setIsAddress(false);
+            if (!data?.fetchTravelproduct.travelproductAddress) return;
             window.kakao.maps.load(function () {
                 const container = document.getElementById("geo");
                 const options = {
@@ -30,7 +32,6 @@ export const useAccommodationDetail = ({ data, refetch }) => {
                     level: 3,
                 };
                 new window.kakao.maps.Map(container, options);
-                setIsAddress(true);
             });
         };
     }, [data?.fetchTravelproduct?.travelproductAddress]);
@@ -44,14 +45,24 @@ export const useAccommodationDetail = ({ data, refetch }) => {
 
     const router = useRouter();
 
-    const [isAddress, setIsAddress] = useState(true);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    const openDeleteModal = () => {
+        setIsDeleteModalOpen(true);
+    };
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
 
     const onClickBookmark = async (id) => {
         try {
             await toggleTravelProductPick({ variables: { travelproductId: id } });
             await refetch({ travelproductId: params.travelproductId });
         } catch (error) {
-            alert(error);
+            Modal.error({
+                content: `${error}`,
+            });
         }
 
         // 리팩토링 버전(좋아요 누른 사람들이 누군지 알아야지 +1, -1 할텐데 백엔드로직에 그 부분이 빠져있어 일단 주석처리)
@@ -97,7 +108,9 @@ export const useAccommodationDetail = ({ data, refetch }) => {
         //         },
         //     });
         // } catch (error) {
-        //     alert(error);
+        //       Modal.error({
+        //       content: `${error}`,
+        //   });
         // }
     };
 
@@ -109,36 +122,47 @@ export const useAccommodationDetail = ({ data, refetch }) => {
             });
             console.log(result);
         } catch (error) {
-            alert(error);
+            Modal.error({
+                content: `${error}`,
+            });
         }
     };
 
-    const onClickDeleteAccommodation = () => {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            try {
-                deleteTravelProduct({
-                    variables: { travelproductId: params.travelproductId },
-                    update(cache, { data }) {
-                        cache.modify({
-                            fields: {
-                                fetchTravelproducts: (prev, { readField }) => {
-                                    const deletedId = data.deleteTravelproduct;
-                                    const filteredAccommodation = prev.filter(
-                                        (accommodation) =>
-                                            readField("_id", accommodation) !== deletedId
-                                    );
-                                    return [...filteredAccommodation];
-                                },
+    const onClickDeleteAccommodation = async () => {
+        try {
+            await deleteTravelProduct({
+                variables: { travelproductId: params.travelproductId },
+                update(cache, { data }) {
+                    cache.modify({
+                        fields: {
+                            fetchTravelproducts: (prev, { readField }) => {
+                                const deletedId = data.deleteTravelproduct;
+                                const filteredAccommodation = prev.filter(
+                                    (accommodation) => readField("_id", accommodation) !== deletedId
+                                );
+                                return [...filteredAccommodation];
                             },
-                        });
-                    },
-                });
-                router.push("/accommodation");
-            } catch (error) {
-                console.log(error);
-            }
+                        },
+                    });
+                },
+            });
+            router.push("/accommodation");
+        } catch (error) {
+            Modal.error({
+                content: "상품 삭제 권한이 존재하지 않습니다..",
+                onOk: () => {
+                    closeDeleteModal();
+                },
+            });
         }
     };
 
-    return { isAddress, onClickDeleteAccommodation, onClickBookmark, onClickBuyingAndSelling };
+    return {
+        isDeleteModalOpen,
+        openDeleteModal,
+        closeDeleteModal,
+        onClickDeleteAccommodation,
+        onClickBookmark,
+        onClickBuyingAndSelling,
+    };
 };

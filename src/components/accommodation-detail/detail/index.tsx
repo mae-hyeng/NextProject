@@ -4,10 +4,17 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { useAccommodationDetail } from "./hook";
 import AccommodationDetailImageGallery from "./image-gallery";
+import { ModalUI } from "@/commons/ui/modal";
 
 const AccommodationDetail = ({ data, refetch }) => {
-    const { isAddress, onClickDeleteAccommodation, onClickBookmark, onClickBuyingAndSelling } =
-        useAccommodationDetail({ data, refetch });
+    const {
+        isDeleteModalOpen,
+        openDeleteModal,
+        closeDeleteModal,
+        onClickDeleteAccommodation,
+        onClickBookmark,
+        onClickBuyingAndSelling,
+    } = useAccommodationDetail({ data, refetch });
 
     return (
         <div className={styles.accommodationDetail}>
@@ -15,7 +22,7 @@ const AccommodationDetail = ({ data, refetch }) => {
                 <h2>{data?.fetchTravelproduct?.name}</h2>
                 <div className={styles.icons_wrapper}>
                     <Image
-                        onClick={onClickDeleteAccommodation}
+                        onClick={openDeleteModal}
                         src={"/images/delete-black.png"}
                         alt="delete"
                         width={25}
@@ -99,6 +106,20 @@ const AccommodationDetail = ({ data, refetch }) => {
                     문의하기
                 </div>
             </div>
+            <ModalUI open={isDeleteModalOpen} onClose={closeDeleteModal}>
+                <div className={styles.modal_title}>정말 삭제하시겠습니까?</div>
+                <div className={styles.modal_button_wrapper}>
+                    <button className={styles.modal_button_cancel} onClick={closeDeleteModal}>
+                        취소하기
+                    </button>
+                    <button
+                        className={styles.modal_button_submit}
+                        onClick={onClickDeleteAccommodation}
+                    >
+                        삭제하기
+                    </button>
+                </div>
+            </ModalUI>
         </div>
     );
 };

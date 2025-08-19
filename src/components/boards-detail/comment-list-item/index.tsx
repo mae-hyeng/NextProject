@@ -4,12 +4,21 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { Rate } from "antd";
 import { CommentWrite } from "../comment-write";
-import { useState } from "react";
 import { UseBoardCommentListItem } from "./hook";
+import { ModalUI } from "@/commons/ui/modal";
 
 export const CommentListItem = ({ comment }) => {
-    const { isEdit, setIsEdit, onClickCommentEdit, onClickCommentDelete } =
-        UseBoardCommentListItem();
+    const {
+        isEdit,
+        isDeleteModalOpen,
+        password,
+        openDeleteModal,
+        closeDeleteModal,
+        setIsEdit,
+        onClickCommentEdit,
+        onClickCommentDelete,
+        onChangePassword,
+    } = UseBoardCommentListItem();
 
     return (
         <>
@@ -50,7 +59,7 @@ export const CommentListItem = ({ comment }) => {
                                 <Image
                                     src={"/images/close.png"}
                                     className={styles.detail_delete_image}
-                                    onClick={() => onClickCommentDelete(comment._id)}
+                                    onClick={openDeleteModal(comment._id)}
                                     alt="삭제버튼"
                                     width={25}
                                     height={0}
@@ -68,6 +77,31 @@ export const CommentListItem = ({ comment }) => {
                 )}
             </div>
             <div className={styles.divideLine}></div>
+            <ModalUI open={isDeleteModalOpen} onClose={closeDeleteModal}>
+                <div className={styles.modal_title}>
+                    댓글을 작성할 때 입력하셨던 비밀번호를 입력해주세요.
+                </div>
+                <div className={styles.modal_input_button_wrapper}>
+                    <div className={styles.modal_input_wrapper}>
+                        <input
+                            className={styles.modal_input}
+                            onChange={onChangePassword}
+                            value={password}
+                        />
+                    </div>
+                    <div className={styles.modal_button_wrapper}>
+                        <button className={styles.modal_button_cancel} onClick={closeDeleteModal}>
+                            취소하기
+                        </button>
+                        <button
+                            className={styles.modal_button_submit}
+                            onClick={onClickCommentDelete}
+                        >
+                            삭제하기
+                        </button>
+                    </div>
+                </div>
+            </ModalUI>
         </>
     );
 };

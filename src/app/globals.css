@@ -87,9 +87,8 @@ button:not(:disabled) {
 .image-gallery-thumbnails-container button {
     opacity: 0.5;
     width: 100% !important;
-    aspect-ratio: 4/3;
-    background-color: lightgray;
     border-radius: 0.5rem;
+    height: 10rem;
 }
 
 .image-gallery-thumbnails,
@@ -106,6 +105,25 @@ nav.image-gallery-thumbnails-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.image-gallery-thumbnail-inner {
+    height: 100%;
+}
+
+.image-gallery-thumbnail .image-gallery-thumbnail-image {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.image-gallery-thumbnail {
+    border: none !important;
+    transition: none !important;
+}
+
+.image-gallery-thumbnail:hover {
+    border: none !important;
 }
 /* react-image-gallery end */
 

@@ -5,13 +5,18 @@ import { usePageNation } from "./hook";
 import styles from "./styles.module.css";
 import { IPaginationProps } from "./types";
 
-export const Pagination = ({ refetch, lastPage }: IPaginationProps) => {
-    const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } = usePageNation(
-        {
-            refetch,
-            lastPage,
-        }
-    );
+export const Pagination = ({
+    refetch,
+    lastPage,
+    currentPage,
+    setCurrentPage,
+}: IPaginationProps) => {
+    const { startPage, onClickPrevPage, onClickNextPage, onClickPage } = usePageNation({
+        refetch,
+        lastPage,
+        currentPage,
+        setCurrentPage,
+    });
     return (
         <div className={styles.pagination_wrapper}>
             <span onClick={onClickPrevPage}>이전페이지</span>

@@ -68,7 +68,6 @@ export const useSignIn = () => {
             });
             router.push("/login");
         } catch (error) {
-            console.log(error);
             Modal.error({
                 content: `${error} 확인해주세요.`,
             });

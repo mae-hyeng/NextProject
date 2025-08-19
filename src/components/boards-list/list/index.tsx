@@ -9,9 +9,12 @@ import { BoardSearchPage } from "../search";
 
 export const BoardsListPage = ({
     data,
+    bestBoards,
     lastPage,
     refetch,
     boardsCountRefetch,
+    currentPage,
+    setCurrentPage,
 }: IBoardListProps) => {
     const {
         keyword,
@@ -20,53 +23,64 @@ export const BoardsListPage = ({
         onClickRegister,
         onChangeKeyword,
         onChangeDatePicker,
-    } = BoardsList({ refetch, boardsCountRefetch });
+    } = BoardsList({ refetch, boardsCountRefetch, setCurrentPage });
     return (
         <>
             <div className={styles.Page}>
                 <h1>요즘 핫한 트립토크</h1>
                 <div className={styles.tripTalk_wrapper}>
-                    {Array(4)
-                        .fill(0)
-                        .map((a, idx) => (
-                            <div key={idx + 1} className={styles.tripTalk_details}>
+                    {bestBoards?.fetchBoardsOfTheBest.map((board, idx) => (
+                        <div
+                            key={idx + 1}
+                            className={styles.tripTalk_details}
+                            onClick={onClickBoard(board._id)}
+                        >
+                            <div className={styles.image_wrapper}>
                                 <Image
                                     className={styles.detail_images}
-                                    src="/images/detail1.png"
-                                    width={120}
-                                    height={0}
-                                    alt="1번이미지"
+                                    src={
+                                        board.images.filter(Boolean).length
+                                            ? `https://storage.googleapis.com/${board.images[0]}`
+                                            : "/images/accommodation-detail.png"
+                                    }
+                                    width={350}
+                                    height={350}
+                                    alt="이미지"
                                 />
-                                <div className={styles.detail_wrapper}>
-                                    <div className={styles.detail_wrapper_inner}>
-                                        <div className={styles.detail_title}>
-                                            제주 살이 1일차 정산별곡이 생각나네요
-                                        </div>
-                                        <div className={styles.detail_profiles}>
-                                            <Image
-                                                src="/images/profile1.png"
-                                                alt="프로필"
-                                                width={25}
-                                                height={0}
-                                            />
-                                            홍길동
-                                        </div>
+                            </div>
+                            <div className={styles.detail_wrapper}>
+                                <div className={styles.detail_wrapper_inner}>
+                                    <div className={styles.detail_title}>{board.title}</div>
+                                    <div className={styles.detail_profiles}>
+                                        <Image
+                                            src="/images/profile1.png"
+                                            alt="프로필"
+                                            width={25}
+                                            height={0}
+                                        />
+                                        {board.writer}
                                     </div>
-                                    <div className={styles.detail_likes}>
-                                        <div className={styles.like_wrapper}>
-                                            <Image
-                                                src="/images/good.png"
-                                                width={25}
-                                                height={0}
-                                                alt="좋아요"
-                                            />
-                                            11
-                                        </div>
-                                        <div className={styles.grayColor}>2024.11.11</div>
+                                </div>
+                                <div className={styles.detail_likes}>
+                                    <div className={styles.like_wrapper}>
+                                        <Image
+                                            src="/images/good-red.png"
+                                            width={25}
+                                            height={0}
+                                            alt="좋아요"
+                                        />
+                                        {board.likeCount}
+                                    </div>
+                                    <div className={styles.detail_date}>
+                                        {new Date(board.updatedAt)
+                                            .toISOString()
+                                            .slice(0, 10)
+                                            .replaceAll("-", ".")}
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        </div>
+                    ))}
                 </div>
                 <h1>트립토크 게시판</h1>
                 <div className={styles.tripTalk_boards}>
@@ -93,9 +107,11 @@ export const BoardsListPage = ({
                             <div className={styles.board_body}>
                                 {data?.fetchBoards?.map((d, idx) => (
                                     <div key={idx + 1} className={styles.board_row}>
-                                        <div className={styles.board_num}>{idx + 1}</div>
+                                        <div className={styles.board_num}>
+                                            {(currentPage - 1) * 10 + idx + 1}
+                                        </div>
                                         <div
-                                            onClick={() => onClickBoard(d._id)}
+                                            onClick={onClickBoard(d._id)}
                                             className={styles.board_title}
                                         >
                                             {d.title
@@ -139,7 +155,12 @@ export const BoardsListPage = ({
                                 ))}
                             </div>
                         </div>
-                        <Pagination refetch={refetch} lastPage={lastPage} />
+                        <Pagination
+                            refetch={refetch}
+                            lastPage={lastPage}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </div>
                 </div>
             </div>

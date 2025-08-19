@@ -4,6 +4,7 @@ import { FetchBoardsQuery } from "@/commons/graphql/graphql";
 
 export type IBoardListProps = {
     data?: FetchBoardsQuery;
+    bestBoards: any;
     boardsCountRefetch: (
         variables?: Partial<OperationVariables>
     ) => Promise<ApolloQueryResult<any>>;

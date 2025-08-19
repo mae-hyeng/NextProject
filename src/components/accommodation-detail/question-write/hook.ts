@@ -55,7 +55,6 @@ export const useQuestionWrite = ({ question, setIsEdit }) => {
                 setIsEdit(false);
             }
         } catch (error) {
-            console.log(error);
             Modal.error({
                 content: "상품 문의 수정 권한이 존재하지 않습니다.",
                 onOk: () => {

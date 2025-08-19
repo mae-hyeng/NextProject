@@ -6,6 +6,8 @@ import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react"
 import { checkValidationFile } from "@/commons/libraries/validationFile";
 import { UploadFileDocument } from "@/commons/graphql/graphql";
 import { CREATE_TRAVEL_PRODUCT, UPDATE_TRAVEL_PRODUCT } from "./queries";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 declare const window: Window & {
     kakao: any;
@@ -103,7 +105,9 @@ export const useAccommodationWrite = (data, reset, setValue) => {
 
             router.push(`/accommodation/detail/${result.data.createTravelproduct._id}`);
         } catch (error) {
-            alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+            Modal.error({
+                content: "에러가 발생하였습니다. 다시 시도해 주세요.",
+            });
         }
     };
 
@@ -135,7 +139,9 @@ export const useAccommodationWrite = (data, reset, setValue) => {
             const result = await updateTravelProduct({ variables });
             router.push(`/accommodation/detail/${result.data.updateTravelproduct._id}`);
         } catch (error) {
-            console.log(error);
+            Modal.error({
+                content: `${error}`,
+            });
         }
     };
 

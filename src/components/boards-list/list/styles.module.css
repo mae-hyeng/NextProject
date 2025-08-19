@@ -8,11 +8,15 @@
 /* img start */
 
 .detail_images {
+    object-fit: cover;
+    width: 8rem;
+    height: 10rem;
     border-radius: 1rem;
 }
 /* img end */
 
 .detail_wrapper {
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -42,6 +46,11 @@
     display: flex;
     gap: 1rem;
     width: 25%;
+    cursor: pointer;
+}
+
+.image_wrapper {
+    width: 40%;
 }
 
 .profile_wrapper {
@@ -56,7 +65,11 @@
 .like_wrapper {
     display: flex;
     gap: 0.5rem;
-    color: red;
+    color: #f66a6a;
+}
+
+.detail_date {
+    color: #777777;
 }
 
 /* 게시판 아래 메뉴바 시작 */
@@ -119,6 +132,16 @@
 .board_header_writer {
     width: 10%;
     text-align: center;
+}
+
+.boar_title,
+.board_writer {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    padding-bottom: 0.1rem;
+    height: 1.5rem;
 }
 
 .board_redDate,

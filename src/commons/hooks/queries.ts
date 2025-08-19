@@ -244,7 +244,7 @@ export const LOG_OUT_USER = gql`
     }
 `;
 
-// 인기글
+// 인기 상품
 export const FETCH_TRAVEL_PRODUCTS_OF_THE_BEST = gql`
     query fetchTravelproductsOfTheBest {
         fetchTravelproductsOfTheBest {
@@ -257,6 +257,44 @@ export const FETCH_TRAVEL_PRODUCTS_OF_THE_BEST = gql`
             }
             pickedCount
             images
+        }
+    }
+`;
+
+// 인기 게시물
+export const FETCH_BOARDS_OF_THE_BEST = gql`
+    query queryfetchBoardsOfTheBest {
+        fetchBoardsOfTheBest {
+            _id
+            title
+            writer
+            images
+            likeCount
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+// ?
+export const FETCH_POINT_TRANSACTIONS = gql`
+    query fetchPointTransactions($search: String, $page: Int) {
+        fetchPointTransactions(search: $search, page: $page) {
+            _id
+            impUid
+            amount
+            balance
+            status
+            statusDetail
+            travelproduct {
+                name
+                price
+                # seller {
+                #     name
+                # }
+            }
+            createdAt
+            updatedAt
         }
     }
 `;

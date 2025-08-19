@@ -4,6 +4,8 @@ import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "./queries";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 export const useBoardComment = ({ comment, setIsEdit }) => {
     useEffect(() => {
@@ -60,7 +62,9 @@ export const useBoardComment = ({ comment, setIsEdit }) => {
                 setIsEdit(false);
             }
         } catch (error) {
-            alert("비밀번호가 일치하지 않습니다");
+            Modal.error({
+                content: "비밀번호가 일치하지 않습니다",
+            });
         }
     };
 

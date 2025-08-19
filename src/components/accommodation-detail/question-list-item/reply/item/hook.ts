@@ -41,7 +41,6 @@ export const useReplyListItem = () => {
                 },
             });
         } catch (error) {
-            console.log(error);
             Modal.error({
                 content: "상품 문의 삭제 권한이 존재하지 않습니다.",
                 onOk: () => {

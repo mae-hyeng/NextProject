@@ -77,7 +77,6 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
 
             router.push(`/boards/detail/${result.data.createBoard._id}`);
         } catch (error) {
-            console.log(error);
             Modal.error({
                 content: `${error}`,
                 onOk: () => {
@@ -114,7 +113,6 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
             const result = await updateBoard({ variables: myVariables });
             router.push(`/boards/detail/${result.data.updateBoard._id}`);
         } catch (error) {
-            console.log(error);
             Modal.error({
                 content: "비밀번호가 일치하지 않습니다!",
                 onOk: () => {

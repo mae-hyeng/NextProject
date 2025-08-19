@@ -1,8 +1,7 @@
 import { MouseEvent, useState } from "react";
 
-export const usePageNation = ({ refetch, lastPage }) => {
+export const usePageNation = ({ refetch, lastPage, currentPage, setCurrentPage }) => {
     const [startPage, setStartPage] = useState(1);
-    const [currentPage, setCurrentPage] = useState(1);
 
     const onClickPrevPage = () => {
         if (startPage === 1) return;
@@ -28,7 +27,6 @@ export const usePageNation = ({ refetch, lastPage }) => {
 
     return {
         startPage,
-        currentPage,
         onClickPrevPage,
         onClickNextPage,
         onClickPage,

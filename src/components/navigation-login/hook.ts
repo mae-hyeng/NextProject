@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 as uuidv4 } from "uuid";
 import { useMutation } from "@apollo/client";
@@ -7,12 +7,22 @@ import { LOG_OUT_USER } from "@/commons/hooks/queries";
 import { Modal } from "antd";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { useLoadStore } from "@/commons/stores/loadStore";
+import { useAuthStore } from "@/commons/stores/authStore";
 
 export const useNavigationLogin = () => {
     const [point, setPoint] = useState();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const [user, setUser] = useState(null);
+
+    const { user: authUser } = useAuthStore();
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            setUser(JSON.parse(userInfo));
+        }
+    }, [authUser]);
 
     const [createPointTransactionOfLoading] = useMutation(CREATE_POINT_TRANSACTION_OF_LOADING);
 
@@ -34,8 +44,8 @@ export const useNavigationLogin = () => {
             currency: "CURRENCY_KRW",
             payMethod: "EASY_PAY",
             customer: {
-                fullName: userInfo.name,
-                email: userInfo.email,
+                fullName: user.name,
+                email: user.email,
             },
             redirectUrl: "http://localhost:3000/mypage",
         });

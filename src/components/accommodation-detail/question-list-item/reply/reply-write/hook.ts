@@ -8,6 +8,8 @@ import {
     UPDATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
 } from "./queries";
 import { IReplyWriteProps } from "./types";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 export const useReplyWrite = ({ question, setIsEdit, setIsShow }: IReplyWriteProps) => {
     useEffect(() => {
@@ -56,7 +58,9 @@ export const useReplyWrite = ({ question, setIsEdit, setIsShow }: IReplyWritePro
                 setIsEdit(false);
             }
         } catch (error) {
-            alert(error);
+            Modal.error({
+                content: `${error}`,
+            });
         }
     };
 

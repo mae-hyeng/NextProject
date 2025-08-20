@@ -8,8 +8,7 @@ import { ChangePassword } from "./change-password";
 import { useMyPages } from "./hook";
 
 export const MyPage = () => {
-    const { category, onClickCategory } = useMyPages();
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const { user, category, onClickCategory } = useMyPages();
 
     return (
         <div className={styles.myPage}>
@@ -24,7 +23,7 @@ export const MyPage = () => {
                         height={0}
                         sizes="100vw"
                     />
-                    <div>{userInfo?.name}</div>
+                    <div>{user?.name}</div>
                 </div>
                 <div className={styles.divideLine}></div>
                 <div className={styles.point_wrapper}>

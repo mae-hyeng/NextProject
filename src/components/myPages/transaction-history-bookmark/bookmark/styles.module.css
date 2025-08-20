@@ -67,11 +67,11 @@
 
 .bookmark_num,
 .bookmark_header_num,
-.bookmark_writer,
-.bookmark_header_writer,
+.bookmark_price,
+.bookmark_header_price,
 .bookmark_regDate,
 .bookmark_header_regDate,
-.seller_wrapper,
+.bookmark_seller_wrapper,
 .bookmark_header_seller {
     width: 10%;
     text-align: center;
@@ -112,5 +112,9 @@
     padding: 1rem 0rem;
 
     cursor: context-menu;
+}
+
+.bookmark_price {
+    color: #2974e5;
 }
 /* bookmark end */

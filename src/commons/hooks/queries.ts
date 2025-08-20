@@ -181,6 +181,7 @@ export const RESET_USER_PASSWORD = gql`
 export const FETCH_TRAVEL_PRODUCTS_I_BOUGHT = gql`
     query fetchTravelproductsIBought($search: String, $page: Int) {
         fetchTravelproductsIBought(search: $search, page: $page) {
+            _id
             name
             price
             soldAt
@@ -201,6 +202,7 @@ export const FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT = gql`
 export const FETCH_TRAVEL_PRODUCTS_I_PICKED = gql`
     query fetchTravelproductsIPicked($search: String, $page: Int) {
         fetchTravelproductsIPicked(search: $search, page: $page) {
+            _id
             name
             price
             soldAt
@@ -221,6 +223,7 @@ export const FETCH_TRAVEL_PRODUCTS_COUNT_I_PICKED = gql`
 export const FETCH_TRAVEL_PRODUCTS_I_SOLD = gql`
     query fetchTravelproductsISold($search: String, $page: Int) {
         fetchTravelproductsISold(search: $search, page: $page) {
+            _id
             name
             price
             soldAt

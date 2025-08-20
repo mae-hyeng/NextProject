@@ -1,20 +1,11 @@
 "use client";
 
-import { PointUsageHistoryAllPagination } from "../all-pagination";
-import { usePointUsageHistoryAllHistory } from "./hook";
+import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
 
-export const AllHistory = ({ buying, loading, selling }) => {
-    const { allHistory, currentPage, setCurrentPage } = usePointUsageHistoryAllHistory({
-        buying,
-        loading,
-        selling,
-    });
-    const lastPage = Math.ceil((allHistory?.length ?? 10) / 10);
+export const AllHistory = ({ pointTransaction, allCounts, refetch }) => {
+    const lastPage = Math.ceil((allCounts || 10) / 10);
 
-    const filteredHistory = allHistory?.filter(
-        (_, idx) => Math.ceil((idx + 1) / 10) === currentPage
-    );
     return (
         <>
             <div className={styles.allHistory_wrapper}>
@@ -26,7 +17,7 @@ export const AllHistory = ({ buying, loading, selling }) => {
                         <div className={styles.allHistory_header_balance}>잔액</div>
                     </div>
                     <div className={styles.allHistory_body}>
-                        {filteredHistory?.map((data, idx) => (
+                        {pointTransaction?.fetchPointTransactions.map((data, idx) => (
                             <div key={idx + 1} className={styles.allHistory_row}>
                                 <div className={styles.allHistory_date}>
                                     {data?.createdAt
@@ -63,11 +54,7 @@ export const AllHistory = ({ buying, loading, selling }) => {
                         ))}
                     </div>
                 </div>
-                <PointUsageHistoryAllPagination
-                    lastPage={lastPage}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                />
+                <PointUsageHistoryPagination lastPage={lastPage} refetch={refetch} />
             </div>
         </>
     );

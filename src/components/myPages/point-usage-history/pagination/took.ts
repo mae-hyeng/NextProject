@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const usePointUsageHistoryPagination = ({ lastPage }) => {
+export const usePointUsageHistoryPagination = ({ lastPage, refetch }) => {
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -18,6 +18,7 @@ export const usePointUsageHistoryPagination = ({ lastPage }) => {
     };
     const onClickPage = (e) => {
         setCurrentPage(Number(e.currentTarget.id));
+        refetch({ page: Number(e.currentTarget.id) });
     };
 
     return {

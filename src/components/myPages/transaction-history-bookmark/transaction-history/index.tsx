@@ -13,7 +13,7 @@ export const TransactionHistory = ({ iSold, refetch }) => {
     const isSold = iSold?.fetchTravelproductsISold.map((el) => (el.soldAt ? true : false));
 
     const { data: iSoldCount } = useQuery(FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD);
-    const lastPage = Math.ceil((iSoldCount?.fetchPointTransactionsCountOfLoading ?? 10) / 10);
+    const lastPage = Math.ceil((iSoldCount?.fetchTravelproductsCountISold ?? 10) / 10);
 
     return (
         <>

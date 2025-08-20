@@ -1,12 +1,9 @@
 "use client";
 
-import { useQuery } from "@apollo/client";
 import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
-import { FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING } from "@/commons/hooks/queries";
 
-export const SaleHistory = ({ selling }) => {
-    const { data: sellingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING);
+export const SaleHistory = ({ selling, sellingCount, refetch }) => {
     const lastPage = Math.ceil((sellingCount?.fetchPointTransactionsCountOfSelling ?? 10) / 10);
 
     return (
@@ -39,7 +36,7 @@ export const SaleHistory = ({ selling }) => {
                         ))}
                     </div>
                 </div>
-                <PointUsageHistoryPagination lastPage={lastPage} />
+                <PointUsageHistoryPagination lastPage={lastPage} refetch={refetch} />
             </div>
         </>
     );

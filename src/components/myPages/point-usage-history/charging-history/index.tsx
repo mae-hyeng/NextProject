@@ -1,12 +1,9 @@
 "use client";
 
-import { useQuery } from "@apollo/client";
 import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
-import { FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING } from "@/commons/hooks/queries";
 
-export const ChargingHistory = ({ loading }) => {
-    const { data: loadingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING);
+export const ChargingHistory = ({ loading, loadingCount, refetch }) => {
     const lastPage = Math.ceil((loadingCount?.fetchPointTransactionsCountOfLoading ?? 10) / 10);
 
     return (
@@ -39,7 +36,7 @@ export const ChargingHistory = ({ loading }) => {
                         ))}
                     </div>
                 </div>
-                <PointUsageHistoryPagination lastPage={lastPage} />
+                <PointUsageHistoryPagination lastPage={lastPage} refetch={refetch} />
             </div>
         </>
     );

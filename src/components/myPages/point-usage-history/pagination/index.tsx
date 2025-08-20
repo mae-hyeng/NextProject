@@ -3,9 +3,9 @@
 import styles from "./styles.module.css";
 import { usePointUsageHistoryPagination } from "./took";
 
-export const PointUsageHistoryPagination = ({ lastPage }) => {
+export const PointUsageHistoryPagination = ({ lastPage, refetch }) => {
     const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } =
-        usePointUsageHistoryPagination({ lastPage });
+        usePointUsageHistoryPagination({ lastPage, refetch });
     return (
         <div className={styles.pagination_wrapper}>
             <span onClick={onClickPrevPage}>이전페이지</span>

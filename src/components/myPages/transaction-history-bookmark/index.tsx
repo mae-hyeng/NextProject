@@ -16,7 +16,9 @@ export const TransactionHistoryBookmark = () => {
     const { selected, onClickButton } = useTransactionHistoryBookmark();
 
     const { data: iBought } = useQuery(FETCH_TRAVEL_PRODUCTS_I_BOUGHT);
-    const { data: iPick, refetch: iPickRefetch } = useQuery(FETCH_TRAVEL_PRODUCTS_I_PICKED);
+    const { data: iPick, refetch: iPickRefetch } = useQuery(FETCH_TRAVEL_PRODUCTS_I_PICKED, {
+        variables: { search: "" },
+    });
     const { data: iSold, refetch: iSoldRefetch } = useQuery(FETCH_TRAVEL_PRODUCTS_I_SOLD);
 
     console.log("iPick : ", iPick);
@@ -34,7 +36,7 @@ export const TransactionHistoryBookmark = () => {
                     onClick={() => onClickButton("purchased")}
                     className={selected === "purchased" ? styles.button_selected : ""}
                 >
-                    나의 상품
+                    구매 상품
                 </button>
                 <button
                     onClick={() => onClickButton("bookmark")}

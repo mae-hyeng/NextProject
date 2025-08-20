@@ -7,7 +7,7 @@ import { FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT } from "@/commons/hooks/queries";
 
 export const Purchased = ({ iBought }) => {
     const { data: iBoughtCount } = useQuery(FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT);
-    const lastPage = Math.ceil((iBoughtCount?.fetchPointTransactionsCountOfLoading ?? 10) / 10);
+    const lastPage = Math.ceil((iBoughtCount?.fetchTravelproductsCountIBought ?? 10) / 10);
 
     return (
         <>

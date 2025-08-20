@@ -8,6 +8,10 @@ import { PurchaseHistory } from "./purchase-history";
 import { SaleHistory } from "./sale-history";
 import styles from "./styles.module.css";
 import {
+    FETCH_POINT_TRANSACTIONS,
+    FETCH_POINT_TRANSACTIONS_COUNT_OF_BUYING,
+    FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING,
+    FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING,
     FETCH_POINT_TRANSACTIONS_OF_BUYING,
     FETCH_POINT_TRANSACTIONS_OF_LOADING,
     FETCH_POINT_TRANSACTIONS_OF_SELLING,
@@ -16,9 +20,24 @@ import {
 export const PointUsageHistory = () => {
     const { selected, onClickButton } = usePointUsageHistory();
 
-    const { data: buying } = useQuery(FETCH_POINT_TRANSACTIONS_OF_BUYING);
-    const { data: loading } = useQuery(FETCH_POINT_TRANSACTIONS_OF_LOADING);
-    const { data: selling } = useQuery(FETCH_POINT_TRANSACTIONS_OF_SELLING);
+    const { data: pointTransaction, refetch: pointTransactionRefetch } =
+        useQuery(FETCH_POINT_TRANSACTIONS);
+    const { data: buying, refetch: buyingRefetch } = useQuery(FETCH_POINT_TRANSACTIONS_OF_BUYING);
+    const { data: loading, refetch: loadingRefetch } = useQuery(
+        FETCH_POINT_TRANSACTIONS_OF_LOADING
+    );
+    const { data: selling, refetch: sellingRefetch } = useQuery(
+        FETCH_POINT_TRANSACTIONS_OF_SELLING
+    );
+
+    const { data: buyingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_BUYING);
+    const { data: loadingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_LOADING);
+    const { data: sellingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING);
+
+    const allCounts =
+        buyingCount?.fetchPointTransactionsCountOfBuying +
+        loadingCount?.fetchPointTransactionsCountOfLoading +
+        sellingCount?.fetchPointTransactionsCountOfSelling;
 
     return (
         <>
@@ -49,11 +68,33 @@ export const PointUsageHistory = () => {
                 </button>
             </div>
             {selected === "allHistory" && (
-                <AllHistory buying={buying} loading={loading} selling={selling} />
+                <AllHistory
+                    pointTransaction={pointTransaction}
+                    allCounts={allCounts}
+                    refetch={pointTransactionRefetch}
+                />
             )}
-            {selected === "chargingHistory" && <ChargingHistory loading={loading} />}
-            {selected === "purchaseHistory" && <PurchaseHistory buying={buying} />}
-            {selected === "saleHistory" && <SaleHistory selling={selling} />}
+            {selected === "chargingHistory" && (
+                <ChargingHistory
+                    loading={loading}
+                    loadingCount={loadingCount}
+                    refetch={loadingRefetch}
+                />
+            )}
+            {selected === "purchaseHistory" && (
+                <PurchaseHistory
+                    buying={buying}
+                    buyingCount={buyingCount}
+                    refetch={buyingRefetch}
+                />
+            )}
+            {selected === "saleHistory" && (
+                <SaleHistory
+                    selling={selling}
+                    sellingCount={sellingCount}
+                    refetch={sellingRefetch}
+                />
+            )}
         </>
     );
 };

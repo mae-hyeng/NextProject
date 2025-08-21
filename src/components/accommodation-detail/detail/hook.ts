@@ -55,6 +55,16 @@ export const useAccommodationDetail = ({ data, refetch }) => {
         setIsDeleteModalOpen(false);
     };
 
+    const [isBoughtModalOpen, setIsBoughtModalOpen] = useState(false);
+
+    const openBoughtModal = () => {
+        setIsBoughtModalOpen(true);
+    };
+
+    const closeBoughtModal = () => {
+        setIsBoughtModalOpen(false);
+    };
+
     const onClickBookmark = async (id) => {
         try {
             await toggleTravelProductPick({ variables: { travelproductId: id } });
@@ -115,15 +125,18 @@ export const useAccommodationDetail = ({ data, refetch }) => {
     };
 
     const onClickBuyingAndSelling = async () => {
-        // todoList : 모달창 띄워서 취소/구매 버튼으로 분기점 나누기
         try {
             const result = await createPointTransactionOfBuyingAndSelling({
                 variables: { useritemId: data.fetchTravelproduct._id },
             });
             console.log(result);
+            Modal.success({
+                content: "상품 구매에 성공했습니다.",
+                onOk: () => closeBoughtModal(),
+            });
         } catch (error) {
             Modal.error({
-                content: `${error}`,
+                content: "포인트가 부족합니다. 충전 후 이용해주세요.",
             });
         }
     };
@@ -159,8 +172,11 @@ export const useAccommodationDetail = ({ data, refetch }) => {
 
     return {
         isDeleteModalOpen,
+        isBoughtModalOpen,
         openDeleteModal,
         closeDeleteModal,
+        openBoughtModal,
+        closeBoughtModal,
         onClickDeleteAccommodation,
         onClickBookmark,
         onClickBuyingAndSelling,

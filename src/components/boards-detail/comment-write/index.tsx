@@ -43,6 +43,7 @@ export const CommentWrite = ({ isEdit, setIsEdit, comment }: ICommentWriteProps)
                         onChange={onChangeInput}
                         name="password"
                         placeholder="비밀번호를 입력해 주세요."
+                        type="password"
                         value={password}
                     />
                 </div>

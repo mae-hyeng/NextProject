@@ -9,8 +9,11 @@ import { ModalUI } from "@/commons/ui/modal";
 const AccommodationDetail = ({ data, refetch }) => {
     const {
         isDeleteModalOpen,
+        isBoughtModalOpen,
         openDeleteModal,
         closeDeleteModal,
+        openBoughtModal,
+        closeBoughtModal,
         onClickDeleteAccommodation,
         onClickBookmark,
         onClickBuyingAndSelling,
@@ -56,7 +59,7 @@ const AccommodationDetail = ({ data, refetch }) => {
                             <li>숙박권은 트립트립에서 포인트 충전 후 구매하실 수 있습니다.</li>
                             <li>상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.</li>
                         </ul>
-                        <button onClick={onClickBuyingAndSelling}>구매하기</button>
+                        <button onClick={openBoughtModal}>구매하기</button>
                     </div>
                     <div className={styles.seller_wrapper}>
                         <h5>판매자</h5>
@@ -117,6 +120,23 @@ const AccommodationDetail = ({ data, refetch }) => {
                         onClick={onClickDeleteAccommodation}
                     >
                         삭제하기
+                    </button>
+                </div>
+            </ModalUI>
+            <ModalUI open={isBoughtModalOpen} onClose={closeBoughtModal}>
+                <div className={styles.modal_bought_title}>해당 숙박권을 구매하시겠습니까?</div>
+                <div className={styles.modal_bought_contents}>
+                    해당 숙박권은 포인트로만 구매 가능합니다.
+                </div>
+                <div className={styles.modal_button_wrapper}>
+                    <button className={styles.modal_button_cancel} onClick={closeBoughtModal}>
+                        취소하기
+                    </button>
+                    <button
+                        className={styles.modal_button_submit}
+                        onClick={onClickBuyingAndSelling}
+                    >
+                        구매하기
                     </button>
                 </div>
             </ModalUI>

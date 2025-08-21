@@ -9,6 +9,7 @@ import { ModalUI } from "@/commons/ui/modal";
 
 export const CommentListItem = ({ comment }) => {
     const {
+        user,
         isEdit,
         isDeleteModalOpen,
         password,
@@ -47,24 +48,26 @@ export const CommentListItem = ({ comment }) => {
                                     <Rate disabled allowHalf defaultValue={comment.rating} />
                                 </div>
                             </div>
-                            <div className={styles.detail_image_wrapper}>
-                                <Image
-                                    src={"/images/edit.png"}
-                                    className={styles.detail_edit_image}
-                                    onClick={onClickCommentEdit}
-                                    alt="수정버튼"
-                                    width={25}
-                                    height={0}
-                                />
-                                <Image
-                                    src={"/images/close.png"}
-                                    className={styles.detail_delete_image}
-                                    onClick={openDeleteModal(comment._id)}
-                                    alt="삭제버튼"
-                                    width={25}
-                                    height={0}
-                                />
-                            </div>
+                            {user?.name === comment.writer && (
+                                <div className={styles.detail_image_wrapper}>
+                                    <Image
+                                        src={"/images/edit.png"}
+                                        className={styles.detail_edit_image}
+                                        onClick={onClickCommentEdit}
+                                        alt="수정버튼"
+                                        width={25}
+                                        height={0}
+                                    />
+                                    <Image
+                                        src={"/images/close.png"}
+                                        className={styles.detail_delete_image}
+                                        onClick={openDeleteModal(comment._id)}
+                                        alt="삭제버튼"
+                                        width={25}
+                                        height={0}
+                                    />
+                                </div>
+                            )}
                         </div>
                         <div>{comment.contents}</div>
                         <div className={styles.detail_comment_contents}>
@@ -84,6 +87,7 @@ export const CommentListItem = ({ comment }) => {
                 <div className={styles.modal_input_button_wrapper}>
                     <div className={styles.modal_input_wrapper}>
                         <input
+                            type="password"
                             className={styles.modal_input}
                             onChange={onChangePassword}
                             value={password}

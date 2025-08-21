@@ -152,6 +152,16 @@
     font-size: 1.3rem;
 }
 
+.modal_bought_title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.modal_bought_contents {
+    text-align: center;
+}
+
 .modal_button_wrapper {
     display: flex;
     justify-content: center;

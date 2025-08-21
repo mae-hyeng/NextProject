@@ -6,7 +6,6 @@ import { AccommodationSearchPage } from "../search";
 import Image from "next/image";
 import { ImageSwiper } from "../swiper";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { FixedSizeList as List } from "react-window";
 
 export const AccommodationListPage = ({ data, bestProducts, refetch, fetchMore }) => {
     const {
@@ -16,13 +15,11 @@ export const AccommodationListPage = ({ data, bestProducts, refetch, fetchMore }
         onClickAccommodation,
         onClickRegister,
         onChangeKeyword,
-        onChangeDatePicker,
         onNext,
     } = AccommodationList({ refetch, data, fetchMore });
     return (
         <>
             <div className={styles.accommodation_page}>
-                {/* <h1>2024 끝여름 낭만있게 마무리 하고 싶다면?</h1> */}
                 <h1>{new Date().getFullYear()}년 가장 인기 있는 상품 TOP 4!</h1>
                 <ImageSwiper bestProducts={bestProducts} />
                 <h1>여기에서만 예약할 수 있는 숙소</h1>
@@ -46,10 +43,7 @@ export const AccommodationListPage = ({ data, bestProducts, refetch, fetchMore }
                 </div>
                 <div className={styles.accommodation_boards}>
                     <div className={styles.accommodation_func_wrapper}>
-                        <AccommodationSearchPage
-                            onChangeKeyword={onChangeKeyword}
-                            onChangeDatePicker={onChangeDatePicker}
-                        />
+                        <AccommodationSearchPage onChangeKeyword={onChangeKeyword} />
                         <div>
                             <button onClick={onClickRegister} className={styles.submit_btn}>
                                 숙박권 판매하기
@@ -98,9 +92,10 @@ export const AccommodationListPage = ({ data, bestProducts, refetch, fetchMore }
                                             )}
                                         </div>
                                         <div className={styles.product_seller_price}>
-                                            <div>아이콘/{product?.seller?.name}</div>
+                                            {/* <div>작성자 : {product?.seller?.name}</div> */}
+                                            <div></div>
                                             <div className={styles.product_price}>
-                                                {product?.price.toLocaleString("ko-KR")}
+                                                {product?.price.toLocaleString("ko-KR")} 원
                                             </div>
                                         </div>
                                         <div className={styles.accommodation_pickedCount}>

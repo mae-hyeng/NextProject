@@ -11,11 +11,6 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
     const [category, setCategory] = useState("reservationAvailable");
     const [isSoldout, setIsSoldout] = useState(false);
 
-    const [endDate, setEndDate] = useState(
-        new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString()
-    );
-    const [startDate, setStartDate] = useState(new Date().toLocaleDateString());
-
     useEffect(() => {
         refetch({ isSoldout });
     }, [isSoldout]);
@@ -30,22 +25,14 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
         router.push("/accommodation/new");
     };
 
-    const getDebounce = _.debounce((value, start, end) => {
+    const getDebounce = _.debounce((value) => {
         refetch({ search: value, page: 1 });
         setKeyword(value);
         setHasMore(true);
     }, 500);
 
     const onChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
-        getDebounce(e.target.value, startDate, endDate);
-    };
-
-    const onChangeDatePicker = (_, dateString) => {
-        const [start, end] = dateString;
-        setStartDate(start);
-        setEndDate(end);
-        setHasMore(true);
-        refetch({ search: keyword, page: 1 });
+        getDebounce(e.target.value);
     };
 
     const onClickCategory = (type) => {
@@ -87,7 +74,6 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
         onClickAccommodation,
         onClickRegister,
         onChangeKeyword,
-        onChangeDatePicker,
         onNext,
     };
 };

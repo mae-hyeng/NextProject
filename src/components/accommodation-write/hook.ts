@@ -24,8 +24,12 @@ export const useAccommodationWrite = (data, reset, setValue) => {
                 zipcode: data.fetchTravelproduct.travelproductAddress.zipcode ?? "",
                 address: data.fetchTravelproduct.travelproductAddress.address ?? "",
                 addressDetail: data.fetchTravelproduct.travelproductAddress.addressDetail ?? "",
-                lat: data.fetchTravelproduct.travelproductAddress.lat.toString() ?? "",
-                lng: data.fetchTravelproduct.travelproductAddress.lng.toString() ?? "",
+                lat: data.fetchTravelproduct.travelproductAddress.lat
+                    ? data.fetchTravelproduct.travelproductAddress.lat.toString()
+                    : "",
+                lng: data.fetchTravelproduct.travelproductAddress.lng
+                    ? data.fetchTravelproduct.travelproductAddress.lng.toString()
+                    : "",
             });
             setIsLoadData(false);
         }

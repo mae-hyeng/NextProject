@@ -68,6 +68,7 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
                                 <input
                                     {...register("password")}
                                     placeholder="비밀번호를 입력해 주세요."
+                                    type="password"
                                     disabled={isEdit ? true : false}
                                 />
                                 <div className={styles.error}>

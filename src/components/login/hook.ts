@@ -4,6 +4,8 @@ import { LOGIN_USER } from "./queries";
 import { useRouter } from "next/navigation";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { FETCH_USER } from "@/commons/hooks/queries";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 export const UseLogin = () => {
     const [password, setPassword] = useState("");
@@ -58,10 +60,14 @@ export const UseLogin = () => {
             //     name: userInfo.data.fetchUser.name,
             //     email: userInfo.data.fetchUser.email,
             // });
-
-            router.push("/boards");
+            Modal.success({
+                content: "로그인에 성공했습니다!",
+                onOk: () => router.push("/boards"),
+            });
         } catch (error) {
-            console.log(error);
+            Modal.error({
+                content: "회원정보을 찾을 수 없습니다.",
+            });
         }
     };
 

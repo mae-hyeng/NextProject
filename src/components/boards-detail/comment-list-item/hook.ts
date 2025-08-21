@@ -1,11 +1,14 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DELETE_BOARD_COMMENT } from "./queries";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { useAuthStore } from "@/commons/stores/authStore";
 
 export const UseBoardCommentListItem = () => {
+    const [user, setUser] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
+    const { user: authUser } = useAuthStore();
 
     const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
@@ -15,6 +18,13 @@ export const UseBoardCommentListItem = () => {
 
     const [password, setPassword] = useState("");
     const [boardCommentId, setBoardCommentId] = useState("");
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            setUser(JSON.parse(userInfo));
+        }
+    }, [authUser]);
 
     const onClickCommentDelete = async () => {
         try {
@@ -59,6 +69,7 @@ export const UseBoardCommentListItem = () => {
     };
 
     return {
+        user,
         isEdit,
         isDeleteModalOpen,
         password,

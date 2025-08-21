@@ -65,8 +65,8 @@ export const useSignIn = () => {
             });
             Modal.success({
                 content: "회원가입을 축하드립니다!",
+                onOk: () => router.push("/login"),
             });
-            router.push("/login");
         } catch (error) {
             Modal.error({
                 content: `${error} 확인해주세요.`,

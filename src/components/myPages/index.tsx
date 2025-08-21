@@ -28,7 +28,7 @@ export const MyPage = () => {
                 <div className={styles.divideLine}></div>
                 <div className={styles.point_wrapper}>
                     <Image src="/images/point.png" alt="포인트이미지" width={25} height={25} />
-                    <div>23,000P</div>
+                    <div>{user?.userPoint.amount}P</div>
                 </div>
                 <div className={styles.divideLine}></div>
 

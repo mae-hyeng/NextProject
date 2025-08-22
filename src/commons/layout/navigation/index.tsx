@@ -13,7 +13,7 @@ export const Navigation = () => {
     const pathName = usePathname();
     const hideRoutes = ["/login", "/signIn"];
 
-    const { data } = useQuery(FETCH_USER_LOGGED_IN);
+    const { data, refetch } = useQuery(FETCH_USER_LOGGED_IN);
     const { isLogin, navigation, onClickNavigation, onclickLogin } = useNavigation({ data });
 
     if (hideRoutes.includes(pathName)) return;

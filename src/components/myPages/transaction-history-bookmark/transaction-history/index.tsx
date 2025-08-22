@@ -45,7 +45,9 @@ export const TransactionHistory = ({ iSold, refetch }) => {
                                         ""
                                     )}
                                 </div>
-                                <div className={styles.transaction_selling_price}>{el.price}</div>
+                                <div className={styles.transaction_selling_price}>
+                                    {el.price.toLocaleString("ko-KR")}
+                                </div>
                                 <div className={styles.transaction_date}>
                                     {new Date(el.updatedAt ?? el.createdAt)
                                         .toISOString()

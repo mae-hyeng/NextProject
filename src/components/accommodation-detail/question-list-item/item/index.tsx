@@ -31,8 +31,6 @@ export const QuestionListItem = ({ data, question }) => {
         variables: { travelproductQuestionId: question._id },
     });
 
-    console.log("isSame : ", isSame);
-
     return (
         <>
             <div className={styles.question_wrapper}>

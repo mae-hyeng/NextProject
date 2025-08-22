@@ -26,7 +26,9 @@ export const Purchased = ({ iBought }) => {
                                     {iBought.fetchTravelproductsIBought.length - idx}
                                 </div>
                                 <div className={styles.purchased_name}>{el.name}</div>
-                                <div className={styles.purchased_bought_price}>{el.price}</div>
+                                <div className={styles.purchased_bought_price}>
+                                    {el.price.toLocaleString("ko-KR")}
+                                </div>
                                 <div className={styles.purchased_date}>
                                     {new Date(el.soldAt)
                                         .toISOString()

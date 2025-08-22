@@ -32,7 +32,9 @@ export const Bookmark = ({ iPick, refetch }) => {
                                     {iPick.fetchTravelproductsIPicked.length - idx}
                                 </div>
                                 <div className={styles.bookmark_title}>{el.name}</div>
-                                <div className={styles.bookmark_price}>{el.price}</div>
+                                <div className={styles.bookmark_price}>
+                                    {el.price.toLocaleString("ko-KR")}
+                                </div>
                                 <div className={styles.bookmark_seller_wrapper}>
                                     판매자 이름
                                     {/* {el.writer} */}

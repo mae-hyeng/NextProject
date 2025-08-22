@@ -75,7 +75,9 @@ export const NavigationLogin = ({ data }) => {
                             width={20}
                             height={0}
                         />
-                        {data?.fetchUserLoggedIn.userPoint.amount.toLocaleString("ko-KR")}
+                        {data?.fetchUserLoggedIn.userPoint
+                            ? data?.fetchUserLoggedIn.userPoint.amount.toLocaleString("ko-KR")
+                            : ""}
                     </div>
                 </MenuItem>
                 <MenuItem onClick={handleOpenModal}>

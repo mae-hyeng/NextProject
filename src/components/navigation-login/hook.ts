@@ -8,6 +8,7 @@ import { Modal } from "antd";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { useLoadStore } from "@/commons/stores/loadStore";
 import { useAuthStore } from "@/commons/stores/authStore";
+import { FETCH_USER_LOGGED_IN } from "../login/queries";
 
 export const useNavigationLogin = () => {
     const [point, setPoint] = useState();
@@ -35,30 +36,39 @@ export const useNavigationLogin = () => {
         setPoint(e.target.value);
     };
     const onClickPointCharge = async () => {
-        const paymentResult = await PortOne.requestPayment({
-            storeId: "store-abc39db7-8ee1-4898-919e-0af603a68317",
-            channelKey: "channel-key-1dc10cea-ec89-471d-aedf-f4bd68993f33",
-            paymentId: uuidv4(),
-            orderName: `${point} 충전`,
-            totalAmount: Number(point),
-            currency: "CURRENCY_KRW",
-            payMethod: "EASY_PAY",
-            customer: {
-                fullName: user.name,
-                email: user.email,
-            },
-            redirectUrl: "http://localhost:3000/mypage",
-        });
+        try {
+            const paymentResult = await PortOne.requestPayment({
+                storeId: "store-abc39db7-8ee1-4898-919e-0af603a68317",
+                channelKey: "channel-key-1dc10cea-ec89-471d-aedf-f4bd68993f33",
+                paymentId: uuidv4(),
+                orderName: `${point} 충전`,
+                totalAmount: Number(point),
+                currency: "CURRENCY_KRW",
+                payMethod: "EASY_PAY",
+                customer: {
+                    fullName: user.name,
+                    email: user.email,
+                },
+                redirectUrl: "http://localhost:3000/mypage",
+            });
 
-        await createPointTransactionOfLoading({
-            variables: { paymentId: paymentResult.paymentId },
-        });
-        handleCloseModal();
+            await createPointTransactionOfLoading({
+                variables: { paymentId: paymentResult.paymentId },
+                refetchQueries: [{ query: FETCH_USER_LOGGED_IN }],
+            });
+
+            Modal.success({
+                content: "충전 완료! 상품을 구매해보세요!",
+                onOk: () => handleCloseModal(),
+            });
+        } catch (error) {
+            Modal.error({ content: "충전에 실패했습니다. 다시 시도해주세요." });
+        }
     };
 
     const onClickLogOut = async () => {
         try {
-            await logOutUser();
+            await logOutUser({ refetchQueries: [{ query: FETCH_USER_LOGGED_IN }] });
             setIsLoaded(false);
             setAccessToken("");
         } catch (error) {

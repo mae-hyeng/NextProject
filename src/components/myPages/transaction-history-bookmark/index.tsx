@@ -21,8 +21,6 @@ export const TransactionHistoryBookmark = () => {
     });
     const { data: iSold, refetch: iSoldRefetch } = useQuery(FETCH_TRAVEL_PRODUCTS_I_SOLD);
 
-    console.log("iPick : ", iPick);
-
     return (
         <>
             <div className={styles.button_wrapper}>

@@ -8,6 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { FETCH_USER_LOGGED_IN } from "@/components/login/queries";
 
 declare const window: Window & {
     kakao: any;
@@ -128,6 +129,7 @@ export const useAccommodationDetail = ({ data, refetch }) => {
         try {
             const result = await createPointTransactionOfBuyingAndSelling({
                 variables: { useritemId: data.fetchTravelproduct._id },
+                refetchQueries: [{ query: FETCH_USER_LOGGED_IN }],
             });
             console.log(result);
             Modal.success({

@@ -10,7 +10,7 @@
 
 .purchase_title,
 .purchase_header_title {
-    width: 60%;
+    width: 70%;
     padding: 0rem 1rem;
 }
 
@@ -23,19 +23,12 @@
 .purchase_transaction,
 .purchase_header_transaction,
 .purchase_balance,
-.purchase_seller,
-.purchase_header_balance,
-.purchase_header_seller {
+.purchase_header_balance {
     width: 10%;
     text-align: center;
 }
 
-.purchase_seller {
-    color: #f66a6a;
-}
-
-.purchase_date,
-.purchase_seller {
+.purchase_date {
     color: gray;
 }
 

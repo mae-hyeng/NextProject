@@ -15,7 +15,6 @@ export const PurchaseHistory = ({ buying, buyingCount, refetch }) => {
                         <div className={styles.purchase_header_title}>상품 명</div>
                         <div className={styles.purchase_header_transaction}>거래내역</div>
                         <div className={styles.purchase_header_balance}>거래 후 잔액</div>
-                        <div className={styles.purchase_header_seller}>판매자</div>
                     </div>
                     <div className={styles.purchase_body}>
                         {buying?.fetchPointTransactionsOfBuying?.map((item, idx) => (
@@ -35,7 +34,6 @@ export const PurchaseHistory = ({ buying, buyingCount, refetch }) => {
                                 <div className={styles.purchase_balance}>
                                     {item.balance.toLocaleString("ko-KR")}
                                 </div>
-                                <div className={styles.purchase_seller}>판매자</div>
                             </div>
                         ))}
                     </div>

@@ -36,8 +36,7 @@ export const Bookmark = ({ iPick, refetch }) => {
                                     {el.price.toLocaleString("ko-KR")}
                                 </div>
                                 <div className={styles.bookmark_seller_wrapper}>
-                                    판매자 이름
-                                    {/* {el.writer} */}
+                                    {el.seller.name}
                                 </div>
                                 <div className={styles.bookmark_regDate}>
                                     {new Date(el.updateAt || el.createdAt)

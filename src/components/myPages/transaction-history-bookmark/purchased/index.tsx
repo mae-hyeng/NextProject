@@ -18,6 +18,7 @@ export const Purchased = ({ iBought }) => {
                         <div className={styles.purchased_header_name}>상품 명</div>
                         <div className={styles.purchased_header_bought_price}>구매가격</div>
                         <div className={styles.purchased_header_date}>날짜</div>
+                        <div className={styles.purchase_header_seller}>판매자</div>
                     </div>
                     <div className={styles.purchased_body}>
                         {iBought?.fetchTravelproductsIBought?.map((el, idx) => (
@@ -35,6 +36,7 @@ export const Purchased = ({ iBought }) => {
                                         .slice(0, 10)
                                         .replaceAll("-", ".")}
                                 </div>
+                                <div className={styles.purchase_seller}>{el.seller.name}</div>
                             </div>
                         ))}
                     </div>

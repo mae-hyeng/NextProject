@@ -69,23 +69,12 @@ export const FETCH_BOARDS_COUNT_OF_MINE = gql`
 export const FETCH_POINT_TRANSACTIONS_OF_BUYING = gql`
     query fetchPointTransactionsOfBuying($search: String, $page: Int) {
         fetchPointTransactionsOfBuying(search: $search, page: $page) {
-            _id
-            impUid
             amount
             balance
             status
             statusDetail
             travelproduct {
                 name
-                seller {
-                    # name
-                    _id
-                    # email
-                }
-                buyer {
-                    _id
-                    # name
-                }
             }
             createdAt
             updatedAt
@@ -184,6 +173,9 @@ export const FETCH_TRAVEL_PRODUCTS_I_BOUGHT = gql`
             _id
             name
             price
+            seller {
+                name
+            }
             soldAt
             createdAt
             updatedAt
@@ -205,6 +197,9 @@ export const FETCH_TRAVEL_PRODUCTS_I_PICKED = gql`
             _id
             name
             price
+            seller {
+                name
+            }
             soldAt
             createdAt
             updatedAt

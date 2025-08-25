@@ -13,7 +13,9 @@
 .purchased_bought_price,
 .purchased_header_bought_price,
 .purchased_date,
-.purchased_header_date {
+.purchased_header_date,
+.purchase_seller,
+.purchase_header_seller {
     width: 10%;
     text-align: center;
 }
@@ -65,5 +67,9 @@
 
 .purchased_bought_price {
     color: #f66a6a;
+}
+
+.purchase_seller {
+    color: gray;
 }
 /* purchased end */

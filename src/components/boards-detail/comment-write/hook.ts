@@ -2,7 +2,7 @@
 
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "./queries";
+import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "@/commons/apis/mutations/mutations";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";

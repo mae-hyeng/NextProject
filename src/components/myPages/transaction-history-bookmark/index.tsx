@@ -9,7 +9,7 @@ import {
     FETCH_TRAVEL_PRODUCTS_I_BOUGHT,
     FETCH_TRAVEL_PRODUCTS_I_PICKED,
     FETCH_TRAVEL_PRODUCTS_I_SOLD,
-} from "@/commons/hooks/queries";
+} from "@/commons/apis/queries/queries";
 import { Purchased } from "./purchased";
 
 export const TransactionHistoryBookmark = () => {

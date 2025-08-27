@@ -5,7 +5,10 @@ import { useParams } from "next/navigation";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { ChangeEvent, useEffect, useState } from "react";
-import { CREATE_TRAVEL_PRODUCT_QUESTION, UPDATE_TRAVEL_PRODUCT_QUESTION } from "./queries";
+import {
+    CREATE_TRAVEL_PRODUCT_QUESTION,
+    UPDATE_TRAVEL_PRODUCT_QUESTION,
+} from "@/commons/apis/mutations/mutations";
 
 export const useQuestionWrite = ({ question, setIsEdit }) => {
     useEffect(() => {

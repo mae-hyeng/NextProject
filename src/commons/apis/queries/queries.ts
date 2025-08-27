@@ -296,3 +296,211 @@ export const FETCH_POINT_TRANSACTIONS = gql`
         }
     }
 `;
+
+// 여행 상품
+export const FETCH_TRAVEL_PRODUCT = gql`
+    query fetchTravelproduct($travelproductId: ID!) {
+        fetchTravelproduct(travelproductId: $travelproductId) {
+            _id
+            name
+            remarks
+            contents
+            price
+            tags
+            images
+            pickedCount
+            travelproductAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                lat
+                lng
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            buyer {
+                _id
+                email
+                name
+                picture
+                # userPoint
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            seller {
+                _id
+                email
+                name
+                picture
+                # userPoint
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            soldAt
+            createdAt
+            updatedAt
+            deletedAt
+            __typename
+        }
+    }
+`;
+
+export const FETCH_TRAVEL_PRODUCT_QUESTIONS = gql`
+    query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {
+        fetchTravelproductQuestions(page: $page, travelproductId: $travelproductId) {
+            _id
+            contents
+            #     travelproduct {}
+            user {
+                _id
+                email
+                name
+            }
+            createdAt
+            updatedAt
+            deletedAt
+            __typename
+        }
+    }
+`;
+
+export const FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER = gql`
+    query fetchTravelproductQuestionAnswers($page: Int, $travelproductQuestionId: ID!) {
+        fetchTravelproductQuestionAnswers(
+            page: $page
+            travelproductQuestionId: $travelproductQuestionId
+        ) {
+            _id
+            contents
+            # travelproductQuestion {
+            #     _id
+            #     contents
+            # }
+            user {
+                _id
+                name
+                email
+            }
+            createdAt
+            updatedAt
+            deletedAt
+        }
+    }
+`;
+
+export const FETCH_TRAVEL_PRODUCTS = gql`
+    query fetchTravelproducts($isSoldout: Boolean, $search: String, $page: Int) {
+        fetchTravelproducts(isSoldout: $isSoldout, search: $search, page: $page) {
+            _id
+            name
+            remarks
+            contents
+            price
+            tags
+            images
+            pickedCount
+            travelproductAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                lat
+                lng
+            }
+            buyer {
+                _id
+                email
+                name
+                picture
+                # userPoint
+            }
+            seller {
+                _id
+                email
+                name
+                picture
+                # userPoint
+            }
+            soldAt
+            createdAt
+            updatedAt
+            deletedAt
+            __typename
+        }
+    }
+`;
+
+export const FETCH_BOARD_COMMENTS = gql`
+    query fetchBoardComments(
+        # $page: Int,
+        $boardId: ID!
+    ) {
+        fetchBoardComments(
+            # page: $page,
+            boardId: $boardId
+        ) {
+            _id
+            writer
+            contents
+            rating
+            # user
+            createdAt
+            updatedAt
+            deletedAt
+            __typename
+        }
+    }
+`;
+
+export const FETCH_BOARDS = gql`
+    query fetchBoards($page: Int, $search: String, $endDate: DateTime, $startDate: DateTime) {
+        fetchBoards(page: $page, search: $search, endDate: $endDate, startDate: $startDate) {
+            _id
+            writer
+            title
+            contents
+            youtubeUrl
+            likeCount
+            dislikeCount
+            # images
+            boardAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                createdAt
+                updatedAt
+                deletedAt
+            }
+            # user
+            createdAt
+            updatedAt
+            deletedAt
+            __typename
+        }
+    }
+`;
+
+export const FETCH_BOARDS_COUNT = gql`
+    query fetchBoardsCount($endDate: DateTime, $startDate: DateTime, $search: String) {
+        fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)
+    }
+`;
+
+export const FETCH_USER_LOGGED_IN = gql`
+    query fetchUserLoggedIn {
+        fetchUserLoggedIn {
+            _id
+            email
+            name
+            userPoint {
+                # _id
+                amount
+            }
+        }
+    }
+`;

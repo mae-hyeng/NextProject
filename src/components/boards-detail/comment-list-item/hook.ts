@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { DELETE_BOARD_COMMENT } from "./queries";
+import { DELETE_BOARD_COMMENT } from "@/commons/apis/mutations/mutations";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useAuthStore } from "@/commons/stores/authStore";

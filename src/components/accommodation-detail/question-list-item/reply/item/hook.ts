@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useState } from "react";
-import { DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER } from "../reply-write/queries";
+import { DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER } from "@/commons/apis/mutations/mutations";
 
 export const useReplyListItem = () => {
     const [isEdit, setIsEdit] = useState(false);

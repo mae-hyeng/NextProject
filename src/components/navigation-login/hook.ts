@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 as uuidv4 } from "uuid";
 import { useMutation } from "@apollo/client";
-import { CREATE_POINT_TRANSACTION_OF_LOADING } from "./queries";
-import { LOG_OUT_USER } from "@/commons/hooks/queries";
+import { CREATE_POINT_TRANSACTION_OF_LOADING } from "@/commons/apis/mutations/mutations";
+import { LOG_OUT_USER, FETCH_USER_LOGGED_IN } from "@/commons/apis/queries/queries";
 import { Modal } from "antd";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { useLoadStore } from "@/commons/stores/loadStore";
 import { useAuthStore } from "@/commons/stores/authStore";
-import { FETCH_USER_LOGGED_IN } from "../login/queries";
 
 export const useNavigationLogin = () => {
     const [point, setPoint] = useState();

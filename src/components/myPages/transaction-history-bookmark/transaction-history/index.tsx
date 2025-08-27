@@ -5,7 +5,7 @@ import { TransactionHistoryBookmarkPagination } from "../pagination";
 import { useTransactionHistory } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD } from "@/commons/hooks/queries";
+import { FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD } from "@/commons/apis/queries/queries";
 import { TransactionHistoryBookmarkSearchPage } from "../search";
 
 export const TransactionHistory = ({ iSold, refetch }) => {
@@ -62,7 +62,6 @@ export const TransactionHistory = ({ iSold, refetch }) => {
                                     <Image
                                         id={String(idx + 1)}
                                         className={styles.transaction_delete}
-                                        // onClick={() => onClickDeletetransaction(d._id)}
                                         src="/images/delete.png"
                                         width={22}
                                         height={0}

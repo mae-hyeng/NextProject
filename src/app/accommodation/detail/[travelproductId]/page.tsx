@@ -1,9 +1,9 @@
 "use client";
 
 import { QuestionWrite } from "@/components/accommodation-detail/question-write";
-import { FETCH_TRAVEL_PRODUCT_QUESTIONS } from "@/components/accommodation-detail/question-write/queries";
+import { FETCH_TRAVEL_PRODUCT_QUESTIONS } from "@/commons/apis/queries/queries";
 import AccommodationDetail from "@/components/accommodation-detail/detail";
-import { FETCH_TRAVEL_PRODUCT } from "@/components/accommodation-detail/detail/queries";
+import { FETCH_TRAVEL_PRODUCT } from "@/commons/apis/queries/queries";
 import { QuestionList } from "@/components/accommodation-detail/question-list";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";

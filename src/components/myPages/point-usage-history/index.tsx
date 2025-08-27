@@ -15,7 +15,7 @@ import {
     FETCH_POINT_TRANSACTIONS_OF_BUYING,
     FETCH_POINT_TRANSACTIONS_OF_LOADING,
     FETCH_POINT_TRANSACTIONS_OF_SELLING,
-} from "@/commons/hooks/queries";
+} from "@/commons/apis/queries/queries";
 
 export const PointUsageHistory = () => {
     const { selected, onClickButton } = usePointUsageHistory();

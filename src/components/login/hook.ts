@@ -1,9 +1,9 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
-import { LOGIN_USER } from "./queries";
+import { LOGIN_USER } from "@/commons/apis/mutations/mutations";
 import { useRouter } from "next/navigation";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
-import { FETCH_USER } from "@/commons/hooks/queries";
+import { FETCH_USER } from "@/commons/apis/queries/queries";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 

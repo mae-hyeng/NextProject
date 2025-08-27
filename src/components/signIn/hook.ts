@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
-import { CREATE_USER } from "./queries";
+import { CREATE_USER } from "@/commons/apis/mutations/mutations";
 import "@ant-design/v5-patch-for-react-19";
 import { Modal } from "antd";
 import { useRouter } from "next/navigation";

@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useImageSwiper } from "./took";
+import { useImageSwiper } from "./hook";
 import { useRef } from "react";
 
 export const ImageSwiper = ({ bestProducts }) => {

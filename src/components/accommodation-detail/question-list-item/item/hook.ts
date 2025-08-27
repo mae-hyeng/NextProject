@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useEffect, useState } from "react";
-import { DELETE_TRAVEL_PRODUCT_QUESTION } from "../../question-write/queries";
+import { DELETE_TRAVEL_PRODUCT_QUESTION } from "@/commons/apis/mutations/mutations";
 import { useAuthStore } from "@/commons/stores/authStore";
 
 export const useQuestionListItem = ({ data }) => {

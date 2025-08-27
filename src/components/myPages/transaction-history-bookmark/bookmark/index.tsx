@@ -2,10 +2,10 @@
 
 import { useQuery } from "@apollo/client";
 import styles from "./styles.module.css";
-import { FETCH_TRAVEL_PRODUCTS_COUNT_I_PICKED } from "@/commons/hooks/queries";
+import { FETCH_TRAVEL_PRODUCTS_COUNT_I_PICKED } from "@/commons/apis/queries/queries";
 import { TransactionHistoryBookmarkPagination } from "../pagination";
 import { TransactionHistoryBookmarkSearchPage } from "../search";
-import { useBookmark } from "./took";
+import { useBookmark } from "./hook";
 
 export const Bookmark = ({ iPick, refetch }) => {
     const { onChangeKeyword, onClickBookMark } = useBookmark({ refetch });

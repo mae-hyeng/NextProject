@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { usePointUsageHistoryPagination } from "./took";
+import { usePointUsageHistoryPagination } from "./hook";
 
 export const PointUsageHistoryPagination = ({ lastPage, refetch }) => {
     const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } =

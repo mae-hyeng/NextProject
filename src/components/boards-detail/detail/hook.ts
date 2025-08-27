@@ -2,8 +2,8 @@
 
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { DISLIKE_BOARD, LIKE_BOARD } from "./queries";
-import { FETCH_BOARD } from "@/commons/hooks/queries";
+import { DISLIKE_BOARD, LIKE_BOARD } from "@/commons/apis/mutations/mutations";
+import { FETCH_BOARD } from "@/commons/apis/queries/queries";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 

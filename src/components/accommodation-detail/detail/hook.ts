@@ -1,14 +1,14 @@
-import { useMutation } from "@apollo/client";
 import {
     CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
     DELETE_TRAVEL_PRODUCT,
     TOGGLE_TRAVEL_PRODUCT_PICK,
-} from "./queries";
+} from "@/commons/apis/mutations/mutations";
+import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
-import { FETCH_USER_LOGGED_IN } from "@/components/login/queries";
+import { FETCH_USER_LOGGED_IN } from "@/commons/apis/queries/queries";
 
 declare const window: Window & {
     kakao: any;

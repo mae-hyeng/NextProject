@@ -1,10 +1,12 @@
 "use client";
 
-import { FETCH_BOARDS_OF_THE_BEST } from "@/commons/hooks/queries";
+import {
+    FETCH_BOARDS_OF_THE_BEST,
+    FETCH_BOARDS,
+    FETCH_BOARDS_COUNT,
+} from "@/commons/apis/queries/queries";
 import { BannerPage } from "@/components/boards-list/banner";
 import { BoardsListPage } from "@/components/boards-list/list";
-import { FETCH_BOARDS } from "@/components/boards-list/list/queries";
-import { FETCH_BOARDS_COUNT } from "@/components/boards-list/pagination/queries";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 

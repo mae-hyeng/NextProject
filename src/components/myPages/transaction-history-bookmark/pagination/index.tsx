@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useTransactionHistoryBookmarkPagination } from "./took";
+import { useTransactionHistoryBookmarkPagination } from "./hook";
 
 export const TransactionHistoryBookmarkPagination = ({ lastPage }) => {
     const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } =

@@ -1,8 +1,10 @@
 "use client";
 
-import { FETCH_TRAVEL_PRODUCTS_OF_THE_BEST } from "@/commons/hooks/queries";
+import {
+    FETCH_TRAVEL_PRODUCTS_OF_THE_BEST,
+    FETCH_TRAVEL_PRODUCTS,
+} from "@/commons/apis/queries/queries";
 import { AccommodationListPage } from "@/components/accommodation-list/list";
-import { FETCH_TRAVEL_PRODUCTS } from "@/components/accommodation-list/list/queries";
 import { BannerPage } from "@/components/boards-list/banner";
 import { useQuery } from "@apollo/client";
 

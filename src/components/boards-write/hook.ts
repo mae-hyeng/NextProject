@@ -6,7 +6,7 @@ import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react"
 import { IMyVariables } from "./types";
 import { checkValidationFile } from "@/commons/libraries/validationFile";
 import { CreateBoardDocument, UploadFileDocument } from "@/commons/graphql/graphql";
-import { UPDATE_BOARD } from "./queries";
+import { UPDATE_BOARD } from "@/commons/apis/mutations/mutations";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useAuthStore } from "@/commons/stores/authStore";

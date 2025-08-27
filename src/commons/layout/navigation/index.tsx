@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import { useNavigation } from "./hook";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@apollo/client";
-import { FETCH_USER_LOGGED_IN } from "@/components/login/queries";
+import { FETCH_USER_LOGGED_IN } from "@/commons/apis/queries/queries";
 import { NavigationLogin } from "@/components/navigation-login";
 
 export const Navigation = () => {

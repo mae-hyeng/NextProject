@@ -6,7 +6,7 @@ import { useQuestionListItem } from "./hook";
 import { QuestionWrite } from "../../question-write";
 import { ReplyWrite } from "../reply/reply-write";
 import { useQuery } from "@apollo/client";
-import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "../reply/reply-write/queries";
+import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "@/commons/apis/queries/queries";
 import { ReplyListItem } from "../reply/item";
 import { ModalUI } from "@/commons/ui/modal";
 

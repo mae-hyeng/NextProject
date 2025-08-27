@@ -1,6 +1,6 @@
 "use client";
 
-import { RESET_USER_PASSWORD } from "@/commons/hooks/queries";
+import { RESET_USER_PASSWORD } from "@/commons/apis/queries/queries";
 import "@ant-design/v5-patch-for-react-19";
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";

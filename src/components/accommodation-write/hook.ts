@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { checkValidationFile } from "@/commons/libraries/validationFile";
 import { UploadFileDocument } from "@/commons/graphql/graphql";
-import { CREATE_TRAVEL_PRODUCT, UPDATE_TRAVEL_PRODUCT } from "./queries";
+import { CREATE_TRAVEL_PRODUCT, UPDATE_TRAVEL_PRODUCT } from "@/commons/apis/mutations/mutations";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 

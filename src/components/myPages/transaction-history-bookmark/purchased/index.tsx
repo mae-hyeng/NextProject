@@ -3,7 +3,7 @@
 import { useQuery } from "@apollo/client";
 import { TransactionHistoryBookmarkPagination } from "../pagination";
 import styles from "./styles.module.css";
-import { FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT } from "@/commons/hooks/queries";
+import { FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT } from "@/commons/apis/queries/queries";
 import { usePurchased } from "./hook";
 
 export const Purchased = ({ iBought }) => {

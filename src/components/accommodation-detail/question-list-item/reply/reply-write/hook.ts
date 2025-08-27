@@ -6,7 +6,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import {
     CREATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
     UPDATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
-} from "./queries";
+} from "@/commons/apis/mutations/mutations";
 import { IReplyWriteProps } from "./types";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";

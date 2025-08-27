@@ -14,7 +14,6 @@ export const Pagination = ({
     const { startPage, onClickPrevPage, onClickNextPage, onClickPage } = usePageNation({
         refetch,
         lastPage,
-        currentPage,
         setCurrentPage,
     });
     return (

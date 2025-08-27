@@ -3,10 +3,11 @@
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import _ from "lodash";
+import { IUseAccommodationListProps } from "./types";
 
-export const AccommodationList = ({ refetch, data, fetchMore }) => {
+export const useAccommodationList = ({ refetch, data, fetchMore }: IUseAccommodationListProps) => {
     const router = useRouter();
-    const [keyword, setKeyword] = useState("");
+    const [search, setSearch] = useState("");
 
     const [category, setCategory] = useState("reservationAvailable");
     const [isSoldout, setIsSoldout] = useState(false);
@@ -27,7 +28,7 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
 
     const getDebounce = _.debounce((value) => {
         refetch({ search: value, page: 1 });
-        setKeyword(value);
+        setSearch(value);
         setHasMore(true);
     }, 500);
 
@@ -35,7 +36,7 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
         getDebounce(e.target.value);
     };
 
-    const onClickCategory = (type) => {
+    const onClickCategory = (type: string) => {
         setCategory(type);
         setIsSoldout(type === "reservationAvailable" ? false : true);
         setHasMore(true);
@@ -46,9 +47,9 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
 
         fetchMore({
             variables: {
-                isSoldout: isSoldout,
+                isSoldout,
                 page: Math.ceil((data?.fetchTravelproducts.length ?? 10) / 10) + 1,
-                search: keyword,
+                search,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult.fetchTravelproducts?.length) {
@@ -67,7 +68,6 @@ export const AccommodationList = ({ refetch, data, fetchMore }) => {
     };
 
     return {
-        keyword,
         category,
         hasMore,
         onClickCategory,

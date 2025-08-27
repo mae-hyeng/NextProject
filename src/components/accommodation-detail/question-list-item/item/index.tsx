@@ -9,8 +9,9 @@ import { useQuery } from "@apollo/client";
 import { FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER } from "@/commons/apis/queries/queries";
 import { ReplyListItem } from "../reply/item";
 import { ModalUI } from "@/commons/ui/modal";
+import { IQuestionListItemProps } from "./types";
 
-export const QuestionListItem = ({ data, question }) => {
+export const QuestionListItem = ({ data, question }: IQuestionListItemProps) => {
     const {
         isSame,
         isEdit,

@@ -354,11 +354,20 @@ export const FETCH_TRAVEL_PRODUCT_QUESTIONS = gql`
         fetchTravelproductQuestions(page: $page, travelproductId: $travelproductId) {
             _id
             contents
-            #     travelproduct {}
+            travelproduct {
+                _id
+                name
+                remarks
+                contents
+                createdAt
+                updatedAt
+            }
             user {
                 _id
                 email
                 name
+                createdAt
+                updatedAt
             }
             createdAt
             updatedAt

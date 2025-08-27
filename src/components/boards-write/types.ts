@@ -5,8 +5,14 @@ export interface IBoardWriteProps {
     data?: FetchBoardQuery;
 }
 
-export interface IMyVariables {
+export interface IUseBoardWriteProps {
+    data: FetchBoardQuery;
+    reset: any;
+    setValue: any;
+}
+
+export interface IBoardVariables {
     updateBoardInput: UpdateBoardInput;
     password: string;
-    boardId: any;
+    boardId: string;
 }

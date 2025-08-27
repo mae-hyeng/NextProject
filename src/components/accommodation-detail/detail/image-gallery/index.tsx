@@ -1,8 +1,9 @@
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import styles from "./styles.module.css";
+import { IUseAccommodationDetailImageGallery } from "./types";
 
-const AccommodationDetailImageGallery = ({ data }) => {
+const AccommodationDetailImageGallery = ({ data }: IUseAccommodationDetailImageGallery) => {
     if (!data?.fetchTravelproduct?.images) return;
 
     const images = data?.fetchTravelproduct?.images.filter(Boolean).map((img) => {

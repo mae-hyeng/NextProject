@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 
-export const usePageNation = ({ refetch, lastPage, currentPage, setCurrentPage }) => {
+export const usePageNation = ({ refetch, lastPage, setCurrentPage }) => {
     const [startPage, setStartPage] = useState(1);
 
     const onClickPrevPage = () => {

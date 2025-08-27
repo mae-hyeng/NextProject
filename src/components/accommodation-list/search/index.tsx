@@ -4,10 +4,11 @@ import _ from "lodash";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { IAccommodationSearchProps } from "./types";
 
 dayjs.extend(customParseFormat);
 
-export const AccommodationSearchPage = ({ onChangeKeyword }) => {
+export const AccommodationSearchPage = ({ onChangeKeyword }: IAccommodationSearchProps) => {
     return (
         <>
             <div className={styles.boards_func}>

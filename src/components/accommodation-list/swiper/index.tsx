@@ -7,8 +7,9 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { useImageSwiper } from "./hook";
 import { useRef } from "react";
+import { IImageSwiperProps } from "./types";
 
-export const ImageSwiper = ({ bestProducts }) => {
+export const ImageSwiper = ({ bestProducts }: IImageSwiperProps) => {
     const { onClickBestProduct } = useImageSwiper();
     const prevRef = useRef(null);
     const nextRef = useRef(null);

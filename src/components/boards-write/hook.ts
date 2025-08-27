@@ -3,7 +3,7 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, SetStateAction, useEffect, useRef, useState } from "react";
-import { IMyVariables } from "./types";
+import { IBoardVariables, IUseBoardWriteProps } from "./types";
 import { checkValidationFile } from "@/commons/libraries/validationFile";
 import { CreateBoardDocument, UploadFileDocument } from "@/commons/graphql/graphql";
 import { UPDATE_BOARD } from "@/commons/apis/mutations/mutations";
@@ -11,7 +11,7 @@ import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useAuthStore } from "@/commons/stores/authStore";
 
-export const useBoardsWrite = ({ data, reset, setValue }) => {
+export const useBoardsWrite = ({ data, reset, setValue }: IUseBoardWriteProps) => {
     const [user, setUser] = useState(null);
     const { user: authUser } = useAuthStore();
 
@@ -102,7 +102,7 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
         );
         const images = resultUrls.length ? resultUrls : imageUrls;
         try {
-            const myVariables: IMyVariables = {
+            const variables: IBoardVariables = {
                 updateBoardInput: {
                     youtubeUrl: data.youtubeUrl,
                     boardAddress: {
@@ -112,14 +112,14 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
                     },
                 },
                 password,
-                boardId: params.boardId,
+                boardId: Array.isArray(params.boardId) ? params.boardId[0] : params.boardId,
             };
 
-            if (data.title) myVariables.updateBoardInput.title = data.title;
-            if (data.contents) myVariables.updateBoardInput.contents = data.contents;
-            if (images && images.length) myVariables.updateBoardInput.images = images;
+            if (data.title) variables.updateBoardInput.title = data.title;
+            if (data.contents) variables.updateBoardInput.contents = data.contents;
+            if (images && images.length) variables.updateBoardInput.images = images;
 
-            const result = await updateBoard({ variables: myVariables });
+            const result = await updateBoard({ variables });
             router.push(`/boards/detail/${result.data.updateBoard._id}`);
         } catch (error) {
             Modal.error({
@@ -132,12 +132,12 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
         }
     };
 
-    const onChangeContents = (value) => {
+    const onChangeContents = (value: string) => {
         const defaultValue = value === "<p><br></p>" ? "" : value;
         setValue("contents", defaultValue, { shouldValidate: true });
     };
 
-    const onChangePassword = (e) => {
+    const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
     };
 
@@ -153,7 +153,7 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
         setIsOpen(false);
     };
 
-    const showEditModal = (e) => {
+    const showEditModal = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsEditModalOpen(true);
     };

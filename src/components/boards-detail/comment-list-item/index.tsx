@@ -6,8 +6,9 @@ import { Rate } from "antd";
 import { CommentWrite } from "../comment-write";
 import { UseBoardCommentListItem } from "./hook";
 import { ModalUI } from "@/commons/ui/modal";
+import { ICommentListItemProps } from "./types";
 
-export const CommentListItem = ({ comment }) => {
+export const CommentListItem = ({ comment }: ICommentListItemProps) => {
     const {
         user,
         isEdit,

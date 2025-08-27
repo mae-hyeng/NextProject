@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useBoardComment } from "./hook";
+import { useBoardCommentWrite } from "./hook";
 
 import { Rate } from "antd";
 import { ICommentWriteProps } from "./types";
@@ -16,7 +16,7 @@ export const CommentWrite = ({ isEdit, setIsEdit, comment }: ICommentWriteProps)
         onClickUpdateComment,
         onChangeInput,
         onChangeRating,
-    } = useBoardComment({ comment, setIsEdit });
+    } = useBoardCommentWrite({ comment, setIsEdit });
 
     return (
         <div className={isEdit ? styles.detail_reg_comment_edit : styles.detail_reg_comment}>

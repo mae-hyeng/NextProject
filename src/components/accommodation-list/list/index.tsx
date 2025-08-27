@@ -1,13 +1,19 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { AccommodationList } from "./hook";
+import { useAccommodationList } from "./hook";
 import { AccommodationSearchPage } from "../search";
 import Image from "next/image";
 import { ImageSwiper } from "../swiper";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { IAccommodationListProps } from "./types";
 
-export const AccommodationListPage = ({ data, bestProducts, refetch, fetchMore }) => {
+export const AccommodationListPage = ({
+    data,
+    bestProducts,
+    refetch,
+    fetchMore,
+}: IAccommodationListProps) => {
     const {
         category,
         hasMore,
@@ -16,7 +22,7 @@ export const AccommodationListPage = ({ data, bestProducts, refetch, fetchMore }
         onClickRegister,
         onChangeKeyword,
         onNext,
-    } = AccommodationList({ refetch, data, fetchMore });
+    } = useAccommodationList({ refetch, data, fetchMore });
     return (
         <>
             <div className={styles.accommodation_page}>

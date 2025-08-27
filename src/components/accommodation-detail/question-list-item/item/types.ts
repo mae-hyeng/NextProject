@@ -3,7 +3,7 @@ import {
     FetchTravelproductQuestionsQuery,
 } from "@/commons/graphql/graphql";
 
-export interface IQuestionListProps {
+export interface IQuestionListItemProps {
     data: FetchTravelproductQuery;
-    questionData: FetchTravelproductQuestionsQuery;
+    question: FetchTravelproductQuestionsQuery["fetchTravelproductQuestions"][0];
 }

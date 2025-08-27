@@ -5,8 +5,9 @@ import styles from "./styles.module.css";
 import { useAccommodationDetail } from "./hook";
 import AccommodationDetailImageGallery from "./image-gallery";
 import { ModalUI } from "@/commons/ui/modal";
+import { IAccommodationDetailProps } from "./types";
 
-const AccommodationDetail = ({ data, refetch }) => {
+const AccommodationDetail = ({ data, refetch }: IAccommodationDetailProps) => {
     const {
         isDeleteModalOpen,
         isBoughtModalOpen,

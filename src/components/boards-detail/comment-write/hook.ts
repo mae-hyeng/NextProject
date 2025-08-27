@@ -6,8 +6,9 @@ import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "@/commons/apis/mutat
 import { ChangeEvent, useEffect, useState } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { IUseBoardCommentWriteProps } from "./types";
 
-export const useBoardComment = ({ comment, setIsEdit }) => {
+export const useBoardCommentWrite = ({ comment, setIsEdit }: IUseBoardCommentWriteProps) => {
     useEffect(() => {
         if (comment) setContents(comment?.contents ?? "");
     }, [comment]);

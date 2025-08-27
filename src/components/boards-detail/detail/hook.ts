@@ -6,8 +6,9 @@ import { DISLIKE_BOARD, LIKE_BOARD } from "@/commons/apis/mutations/mutations";
 import { FETCH_BOARD } from "@/commons/apis/queries/queries";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { IUseBoardDetailProps } from "./types";
 
-export const useBoardsDetail = ({ data }) => {
+export const useBoardsDetail = ({ data }: IUseBoardDetailProps) => {
     const router = useRouter();
     const params = useParams();
 

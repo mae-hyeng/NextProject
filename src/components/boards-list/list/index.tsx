@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { BoardsList } from "./hook";
+import { useBoardsList } from "./hook";
 import { IBoardListProps } from "./types";
 import { Pagination } from "../pagination";
 import { BoardSearchPage } from "../search";
@@ -28,7 +28,7 @@ export const BoardsListPage = ({
         onClickRegister,
         onChangeKeyword,
         onChangeDatePicker,
-    } = BoardsList({ refetch, boardsCountRefetch, setCurrentPage });
+    } = useBoardsList({ refetch, boardsCountRefetch, setCurrentPage });
     return (
         <>
             <div className={styles.Page}>

@@ -1,5 +1,5 @@
-import { FetchBoardQueryVariables } from "@/commons/graphql/graphql";
+import { FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
 
-export interface IBoardDetailProps {
-    data: FetchBoardQueryVariables;
+export interface ICommentListProps {
+    comments: FetchBoardCommentsQuery;
 }

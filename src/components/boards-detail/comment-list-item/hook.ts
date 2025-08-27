@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { DELETE_BOARD_COMMENT } from "@/commons/apis/mutations/mutations";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
@@ -59,12 +59,12 @@ export const UseBoardCommentListItem = () => {
         setPassword("");
     };
 
-    const openDeleteModal = (commentId) => () => {
+    const openDeleteModal = (commentId: string) => () => {
         setIsDeleteModalOpen(true);
         setBoardCommentId(commentId);
     };
 
-    const onChangePassword = (e) => {
+    const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
     };
 

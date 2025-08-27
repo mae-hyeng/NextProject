@@ -8,8 +8,14 @@ import _ from "lodash";
 import { useAuthStore } from "@/commons/stores/authStore";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { IUseBoardListProps } from "./types";
+import { Dayjs } from "dayjs";
 
-export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
+export const useBoardsList = ({
+    refetch,
+    boardsCountRefetch,
+    setCurrentPage,
+}: IUseBoardListProps) => {
     const router = useRouter();
     const [deleteBoard] = useMutation(DeleteBoardDocument);
     const [user, setUser] = useState(null);
@@ -94,7 +100,7 @@ export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
         getDebounce(e.target.value, startDate, endDate);
     };
 
-    const onChangeDatePicker = (_, dateString) => {
+    const onChangeDatePicker = (_: Dayjs | null, dateString: string) => {
         const [start, end] = dateString;
         setStartDate(start);
         setEndDate(end);
@@ -102,7 +108,7 @@ export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
         boardsCountRefetch({ startDate: start, endDate: IncreaseDateDay(end), search: keyword });
     };
 
-    const IncreaseDateDay = (dateStr) => {
+    const IncreaseDateDay = (dateStr: string) => {
         const day = parseInt(dateStr.slice(-2), 10);
 
         const newDay = day + 1;
@@ -112,7 +118,7 @@ export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
         return dateStr.slice(0, -2) + newDayStr;
     };
 
-    const showDeleteBoardModal = (boardId) => () => {
+    const showDeleteBoardModal = (boardId: string) => () => {
         setBoardId(boardId);
         setIsOpen(true);
     };

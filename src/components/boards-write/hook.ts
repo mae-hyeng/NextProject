@@ -9,8 +9,17 @@ import { CreateBoardDocument, UploadFileDocument } from "@/commons/graphql/graph
 import { UPDATE_BOARD } from "./queries";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { useAuthStore } from "@/commons/stores/authStore";
 
 export const useBoardsWrite = ({ data, reset, setValue }) => {
+    const [user, setUser] = useState(null);
+    const { user: authUser } = useAuthStore();
+
+    useEffect(() => {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if (userInfo) setUser(userInfo);
+    }, [authUser]);
+
     useEffect(() => {
         if (data?.fetchBoard?.boardAddress) {
             reset({
@@ -197,6 +206,7 @@ export const useBoardsWrite = ({ data, reset, setValue }) => {
     };
 
     return {
+        user,
         isOpen,
         isEditModalOpen,
         imageRefs,

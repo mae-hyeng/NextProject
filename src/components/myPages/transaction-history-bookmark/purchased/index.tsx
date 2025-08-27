@@ -4,10 +4,13 @@ import { useQuery } from "@apollo/client";
 import { TransactionHistoryBookmarkPagination } from "../pagination";
 import styles from "./styles.module.css";
 import { FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT } from "@/commons/hooks/queries";
+import { usePurchased } from "./hook";
 
 export const Purchased = ({ iBought }) => {
     const { data: iBoughtCount } = useQuery(FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT);
     const lastPage = Math.ceil((iBoughtCount?.fetchTravelproductsCountIBought ?? 10) / 10);
+
+    const { onClickPurchased } = usePurchased();
 
     return (
         <>
@@ -22,7 +25,11 @@ export const Purchased = ({ iBought }) => {
                     </div>
                     <div className={styles.purchased_body}>
                         {iBought?.fetchTravelproductsIBought?.map((el, idx) => (
-                            <div key={idx + 1} className={styles.purchased_row}>
+                            <div
+                                key={idx + 1}
+                                className={styles.purchased_row}
+                                onClick={onClickPurchased(el._id)}
+                            >
                                 <div className={styles.purchased_num}>
                                     {iBought.fetchTravelproductsIBought.length - idx}
                                 </div>

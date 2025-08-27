@@ -9,7 +9,7 @@ import { FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD } from "@/commons/hooks/queries";
 import { TransactionHistoryBookmarkSearchPage } from "../search";
 
 export const TransactionHistory = ({ iSold, refetch }) => {
-    const { onChangeKeyword } = useTransactionHistory({ refetch });
+    const { onChangeKeyword, onClickPurchased } = useTransactionHistory({ refetch });
     const isSold = iSold?.fetchTravelproductsISold.map((el) => (el.soldAt ? true : false));
 
     const { data: iSoldCount } = useQuery(FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD);
@@ -29,7 +29,11 @@ export const TransactionHistory = ({ iSold, refetch }) => {
                     </div>
                     <div className={styles.transaction_body}>
                         {iSold?.fetchTravelproductsISold?.map((el, idx) => (
-                            <div key={idx + 1} className={styles.transaction_row}>
+                            <div
+                                key={idx + 1}
+                                className={styles.transaction_row}
+                                onClick={onClickPurchased(el._id)}
+                            >
                                 <div className={styles.transaction_num}>
                                     {iSold.fetchTravelproductsISold.length - idx}
                                 </div>

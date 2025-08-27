@@ -20,7 +20,10 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
         mode: "onChange",
     });
 
+    console.log(formState, formState.isValid);
+
     const {
+        user,
         isOpen,
         isEditModalOpen,
         imageRefs,
@@ -55,8 +58,8 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
                             <input
                                 {...register("writer")}
                                 placeholder="작성자 명을 입력해 주세요."
-                                defaultValue={data?.fetchBoard.writer}
-                                disabled={isEdit ? true : false}
+                                defaultValue={isEdit ? data?.fetchBoard.writer : user?.name}
+                                disabled
                             />
                             <div className={styles.error}>{formState.errors.writer?.message}</div>
                         </div>
@@ -170,6 +173,7 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
                                             }}
                                         />
                                         <button
+                                            type="button"
                                             onClick={() => onDeleteImage(idx)}
                                             className={styles.image_delete}
                                         >

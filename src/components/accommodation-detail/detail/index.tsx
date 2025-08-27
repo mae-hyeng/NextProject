@@ -24,6 +24,12 @@ const AccommodationDetail = ({ data, refetch }) => {
             <div className={styles.detail_header_wrapper}>
                 <h2>{data?.fetchTravelproduct?.name}</h2>
                 <div className={styles.icons_wrapper}>
+                    <button
+                        onClick={() => onClickBookmark(data?.fetchTravelproduct?._id)}
+                        className={styles.accommodation_pickedCount}
+                    >
+                        {data?.fetchTravelproduct?.pickedCount}
+                    </button>
                     <Image
                         onClick={openDeleteModal}
                         src={"/images/delete-black.png"}
@@ -31,14 +37,8 @@ const AccommodationDetail = ({ data, refetch }) => {
                         width={25}
                         height={25}
                     />
-                    <Image src={"/images/link.png"} alt="link" width={25} height={25} />
-                    <Image src={"/images/location.png"} alt="location" width={25} height={25} />
-                    <button
-                        onClick={() => onClickBookmark(data?.fetchTravelproduct?._id)}
-                        className={styles.accommodation_pickedCount}
-                    >
-                        {data?.fetchTravelproduct?.pickedCount}
-                    </button>
+                    {/* <Image src={"/images/link.png"} alt="link" width={25} height={25} />
+                    <Image src={"/images/location.png"} alt="location" width={25} height={25} /> */}
                 </div>
             </div>
             <div className={styles.accommodation_remarks}>{data?.fetchTravelproduct?.remarks}</div>

@@ -6,6 +6,7 @@ import { BoardsList } from "./hook";
 import { IBoardListProps } from "./types";
 import { Pagination } from "../pagination";
 import { BoardSearchPage } from "../search";
+import { ModalUI } from "@/commons/ui/modal";
 
 export const BoardsListPage = ({
     data,
@@ -17,7 +18,11 @@ export const BoardsListPage = ({
     setCurrentPage,
 }: IBoardListProps) => {
     const {
+        user,
         keyword,
+        isOpen,
+        showDeleteBoardModal,
+        closeDeleteBoardModal,
         onClickBoard,
         onClickDeleteBoard,
         onClickRegister,
@@ -141,15 +146,17 @@ export const BoardsListPage = ({
                                                 .replaceAll("-", ".")}
                                         </div>
                                         <div className={styles.delete_wrapper}>
-                                            <Image
-                                                id={String(idx + 1)}
-                                                className={styles.board_delete}
-                                                onClick={() => onClickDeleteBoard(d._id)}
-                                                src="/images/delete.png"
-                                                width={22}
-                                                height={0}
-                                                alt="삭제하기"
-                                            />
+                                            {user?.name === d.writer && (
+                                                <Image
+                                                    id={String(idx + 1)}
+                                                    className={styles.board_delete}
+                                                    onClick={showDeleteBoardModal(d._id)}
+                                                    src="/images/delete.png"
+                                                    width={22}
+                                                    height={0}
+                                                    alt="삭제하기"
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                 ))}
@@ -163,6 +170,25 @@ export const BoardsListPage = ({
                         />
                     </div>
                 </div>
+                <ModalUI open={isOpen} onClose={closeDeleteBoardModal}>
+                    <div className={styles.modal_title}>정말 삭제하시겠습니까?</div>
+                    <div className={styles.modal_input_button_wrapper}>
+                        <div className={styles.modal_button_wrapper}>
+                            <button
+                                className={styles.modal_button_cancel}
+                                onClick={closeDeleteBoardModal}
+                            >
+                                취소하기
+                            </button>
+                            <button
+                                className={styles.modal_button_submit}
+                                onClick={onClickDeleteBoard}
+                            >
+                                삭제하기
+                            </button>
+                        </div>
+                    </div>
+                </ModalUI>
             </div>
         </>
     );

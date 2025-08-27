@@ -99,6 +99,7 @@
     border: 1px solid #efefef;
     border-radius: 1rem;
     padding: 1rem 0rem;
+    cursor: pointer;
 }
 
 .transaction_delete {

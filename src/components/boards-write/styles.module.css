@@ -12,6 +12,11 @@
     outline: none;
 }
 
+.BoardsNew input:disabled {
+    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
+}
+
 .BoardsNew textarea {
     resize: none;
     height: 20rem;

@@ -3,14 +3,29 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { DeleteBoardDocument } from "@/commons/graphql/graphql";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import _ from "lodash";
+import { useAuthStore } from "@/commons/stores/authStore";
+import { Modal } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
     const router = useRouter();
     const [deleteBoard] = useMutation(DeleteBoardDocument);
+    const [user, setUser] = useState(null);
+    const { user: authUser } = useAuthStore();
 
     const [keyword, setKeyword] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [boardId, setBoardId] = useState("");
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            setUser(JSON.parse(userInfo));
+        }
+    }, [authUser]);
 
     const [startDate, setStartDate] = useState(
         new Date(new Date().setFullYear(new Date().getFullYear() - 1))
@@ -30,11 +45,11 @@ export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
         router.push(`/boards/detail/${boardId}`);
     };
 
-    const onClickDeleteBoard = (boardId) => {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            deleteBoard({
+    const onClickDeleteBoard = async () => {
+        try {
+            await deleteBoard({
                 variables: {
-                    boardId: boardId,
+                    boardId,
                 },
                 update(cache, { data }) {
                     cache.modify({
@@ -48,6 +63,17 @@ export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
                             },
                         },
                     });
+                },
+            });
+            Modal.success({
+                content: "게시물을 삭제했습니다!",
+                onOk: () => setIsOpen(false),
+            });
+        } catch (error) {
+            Modal.error({
+                content: "게시물 삭제 권한이 없습니다.",
+                onOk: () => {
+                    setIsOpen(false);
                 },
             });
         }
@@ -86,8 +112,21 @@ export const BoardsList = ({ refetch, boardsCountRefetch, setCurrentPage }) => {
         return dateStr.slice(0, -2) + newDayStr;
     };
 
+    const showDeleteBoardModal = (boardId) => () => {
+        setBoardId(boardId);
+        setIsOpen(true);
+    };
+
+    const closeDeleteBoardModal = () => {
+        setIsOpen(false);
+    };
+
     return {
+        user,
         keyword,
+        isOpen,
+        showDeleteBoardModal,
+        closeDeleteBoardModal,
         onClickBoard,
         onClickDeleteBoard,
         onClickRegister,

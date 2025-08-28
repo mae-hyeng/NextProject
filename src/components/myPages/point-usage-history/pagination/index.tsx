@@ -2,8 +2,12 @@
 
 import styles from "./styles.module.css";
 import { usePointUsageHistoryPagination } from "./hook";
+import { IPointUsageHistoryPaginationProps } from "./types";
 
-export const PointUsageHistoryPagination = ({ lastPage, refetch }) => {
+export const PointUsageHistoryPagination = ({
+    lastPage,
+    refetch,
+}: IPointUsageHistoryPaginationProps) => {
     const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } =
         usePointUsageHistoryPagination({ lastPage, refetch });
     return (

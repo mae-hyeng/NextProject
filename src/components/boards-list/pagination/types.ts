@@ -7,3 +7,9 @@ export interface IPaginationProps {
     currentPage: number;
     setCurrentPage: Dispatch<SetStateAction<number>>;
 }
+
+export interface IUsePaginationProps {
+    refetch: (variables?: Partial<OperationVariables>) => Promise<ApolloQueryResult<any>>;
+    lastPage: number;
+    setCurrentPage: Dispatch<SetStateAction<number>>;
+}

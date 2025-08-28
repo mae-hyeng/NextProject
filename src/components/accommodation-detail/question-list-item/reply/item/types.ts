@@ -1,14 +1,7 @@
-import {
-    Travelproduct,
-    TravelproductQuestion,
-    TravelproductQuestionAnswer,
-} from "@/commons/graphql/graphql";
-import { ApolloQueryResult, OperationVariables } from "@apollo/client";
+import { TravelproductQuestion, TravelproductQuestionAnswer } from "@/commons/graphql/graphql";
 
-export interface IUseReplyListItem {
+export interface IReplyListItem {
     reply?: TravelproductQuestionAnswer;
     question: TravelproductQuestion;
-    refetchQuestionData: (
-        variables?: Partial<OperationVariables>
-    ) => Promise<ApolloQueryResult<any>>;
+    isSame: boolean;
 }

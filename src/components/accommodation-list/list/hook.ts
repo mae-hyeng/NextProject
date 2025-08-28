@@ -18,7 +18,7 @@ export const useAccommodationList = ({ refetch, data, fetchMore }: IUseAccommoda
 
     const [hasMore, setHasMore] = useState(true);
 
-    const onClickAccommodation = (travelproductId) => {
+    const onClickAccommodation = (travelproductId: string) => {
         router.push(`/accommodation/detail/${travelproductId}`);
     };
 

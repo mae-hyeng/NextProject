@@ -2,8 +2,9 @@
 
 import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
+import { IPurchaseHistory } from "./types";
 
-export const PurchaseHistory = ({ buying, buyingCount, refetch }) => {
+export const PurchaseHistory = ({ buying, buyingCount, refetch }: IPurchaseHistory) => {
     const lastPage = Math.ceil((buyingCount?.fetchPointTransactionsCountOfBuying ?? 10) / 10);
 
     return (

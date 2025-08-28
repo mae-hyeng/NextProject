@@ -6,9 +6,10 @@ import { useTransactionHistory } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { FETCH_TRAVEL_PRODUCTS_COUNT_I_SOLD } from "@/commons/apis/queries/queries";
-import { TransactionHistoryBookmarkSearchPage } from "../search";
+import { TransactionHistoryBookmarkSearch } from "../search";
+import { ITransactionHistoryProps } from "./types";
 
-export const TransactionHistory = ({ iSold, refetch }) => {
+export const TransactionHistory = ({ iSold, refetch }: ITransactionHistoryProps) => {
     const { onChangeKeyword, onClickPurchased } = useTransactionHistory({ refetch });
     const isSold = iSold?.fetchTravelproductsISold.map((el) => (el.soldAt ? true : false));
 
@@ -17,7 +18,7 @@ export const TransactionHistory = ({ iSold, refetch }) => {
 
     return (
         <>
-            <TransactionHistoryBookmarkSearchPage onChangeKeyword={onChangeKeyword} />
+            <TransactionHistoryBookmarkSearch onChangeKeyword={onChangeKeyword} />
             <div className={styles.transaction_wrapper}>
                 <div className={styles.transaction_table}>
                     <div className={styles.transaction_header}>

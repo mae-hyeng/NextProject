@@ -1,5 +1,5 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { LOGIN_USER } from "@/commons/apis/mutations/mutations";
 import { useRouter } from "next/navigation";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
@@ -20,7 +20,7 @@ export const UseLogin = () => {
     const [loginUser] = useMutation(LOGIN_USER);
     const [fetchUser] = useLazyQuery(FETCH_USER);
 
-    const onChangeInput = (e) => {
+    const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
         switch (name) {

@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from "react";
+import { IUsePaginationProps } from "./types";
 
-export const usePageNation = ({ refetch, lastPage, setCurrentPage }) => {
+export const usePagiNation = ({ refetch, lastPage, setCurrentPage }: IUsePaginationProps) => {
     const [startPage, setStartPage] = useState(1);
 
     const onClickPrevPage = () => {

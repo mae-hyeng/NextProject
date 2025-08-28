@@ -5,8 +5,9 @@ import { TransactionHistoryBookmarkPagination } from "../pagination";
 import styles from "./styles.module.css";
 import { FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT } from "@/commons/apis/queries/queries";
 import { usePurchased } from "./hook";
+import { IPurchased } from "./types";
 
-export const Purchased = ({ iBought }) => {
+export const Purchased = ({ iBought }: IPurchased) => {
     const { data: iBoughtCount } = useQuery(FETCH_TRAVEL_PRODUCTS_COUNT_I_BOUGHT);
     const lastPage = Math.ceil((iBoughtCount?.fetchTravelproductsCountIBought ?? 10) / 10);
 

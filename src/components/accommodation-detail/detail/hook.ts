@@ -9,12 +9,13 @@ import { useEffect, useState } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { FETCH_USER_LOGGED_IN } from "@/commons/apis/queries/queries";
+import { IUseAccommodationDetailProps } from "./types";
 
 declare const window: Window & {
     kakao: any;
 };
 
-export const useAccommodationDetail = ({ data, refetch }) => {
+export const useAccommodationDetail = ({ data, refetch }: IUseAccommodationDetailProps) => {
     useEffect(() => {
         const script = document.createElement("script");
         script.src =
@@ -66,7 +67,7 @@ export const useAccommodationDetail = ({ data, refetch }) => {
         setIsBoughtModalOpen(false);
     };
 
-    const onClickBookmark = async (id) => {
+    const onClickBookmark = async (id: string) => {
         try {
             await toggleTravelProductPick({ variables: { travelproductId: id } });
             await refetch({ travelproductId: params.travelproductId });

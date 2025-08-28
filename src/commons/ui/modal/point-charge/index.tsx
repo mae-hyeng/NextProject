@@ -3,8 +3,9 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./styles.module.css";
+import { IPointChargeModalUIProps } from "./types";
 
-export const PointChargeModalUI = ({ open, onClose, children }) => {
+export const PointChargeModalUI = ({ open, onClose, children }: IPointChargeModalUIProps) => {
     return (
         <Modal
             open={open}

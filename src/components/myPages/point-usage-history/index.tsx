@@ -35,9 +35,9 @@ export const PointUsageHistory = () => {
     const { data: sellingCount } = useQuery(FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING);
 
     const allCounts =
-        buyingCount?.fetchPointTransactionsCountOfBuying +
-        loadingCount?.fetchPointTransactionsCountOfLoading +
-        sellingCount?.fetchPointTransactionsCountOfSelling;
+        (buyingCount?.fetchPointTransactionsCountOfBuying ?? 0) +
+        (loadingCount?.fetchPointTransactionsCountOfLoading ?? 0) +
+        (sellingCount?.fetchPointTransactionsCountOfSelling ?? 0);
 
     return (
         <>

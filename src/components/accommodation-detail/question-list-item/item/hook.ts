@@ -4,8 +4,9 @@ import "@ant-design/v5-patch-for-react-19";
 import { useEffect, useState } from "react";
 import { DELETE_TRAVEL_PRODUCT_QUESTION } from "@/commons/apis/mutations/mutations";
 import { useAuthStore } from "@/commons/stores/authStore";
+import { IUseQuestionListItemProps } from "./types";
 
-export const useQuestionListItem = ({ data }) => {
+export const useQuestionListItem = ({ data }: IUseQuestionListItemProps) => {
     const [user, setUser] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
     const [isSame, setIsSame] = useState(false);
@@ -20,7 +21,7 @@ export const useQuestionListItem = ({ data }) => {
 
     const { user: authUser } = useAuthStore();
 
-    const handleOpenModal = (questionId) => () => {
+    const handleOpenModal = (questionId: string) => () => {
         setIsModalOpen(true);
         setTravelproductQuestionId(questionId);
     };

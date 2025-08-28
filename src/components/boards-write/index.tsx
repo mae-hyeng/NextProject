@@ -20,8 +20,6 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
         mode: "onChange",
     });
 
-    console.log(formState, formState.isValid);
-
     const {
         user,
         isOpen,

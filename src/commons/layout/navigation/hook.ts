@@ -2,8 +2,9 @@ import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { useAuthStore } from "@/commons/stores/authStore";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { IUseNavigationProps } from "./types";
 
-export const useNavigation = ({ data }) => {
+export const useNavigation = ({ data }: IUseNavigationProps) => {
     const pathName = usePathname();
     const router = useRouter();
     const [isLogin, setIsLogin] = useState(false);
@@ -20,11 +21,11 @@ export const useNavigation = ({ data }) => {
     useEffect(() => {
         if (!accessToken) {
             setIsLogin(false);
-            clearUser();
+            // clearUser();
             localStorage.removeItem("userInfo");
         } else {
             setIsLogin(true);
-            setUser(data.fetchUserLoggedIn);
+            // setUser(data.fetchUserLoggedIn);
             localStorage.setItem("userInfo", JSON.stringify(data.fetchUserLoggedIn));
         }
     }, [data]);

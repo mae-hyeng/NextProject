@@ -34,7 +34,7 @@ export const AccommodationWrite = ({ isEdit, data }: IAccommodationWriteProps) =
         onClickImage,
         onChangeImage,
         onDeleteImage,
-    } = useAccommodationWrite(data, reset, setValue);
+    } = useAccommodationWrite({ data, reset, setValue });
 
     return (
         <div className={styles.accommodation_new}>

@@ -5,3 +5,5 @@ export interface IAccommodationDetailProps {
     data: FetchTravelproductQuery;
     refetch: (variables?: Partial<OperationVariables>) => Promise<ApolloQueryResult<any>>;
 }
+
+export interface IUseAccommodationDetailProps extends IAccommodationDetailProps {}

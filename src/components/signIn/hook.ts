@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { CREATE_USER } from "@/commons/apis/mutations/mutations";
 import "@ant-design/v5-patch-for-react-19";
 import { Modal } from "antd";
@@ -20,7 +20,7 @@ export const useSignIn = () => {
 
     const [createUser] = useMutation(CREATE_USER);
 
-    const onChangeInput = (e) => {
+    const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
         switch (name) {

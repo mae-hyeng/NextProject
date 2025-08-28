@@ -5,8 +5,9 @@ import styles from "./styles.module.css";
 import { ReplyWrite } from "../reply-write";
 import { useReplyListItem } from "./hook";
 import { ModalUI } from "@/commons/ui/modal";
+import { IReplyListItem } from "./types";
 
-export const ReplyListItem = ({ reply, question, isSame }) => {
+export const ReplyListItem = ({ reply, question, isSame }: IReplyListItem) => {
     const {
         isEdit,
         setIsEdit,

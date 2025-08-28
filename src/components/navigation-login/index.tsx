@@ -8,8 +8,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { PointChargeModalUI } from "@/commons/ui/modal/point-charge";
 import { useNavigationLogin } from "./hook";
+import { INavigationLoginProps } from "./types";
 
-export const NavigationLogin = ({ data }) => {
+export const NavigationLogin = ({ data }: INavigationLoginProps) => {
     const {
         open,
         anchorEl,

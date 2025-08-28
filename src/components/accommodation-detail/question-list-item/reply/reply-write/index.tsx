@@ -22,8 +22,8 @@ export const ReplyWrite = ({ isEdit, setIsShow, question, setIsEdit, reply }: IR
                 <button
                     onClick={
                         isEdit
-                            ? () => onClickUpdateReply(reply)
-                            : () => onClickSubmitReply(question)
+                            ? () => onClickUpdateReply(reply._id)
+                            : () => onClickSubmitReply(question._id)
                     }
                 >
                     {isEdit ? "수정하기" : "답변하기"}

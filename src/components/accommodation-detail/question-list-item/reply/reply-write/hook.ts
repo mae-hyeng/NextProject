@@ -1,7 +1,6 @@
 "use client";
 
 import { useMutation } from "@apollo/client";
-import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import {
     CREATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
@@ -16,18 +15,17 @@ export const useReplyWrite = ({ question, setIsEdit, setIsShow }: IReplyWritePro
         if (question) setContents(question?.contents ?? "");
     }, [question]);
 
-    const params = useParams();
     const [contents, setContents] = useState("");
 
     const [createTravelProductQuestionAnswer] = useMutation(CREATE_TRAVEL_PRODUCT_QUESTION_ANSWER);
     const [updateTravelProductQuestionAnswer] = useMutation(UPDATE_TRAVEL_PRODUCT_QUESTION_ANSWER);
 
-    const onClickSubmitReply = async (question) => {
+    const onClickSubmitReply = async (travelproductQuestionId: string) => {
         const variables = {
             createTravelproductQuestionAnswerInput: {
-                contents: contents,
+                contents,
             },
-            travelproductQuestionId: question._id,
+            travelproductQuestionId,
         };
 
         await createTravelProductQuestionAnswer({
@@ -45,10 +43,10 @@ export const useReplyWrite = ({ question, setIsEdit, setIsShow }: IReplyWritePro
         resetReplyArea();
     };
 
-    const onClickUpdateReply = async (reply) => {
+    const onClickUpdateReply = async (travelproductQuestionAnswerId: string) => {
         const variables = {
             updateTravelproductQuestionAnswerInput: { contents },
-            travelproductQuestionAnswerId: reply._id,
+            travelproductQuestionAnswerId,
         };
         try {
             const result = await updateTravelProductQuestionAnswer({

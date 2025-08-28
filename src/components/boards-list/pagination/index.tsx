@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import { usePageNation } from "./hook";
+import { usePagiNation } from "./hook";
 import styles from "./styles.module.css";
 import { IPaginationProps } from "./types";
 
@@ -11,7 +11,7 @@ export const Pagination = ({
     currentPage,
     setCurrentPage,
 }: IPaginationProps) => {
-    const { startPage, onClickPrevPage, onClickNextPage, onClickPage } = usePageNation({
+    const { startPage, onClickPrevPage, onClickNextPage, onClickPage } = usePagiNation({
         refetch,
         lastPage,
         setCurrentPage,

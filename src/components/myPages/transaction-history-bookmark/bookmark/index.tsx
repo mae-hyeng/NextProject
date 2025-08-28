@@ -4,10 +4,11 @@ import { useQuery } from "@apollo/client";
 import styles from "./styles.module.css";
 import { FETCH_TRAVEL_PRODUCTS_COUNT_I_PICKED } from "@/commons/apis/queries/queries";
 import { TransactionHistoryBookmarkPagination } from "../pagination";
-import { TransactionHistoryBookmarkSearchPage } from "../search";
+import { TransactionHistoryBookmarkSearch } from "../search";
 import { useBookmark } from "./hook";
+import { IBookmarkProps } from "./types";
 
-export const Bookmark = ({ iPick, refetch }) => {
+export const Bookmark = ({ iPick, refetch }: IBookmarkProps) => {
     const { onChangeKeyword, onClickBookMark } = useBookmark({ refetch });
 
     const { data: iPickCount } = useQuery(FETCH_TRAVEL_PRODUCTS_COUNT_I_PICKED);
@@ -15,7 +16,7 @@ export const Bookmark = ({ iPick, refetch }) => {
     const lastPage = Math.ceil((iPickCount?.fetchPointTransactionsCountOfLoading ?? 10) / 10);
     return (
         <>
-            <TransactionHistoryBookmarkSearchPage onChangeKeyword={onChangeKeyword} />
+            <TransactionHistoryBookmarkSearch onChangeKeyword={onChangeKeyword} />
             <div className={styles.bookmark_wrapper}>
                 <div className={styles.bookmark_table}>
                     <div className={styles.bookmark_header}>
@@ -43,7 +44,7 @@ export const Bookmark = ({ iPick, refetch }) => {
                                     {el.seller.name}
                                 </div>
                                 <div className={styles.bookmark_regDate}>
-                                    {new Date(el.updateAt || el.createdAt)
+                                    {new Date(el.updatedAt || el.createdAt)
                                         .toISOString()
                                         .slice(0, 10)
                                         .replaceAll("-", ".")}

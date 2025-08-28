@@ -6,3 +6,8 @@ export interface IQuestionWriteProps {
     setIsEdit?: Dispatch<SetStateAction<boolean>>;
     question?: TravelproductQuestion;
 }
+
+export interface IUseQuestionWriteProps {
+    question: TravelproductQuestion;
+    setIsEdit: Dispatch<SetStateAction<boolean>>;
+}

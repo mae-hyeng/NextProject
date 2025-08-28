@@ -9,8 +9,9 @@ import {
     CREATE_TRAVEL_PRODUCT_QUESTION,
     UPDATE_TRAVEL_PRODUCT_QUESTION,
 } from "@/commons/apis/mutations/mutations";
+import { IUseQuestionWriteProps } from "./types";
 
-export const useQuestionWrite = ({ question, setIsEdit }) => {
+export const useQuestionWrite = ({ question, setIsEdit }: IUseQuestionWriteProps) => {
     useEffect(() => {
         if (question) setContents(question?.contents ?? "");
     }, [question]);

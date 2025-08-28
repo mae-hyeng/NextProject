@@ -2,8 +2,9 @@
 
 import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
+import { IChargingHistoryProps } from "./types";
 
-export const ChargingHistory = ({ loading, loadingCount, refetch }) => {
+export const ChargingHistory = ({ loading, loadingCount, refetch }: IChargingHistoryProps) => {
     const lastPage = Math.ceil((loadingCount?.fetchPointTransactionsCountOfLoading ?? 10) / 10);
 
     return (

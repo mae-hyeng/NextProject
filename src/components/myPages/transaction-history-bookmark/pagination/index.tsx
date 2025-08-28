@@ -2,8 +2,11 @@
 
 import styles from "./styles.module.css";
 import { useTransactionHistoryBookmarkPagination } from "./hook";
+import { ITransactionHistoryBookmarkPagination } from "./types";
 
-export const TransactionHistoryBookmarkPagination = ({ lastPage }) => {
+export const TransactionHistoryBookmarkPagination = ({
+    lastPage,
+}: ITransactionHistoryBookmarkPagination) => {
     const { startPage, currentPage, onClickPrevPage, onClickNextPage, onClickPage } =
         useTransactionHistoryBookmarkPagination({ lastPage });
 

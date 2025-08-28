@@ -8,12 +8,13 @@ import { UploadFileDocument } from "@/commons/graphql/graphql";
 import { CREATE_TRAVEL_PRODUCT, UPDATE_TRAVEL_PRODUCT } from "@/commons/apis/mutations/mutations";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { IUseAccommodationWriteProps } from "./types";
 
 declare const window: Window & {
     kakao: any;
 };
 
-export const useAccommodationWrite = (data, reset, setValue) => {
+export const useAccommodationWrite = ({ data, reset, setValue }: IUseAccommodationWriteProps) => {
     const kakaoMapRef = useRef(null);
     const [isLoadData, setIsLoadData] = useState(true);
 
@@ -149,7 +150,7 @@ export const useAccommodationWrite = (data, reset, setValue) => {
         }
     };
 
-    const onChangeContents = (value) => {
+    const onChangeContents = (value: string) => {
         setValue("contents", value, { shouldValidate: true });
     };
 

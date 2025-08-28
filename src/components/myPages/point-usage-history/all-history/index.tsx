@@ -2,8 +2,9 @@
 
 import { PointUsageHistoryPagination } from "../pagination";
 import styles from "./styles.module.css";
+import { IAllHistoryProps } from "./types";
 
-export const AllHistory = ({ pointTransaction, allCounts, refetch }) => {
+export const AllHistory = ({ pointTransaction, allCounts, refetch }: IAllHistoryProps) => {
     const lastPage = Math.ceil((allCounts || 10) / 10);
 
     return (

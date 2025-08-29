@@ -6,6 +6,7 @@ import { TransactionHistoryBookmark } from "./transaction-history-bookmark";
 import { PointUsageHistory } from "./point-usage-history";
 import { ChangePassword } from "./change-password";
 import { useMyPages } from "./hook";
+import { MyBoards } from "./myBoards";
 
 export const MyPage = () => {
     const { user, category, onClickCategory } = useMyPages();
@@ -32,6 +33,16 @@ export const MyPage = () => {
                 </div>
                 <div className={styles.divideLine}></div>
 
+                <div
+                    style={{ display: "none" }}
+                    className={`${styles.menu_wrapper} ${
+                        category === "myBoards" ? styles.menu_wrapper_selected : ""
+                    }`}
+                    onClick={() => onClickCategory("myBoards")}
+                >
+                    <div>나의 게시글</div>
+                    <div>➡️</div>
+                </div>
                 <div
                     className={`${styles.menu_wrapper} ${
                         category === "transactionHistoryBookmark"
@@ -63,6 +74,7 @@ export const MyPage = () => {
                 </div>
             </div>
 
+            {category === "myBoards" && <MyBoards />}
             {category === "transactionHistoryBookmark" && <TransactionHistoryBookmark />}
             {category === "pointUsageHistory" && <PointUsageHistory />}
             {category === "changePassword" && <ChangePassword />}

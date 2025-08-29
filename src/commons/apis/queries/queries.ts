@@ -59,12 +59,6 @@ export const FETCH_USER = gql`
     }
 `;
 
-export const FETCH_BOARDS_COUNT_OF_MINE = gql`
-    query fetchBoardsCountOfMine {
-        fetchBoardsCountOfMine
-    }
-`;
-
 // 구매내역
 export const FETCH_POINT_TRANSACTIONS_OF_BUYING = gql`
     query fetchPointTransactionsOfBuying($search: String, $page: Int) {
@@ -511,5 +505,23 @@ export const FETCH_USER_LOGGED_IN = gql`
                 amount
             }
         }
+    }
+`;
+
+export const FETCH_BOARDS_OF_MINE = gql`
+    query fetchBoardsOfMine {
+        fetchBoardsOfMine {
+            _id
+            title
+            likeCount
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const FETCH_BOARDS_COUNT_OF_MINE = gql`
+    query fetchBoardsCountOfMine {
+        fetchBoardsCountOfMine
     }
 `;

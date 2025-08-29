@@ -4,21 +4,11 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { useAccommodationDetail } from "./hook";
 import AccommodationDetailImageGallery from "./image-gallery";
-import { ModalUI } from "@/commons/ui/modal";
 import { IAccommodationDetailProps } from "./types";
+import Link from "next/link";
 
 const AccommodationDetail = ({ data, refetch }: IAccommodationDetailProps) => {
-    const {
-        isDeleteModalOpen,
-        isBoughtModalOpen,
-        openDeleteModal,
-        closeDeleteModal,
-        openBoughtModal,
-        closeBoughtModal,
-        onClickDeleteAccommodation,
-        onClickBookmark,
-        onClickBuyingAndSelling,
-    } = useAccommodationDetail({ data, refetch });
+    const { onClickBookmark } = useAccommodationDetail({ data, refetch });
 
     return (
         <div className={styles.accommodationDetail}>
@@ -31,13 +21,15 @@ const AccommodationDetail = ({ data, refetch }: IAccommodationDetailProps) => {
                     >
                         {data?.fetchTravelproduct?.pickedCount}
                     </button>
-                    <Image
-                        onClick={openDeleteModal}
-                        src={"/images/delete-black.png"}
-                        alt="delete"
-                        width={25}
-                        height={25}
-                    />
+                    <Link href={`/accommodation/detail/${data?.fetchTravelproduct._id}/delete`}>
+                        <Image
+                            // onClick={openDeleteModal}
+                            src={"/images/delete-black.png"}
+                            alt="delete"
+                            width={25}
+                            height={25}
+                        />
+                    </Link>
                     {/* <Image src={"/images/link.png"} alt="link" width={25} height={25} />
                     <Image src={"/images/location.png"} alt="location" width={25} height={25} /> */}
                 </div>
@@ -60,7 +52,9 @@ const AccommodationDetail = ({ data, refetch }: IAccommodationDetailProps) => {
                             <li>숙박권은 트립트립에서 포인트 충전 후 구매하실 수 있습니다.</li>
                             <li>상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.</li>
                         </ul>
-                        <button onClick={openBoughtModal}>구매하기</button>
+                        <Link href={`/accommodation/detail/${data?.fetchTravelproduct._id}/buying`}>
+                            <button>구매하기</button>
+                        </Link>
                     </div>
                     <div className={styles.seller_wrapper}>
                         <h5>판매자</h5>
@@ -110,37 +104,6 @@ const AccommodationDetail = ({ data, refetch }: IAccommodationDetailProps) => {
                     문의하기
                 </div>
             </div>
-            <ModalUI open={isDeleteModalOpen} onClose={closeDeleteModal}>
-                <div className={styles.modal_title}>정말 삭제하시겠습니까?</div>
-                <div className={styles.modal_button_wrapper}>
-                    <button className={styles.modal_button_cancel} onClick={closeDeleteModal}>
-                        취소하기
-                    </button>
-                    <button
-                        className={styles.modal_button_submit}
-                        onClick={onClickDeleteAccommodation}
-                    >
-                        삭제하기
-                    </button>
-                </div>
-            </ModalUI>
-            <ModalUI open={isBoughtModalOpen} onClose={closeBoughtModal}>
-                <div className={styles.modal_bought_title}>해당 숙박권을 구매하시겠습니까?</div>
-                <div className={styles.modal_bought_contents}>
-                    해당 숙박권은 포인트로만 구매 가능합니다.
-                </div>
-                <div className={styles.modal_button_wrapper}>
-                    <button className={styles.modal_button_cancel} onClick={closeBoughtModal}>
-                        취소하기
-                    </button>
-                    <button
-                        className={styles.modal_button_submit}
-                        onClick={onClickBuyingAndSelling}
-                    >
-                        구매하기
-                    </button>
-                </div>
-            </ModalUI>
         </div>
     );
 };

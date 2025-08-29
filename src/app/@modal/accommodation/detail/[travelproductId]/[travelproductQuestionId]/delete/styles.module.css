@@ -1,0 +1,29 @@
+/* modal */
+.modal_title {
+    color: #f66a6a;
+    text-align: center;
+    font-weight: 700;
+}
+
+.modal_button_wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal_button_cancel,
+.modal_button_submit {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 10rem;
+}
+
+.modal_button_cancel {
+    border: 1px solid black;
+}
+
+.modal_button_submit {
+    border: 1px solid #2974e5;
+    background-color: #2974e5;
+    color: white;
+}

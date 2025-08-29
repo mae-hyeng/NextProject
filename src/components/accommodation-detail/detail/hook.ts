@@ -1,14 +1,9 @@
-import {
-    CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
-    DELETE_TRAVEL_PRODUCT,
-    TOGGLE_TRAVEL_PRODUCT_PICK,
-} from "@/commons/apis/mutations/mutations";
+import { TOGGLE_TRAVEL_PRODUCT_PICK } from "@/commons/apis/mutations/mutations";
 import { useMutation } from "@apollo/client";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
-import { FETCH_USER_LOGGED_IN } from "@/commons/apis/queries/queries";
 import { IUseAccommodationDetailProps } from "./types";
 
 declare const window: Window & {
@@ -40,32 +35,6 @@ export const useAccommodationDetail = ({ data, refetch }: IUseAccommodationDetai
     const params = useParams();
 
     const [toggleTravelProductPick] = useMutation(TOGGLE_TRAVEL_PRODUCT_PICK);
-    const [createPointTransactionOfBuyingAndSelling] = useMutation(
-        CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING
-    );
-    const [deleteTravelProduct] = useMutation(DELETE_TRAVEL_PRODUCT);
-
-    const router = useRouter();
-
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-    const openDeleteModal = () => {
-        setIsDeleteModalOpen(true);
-    };
-
-    const closeDeleteModal = () => {
-        setIsDeleteModalOpen(false);
-    };
-
-    const [isBoughtModalOpen, setIsBoughtModalOpen] = useState(false);
-
-    const openBoughtModal = () => {
-        setIsBoughtModalOpen(true);
-    };
-
-    const closeBoughtModal = () => {
-        setIsBoughtModalOpen(false);
-    };
 
     const onClickBookmark = async (id: string) => {
         try {
@@ -126,62 +95,7 @@ export const useAccommodationDetail = ({ data, refetch }: IUseAccommodationDetai
         // }
     };
 
-    const onClickBuyingAndSelling = async () => {
-        try {
-            const result = await createPointTransactionOfBuyingAndSelling({
-                variables: { useritemId: data.fetchTravelproduct._id },
-                refetchQueries: [{ query: FETCH_USER_LOGGED_IN }],
-            });
-            console.log(result);
-            Modal.success({
-                content: "상품 구매에 성공했습니다.",
-                onOk: () => closeBoughtModal(),
-            });
-        } catch (error) {
-            Modal.error({
-                content: "포인트가 부족합니다. 충전 후 이용해주세요.",
-            });
-        }
-    };
-
-    const onClickDeleteAccommodation = async () => {
-        try {
-            await deleteTravelProduct({
-                variables: { travelproductId: params.travelproductId },
-                update(cache, { data }) {
-                    cache.modify({
-                        fields: {
-                            fetchTravelproducts: (prev, { readField }) => {
-                                const deletedId = data.deleteTravelproduct;
-                                const filteredAccommodation = prev.filter(
-                                    (accommodation) => readField("_id", accommodation) !== deletedId
-                                );
-                                return [...filteredAccommodation];
-                            },
-                        },
-                    });
-                },
-            });
-            router.push("/accommodation");
-        } catch (error) {
-            Modal.error({
-                content: "상품 삭제 권한이 존재하지 않습니다..",
-                onOk: () => {
-                    closeDeleteModal();
-                },
-            });
-        }
-    };
-
     return {
-        isDeleteModalOpen,
-        isBoughtModalOpen,
-        openDeleteModal,
-        closeDeleteModal,
-        openBoughtModal,
-        closeBoughtModal,
-        onClickDeleteAccommodation,
         onClickBookmark,
-        onClickBuyingAndSelling,
     };
 };

@@ -4,19 +4,11 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { ReplyWrite } from "../reply-write";
 import { useReplyListItem } from "./hook";
-import { ModalUI } from "@/commons/ui/modal";
 import { IReplyListItem } from "./types";
+import Link from "next/link";
 
-export const ReplyListItem = ({ reply, question, isSame }: IReplyListItem) => {
-    const {
-        isEdit,
-        setIsEdit,
-        isModalOpen,
-        handleOpenModal,
-        handleCloseModal,
-        onClickReplyEdit,
-        onClickReplyDelete,
-    } = useReplyListItem();
+export const ReplyListItem = ({ data, reply, question, isSame }: IReplyListItem) => {
+    const { isEdit, setIsEdit, onClickReplyEdit } = useReplyListItem();
 
     return (
         <>
@@ -62,14 +54,17 @@ export const ReplyListItem = ({ reply, question, isSame }: IReplyListItem) => {
                                             width={25}
                                             height={0}
                                         />
-                                        <Image
-                                            src={"/images/close.png"}
-                                            className={styles.detail_delete_image}
-                                            onClick={handleOpenModal(reply._id)}
-                                            alt="삭제버튼"
-                                            width={25}
-                                            height={0}
-                                        />
+                                        <Link
+                                            href={`/accommodation/detail/${data?.fetchTravelproduct._id}/${question._id}/${reply._id}/delete`}
+                                        >
+                                            <Image
+                                                src={"/images/close.png"}
+                                                className={styles.detail_delete_image}
+                                                alt="삭제버튼"
+                                                width={25}
+                                                height={0}
+                                            />
+                                        </Link>
                                     </div>
                                 )}
                             </div>
@@ -84,17 +79,6 @@ export const ReplyListItem = ({ reply, question, isSame }: IReplyListItem) => {
                     </div>
                 )}
             </div>
-            <ModalUI open={isModalOpen} onClose={handleCloseModal}>
-                <div className={styles.modal_title}>정말 삭제하시겠습니까?</div>
-                <div className={styles.modal_button_wrapper}>
-                    <button className={styles.modal_button_cancel} onClick={handleCloseModal}>
-                        취소하기
-                    </button>
-                    <button className={styles.modal_button_submit} onClick={onClickReplyDelete}>
-                        삭제하기
-                    </button>
-                </div>
-            </ModalUI>
         </>
     );
 };

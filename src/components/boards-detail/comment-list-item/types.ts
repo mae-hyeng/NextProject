@@ -1,5 +1,6 @@
-import { BoardComment } from "@/commons/graphql/graphql";
+import { BoardComment, FetchBoardQuery } from "@/commons/graphql/graphql";
 
 export interface ICommentListItemProps {
+    data: FetchBoardQuery;
     comment: BoardComment;
 }

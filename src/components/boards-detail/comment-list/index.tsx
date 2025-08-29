@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import { CommentListItem } from "../comment-list-item";
 import { ICommentListProps } from "./types";
 
-export const CommentList = ({ comments }: ICommentListProps) => {
+export const CommentList = ({ data, comments }: ICommentListProps) => {
     return (
         <div className={styles.detail_all_comment}>
             <div
@@ -15,7 +15,7 @@ export const CommentList = ({ comments }: ICommentListProps) => {
             </div>
             {/* <InfiniteScroll next={} hasMore={} loader={} dataLength={}> */}
             {comments?.fetchBoardComments.map((comment) => (
-                <CommentListItem key={comment._id} comment={comment} />
+                <CommentListItem key={comment._id} data={data} comment={comment} />
             ))}
             {/* </InfiniteScroll> */}
         </div>

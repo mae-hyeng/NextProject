@@ -11,7 +11,7 @@ import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { useAuthStore } from "@/commons/stores/authStore";
 
-export const useBoardsWrite = ({ data, reset, setValue }: IUseBoardWriteProps) => {
+export const useBoardsWrite = ({ data, reset, setValue, isEdit }: IUseBoardWriteProps) => {
     const [user, setUser] = useState(null);
     const { user: authUser } = useAuthStore();
 
@@ -21,8 +21,16 @@ export const useBoardsWrite = ({ data, reset, setValue }: IUseBoardWriteProps) =
     }, [authUser]);
 
     useEffect(() => {
-        if (data?.fetchBoard?.boardAddress) {
+        if (user?.name && !isEdit) {
+            setValue("writer", user.name, { shouldValidate: true });
+        }
+    }, [user, isEdit]);
+
+    useEffect(() => {
+        if (data?.fetchBoard) {
             reset({
+                writer: data.fetchBoard.writer ?? "",
+                contents: data?.fetchBoard.contents ?? "",
                 zipcode: data.fetchBoard.boardAddress.zipcode ?? "",
                 address: data.fetchBoard.boardAddress.address ?? "",
                 addressDetail: data.fetchBoard.boardAddress.addressDetail ?? "",
@@ -206,7 +214,6 @@ export const useBoardsWrite = ({ data, reset, setValue }: IUseBoardWriteProps) =
     };
 
     return {
-        user,
         isOpen,
         isEditModalOpen,
         imageRefs,

@@ -40,6 +40,11 @@
     border-radius: 0.5rem;
 }
 
+.detail_reg_comment button:disabled,
+.detail_reg_comment_edit button:disabled {
+    opacity: 0.5;
+}
+
 .writer_password_wrapper {
     display: flex;
     gap: 1rem;
@@ -50,6 +55,11 @@
     border-radius: 0.5rem;
     padding: 1rem;
     outline: none;
+}
+
+.writer_password_wrapper input:disabled {
+    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
 }
 
 .writer_wrapper,
@@ -63,6 +73,10 @@
 .require_input {
     padding: 0.3rem;
     align-items: center;
+    color: red;
+}
+
+.error {
     color: red;
 }
 /* detail-reg-comment end */

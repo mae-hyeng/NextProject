@@ -9,5 +9,8 @@ export interface ICommentWriteProps {
 
 export interface IUseBoardCommentWriteProps {
     comment: BoardComment;
+    isEdit: boolean;
     setIsEdit: Dispatch<SetStateAction<boolean>>;
+    reset: any;
+    setValue: any;
 }

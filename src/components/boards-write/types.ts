@@ -9,6 +9,7 @@ export interface IUseBoardWriteProps {
     data: FetchBoardQuery;
     reset: any;
     setValue: any;
+    isEdit: boolean;
 }
 
 export interface IBoardVariables {

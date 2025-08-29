@@ -19,13 +19,19 @@ export const metadata: Metadata = {
     description: "Trip",
 };
 
-export default function RootLayout(props) {
+interface IProps {
+    children: React.ReactNode;
+    modal: React.ReactNode;
+}
+
+export default function RootLayout({ children, modal }: IProps) {
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <ApolloSetting>
                     <Navigation />
-                    {props.children}
+                    {children}
+                    <div>{modal}</div>
                 </ApolloSetting>
             </body>
         </html>

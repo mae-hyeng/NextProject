@@ -8,6 +8,4 @@ export interface IQuestionListItemProps {
     question: FetchTravelproductQuestionsQuery["fetchTravelproductQuestions"][0];
 }
 
-export interface IUseQuestionListItemProps {
-    data: FetchTravelproductQuery;
-}
+export interface IUseQuestionListItemProps extends IQuestionListItemProps {}

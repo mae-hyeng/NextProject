@@ -21,11 +21,11 @@ export const useNavigation = ({ data }: IUseNavigationProps) => {
     useEffect(() => {
         if (!accessToken) {
             setIsLogin(false);
-            // clearUser();
+            clearUser();
             localStorage.removeItem("userInfo");
         } else {
             setIsLogin(true);
-            // setUser(data.fetchUserLoggedIn);
+            setUser(data.fetchUserLoggedIn);
             localStorage.setItem("userInfo", JSON.stringify(data.fetchUserLoggedIn));
         }
     }, [data]);

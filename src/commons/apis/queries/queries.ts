@@ -356,11 +356,11 @@ export const FETCH_TRAVEL_PRODUCT_QUESTIONS = gql`
             contents
             travelproduct {
                 _id
-                name
-                remarks
-                contents
-                createdAt
-                updatedAt
+                # name
+                # remarks
+                # contents
+                # createdAt
+                # updatedAt
             }
             user {
                 _id

@@ -7,24 +7,52 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Modal } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { IUseBoardCommentWriteProps } from "./types";
+import { useAuthStore } from "@/commons/stores/authStore";
 
-export const useBoardCommentWrite = ({ comment, setIsEdit }: IUseBoardCommentWriteProps) => {
+export const useBoardCommentWrite = ({
+    comment,
+    isEdit,
+    setIsEdit,
+    reset,
+    setValue,
+}: IUseBoardCommentWriteProps) => {
+    const [user, setUser] = useState(null);
+    const { user: authUser } = useAuthStore();
+
     useEffect(() => {
-        if (comment) setContents(comment?.contents ?? "");
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if (userInfo) setUser(userInfo);
+    }, [authUser]);
+
+    useEffect(() => {
+        if (user?.name && !isEdit) {
+            setValue("writer", user.name, { shouldValidate: true });
+        }
+    }, [user, isEdit]);
+
+    useEffect(() => {
+        if (comment) {
+            reset({
+                writer: comment.writer ?? "",
+                contents: comment.contents ?? "",
+            });
+        }
     }, [comment]);
 
     const params = useParams();
-    const [writer, setWriter] = useState("");
-    const [password, setPassword] = useState("");
-    const [contents, setContents] = useState("");
     const [rating, setRating] = useState(2.5);
 
     const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
     const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
-    const onClickSubmitComment = async () => {
+    const onClickSubmitComment = async (data) => {
         const commentVariables = {
-            createBoardCommentInput: { writer, password, contents, rating },
+            createBoardCommentInput: {
+                writer: data.writer,
+                password: data.password,
+                contents: data.contents,
+                rating,
+            },
             boardId: params.boardId,
         };
 
@@ -44,14 +72,14 @@ export const useBoardCommentWrite = ({ comment, setIsEdit }: IUseBoardCommentWri
         resetCommentArea();
     };
 
-    const onClickUpdateComment = async () => {
+    const onClickUpdateComment = async (data) => {
         const commentVariables = {
             updateBoardCommentInput: {
-                contents: contents,
+                contents: data.contents,
                 rating: rating,
             },
             boardCommentId: comment._id,
-            password: password,
+            password: data.password,
         };
 
         try {
@@ -69,33 +97,21 @@ export const useBoardCommentWrite = ({ comment, setIsEdit }: IUseBoardCommentWri
         }
     };
 
-    const onChangeInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        if (name === "writer") setWriter(value);
-        else if (name === "password") setPassword(value);
-        else if (name === "contents") setContents(value);
-    };
-
     const onChangeRating = (e) => {
         setRating(e);
     };
 
     const resetCommentArea = () => {
-        setWriter("");
-        setPassword("");
-        setContents("");
+        setValue("writer", "");
+        setValue("password", "");
+        setValue("contents", "");
         setRating(2.5);
     };
 
     return {
-        writer,
-        password,
-        contents,
         rating,
         onClickSubmitComment,
         onClickUpdateComment,
-        onChangeInput,
         onChangeRating,
     };
 };

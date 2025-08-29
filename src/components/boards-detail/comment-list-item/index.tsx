@@ -5,22 +5,11 @@ import styles from "./styles.module.css";
 import { Rate } from "antd";
 import { CommentWrite } from "../comment-write";
 import { UseBoardCommentListItem } from "./hook";
-import { ModalUI } from "@/commons/ui/modal";
 import { ICommentListItemProps } from "./types";
+import Link from "next/link";
 
-export const CommentListItem = ({ comment }: ICommentListItemProps) => {
-    const {
-        user,
-        isEdit,
-        isDeleteModalOpen,
-        password,
-        openDeleteModal,
-        closeDeleteModal,
-        setIsEdit,
-        onClickCommentEdit,
-        onClickCommentDelete,
-        onChangePassword,
-    } = UseBoardCommentListItem();
+export const CommentListItem = ({ data, comment }: ICommentListItemProps) => {
+    const { user, isEdit, setIsEdit, onClickCommentEdit } = UseBoardCommentListItem();
 
     return (
         <>
@@ -59,14 +48,17 @@ export const CommentListItem = ({ comment }: ICommentListItemProps) => {
                                         width={25}
                                         height={0}
                                     />
-                                    <Image
-                                        src={"/images/close.png"}
-                                        className={styles.detail_delete_image}
-                                        onClick={openDeleteModal(comment._id)}
-                                        alt="삭제버튼"
-                                        width={25}
-                                        height={0}
-                                    />
+                                    <Link
+                                        href={`/boards/detail/${data.fetchBoard._id}/${comment._id}/commentDelete`}
+                                    >
+                                        <Image
+                                            src={"/images/close.png"}
+                                            className={styles.detail_delete_image}
+                                            alt="삭제버튼"
+                                            width={25}
+                                            height={0}
+                                        />
+                                    </Link>
                                 </div>
                             )}
                         </div>
@@ -81,32 +73,6 @@ export const CommentListItem = ({ comment }: ICommentListItemProps) => {
                 )}
             </div>
             <div className={styles.divideLine}></div>
-            <ModalUI open={isDeleteModalOpen} onClose={closeDeleteModal}>
-                <div className={styles.modal_title}>
-                    댓글을 작성할 때 입력하셨던 비밀번호를 입력해주세요.
-                </div>
-                <div className={styles.modal_input_button_wrapper}>
-                    <div className={styles.modal_input_wrapper}>
-                        <input
-                            type="password"
-                            className={styles.modal_input}
-                            onChange={onChangePassword}
-                            value={password}
-                        />
-                    </div>
-                    <div className={styles.modal_button_wrapper}>
-                        <button className={styles.modal_button_cancel} onClick={closeDeleteModal}>
-                            취소하기
-                        </button>
-                        <button
-                            className={styles.modal_button_submit}
-                            onClick={onClickCommentDelete}
-                        >
-                            삭제하기
-                        </button>
-                    </div>
-                </div>
-            </ModalUI>
         </>
     );
 };

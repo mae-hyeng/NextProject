@@ -21,7 +21,6 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
     });
 
     const {
-        user,
         isOpen,
         isEditModalOpen,
         imageRefs,
@@ -40,7 +39,7 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
         onClickImage,
         onChangeImage,
         onDeleteImage,
-    } = useBoardsWrite({ data, reset, setValue });
+    } = useBoardsWrite({ data, reset, setValue, isEdit });
 
     return (
         <div className={styles.BoardsNew}>
@@ -56,7 +55,6 @@ export const BoardsWrite = ({ isEdit, data }: IBoardWriteProps) => {
                             <input
                                 {...register("writer")}
                                 placeholder="작성자 명을 입력해 주세요."
-                                defaultValue={isEdit ? data?.fetchBoard.writer : user?.name}
                                 disabled
                             />
                             <div className={styles.error}>{formState.errors.writer?.message}</div>
